@@ -3,5 +3,14 @@ extends layout
 block content
 
     .content
-        img(src='../images/logo.png', alt='CrossFit Games Analytics', height='90', width='90')
         h1 Welcome to CrossFit Games Analytics
+        img(class="logo", src='../images/logo.png', alt='CrossFit Games Analytics')
+        .results_table
+          select(name="gender")
+            option(value="female", label="Female", selected=(gender == 'female'))
+            option(value="male", label="Male", selected=(gender == 'male'))
+          select(name="level")
+            option(value="top", label="Top 10", selected=(level == 'top'))
+            option(value="games", label="Games Competitors", selected=(level == 'games'))
+            option(value="regionals", label="Regionals Competitors", selected=(level == 'regionals'))
+            option(value="open", label="Open Competitors", selected=(level == 'open'))

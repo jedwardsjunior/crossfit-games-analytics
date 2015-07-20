@@ -5,32 +5,33 @@ h1 {
   top: 10px;
   width:100%;
   text-align: center;
-  text-align: center;
-  font-family:Open Sans;
-  font-size: 700%;
-  color: #DDAA11;
+  font-family:Impact;
+  font-size: 400%;
+  color: #DD0000;
 }
 
-h2 {
+.logo {
   position: fixed;
-  bottom: 10px;
-  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 150px;
+  width: 150px;
+}
+
+select {
   text-align: center;
-  font-family:Open Sans;
-  font-size: 300%;
+}
 
-  /* unvisited link */
-  a:link {
-    color: #003366;
-  }
+.results_table {
+   width: 80%;
+   height: 40%;
+   background-color: red;
+   padding: 30px;
+   position: absolute;
+   top:0;
+   bottom: 0;
+   left: 0;
+   right: 0;
 
-  /* visited link */
-  a:visited {
-    color: #669999;
-  }
-
-  /* mouse over link */
-  a:hover {
-    color: #336699;
-  }
+   margin: auto;
 }
