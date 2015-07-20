@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+h1 {
+  position: fixed;
+  top: 10px;
+  width:100%;
+  text-align: center;
+  text-align: center;
+  font-family:Open Sans;
+  font-size: 700%;
+  color: #DDAA11;
+}
+
+h2 {
+  position: fixed;
+  bottom: 10px;
+  width:100%;
+  text-align: center;
+  font-family:Open Sans;
+  font-size: 300%;
+
+  /* unvisited link */
+  a:link {
+    color: #003366;
+  }
+
+  /* visited link */
+  a:visited {
+    color: #669999;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: #336699;
+  }
+}
