@@ -1,0 +1,47 @@
+<h1> Welcome to CrossFit Games Analytics </h1>
+<img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'>
+<div class="results_table">
+  <select id="gender">
+    <option value="female", label="Female", selected=(gender == 'female')>
+    <option value="male", label="Male", selected=(gender == 'male')>
+  </select>
+  <select id="level">
+    <option value="top", label="Top 10", selected=(level == 'top')>
+    <option value="games", label="Games Competitors", selected=(level == 'games')>
+    <option value="regionals", label="Regionals Competitors", selected=(level == 'regionals')>
+    <option value="open", label="Open Competitors", selected=(level == 'open')>
+  </select>
+  <button type='submit', name='submit', value='submit', onclick="getAthleteScores()">
+    View Scores
+  </button>
+  <table>
+    <tr>
+      <th> Fran </th>
+      <th> Helen </th>
+      <th> Grace </th>
+      <th> Filthy 50 </th>
+      <th> Fight Gone Bad </th>
+      <th> Sprint 400m </th>
+      <th> Run 5k </th>
+      <th> Clean & Jerk </th>
+      <th> Snatch </th>
+      <th> Deadlift </th>
+      <th> Back Squat </th>
+      <th> Max Pull-ups </th>
+    </tr>
+    <tr>
+      <td> {{fran}} </td>
+      <td> {{helen}} </td>
+      <td> {{grace}} </td>
+      <td> {{filthy50}} </td>
+      <td> {{fightGoneBad}} </td>
+      <td> {{sprint400m}} </td>
+      <td> {{run5k}} </td>
+      <td> {{cleanAndJerk}} lbs </td>
+      <td> {{snatch}} lbs </td>
+      <td> {{deadlift}} lbs </td>
+      <td> {{backSquat}} lbs </td>
+      <td> {{maxPullups}} </td>
+    </tr>
+  </table>
+</div>
