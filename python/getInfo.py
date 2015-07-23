@@ -108,12 +108,14 @@ def getAthletesScores(url, numToCount=-1, numPages=1):
                                 lbIndex = contents.find("lb")
                                 timeIndex = contents.find(":")
                                 if (kgIndex is not -1):
-                                    kgs = eval(contents[0:kgIndex])
-                                    scores[key].append(kgs*2.20462)
+                                    kgs = eval("%0.2f" % eval(contents[0:kgIndex]*2.20462))
+                                    print "\n\nKgs =",kgs,"\n\n"
+                                    scores[key].append(kgs)
 
                                 # --- Remove the "lb" of lb values ---
                                 elif (lbIndex is not -1):
-                                    lbs = eval(contents[0:lbIndex])
+                                    lbs = eval("%0.2f" % eval(contents[0:lbIndex]))
+                                    print "Lbs =",lbs
                                     scores[key].append(lbs)
 
                                 # --- Convert time values to total seconds ---
@@ -143,7 +145,7 @@ def getTopScores():
         total = 0
         for score in eventScores:
             total += score
-        femaleTopScores[key] = total/numScores
+        femaleTopScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleTopDictionary(femaleTopScores)
 
     maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
@@ -156,7 +158,7 @@ def getTopScores():
         total = 0
         for score in eventScores:
             total += score
-        maleTopScores[key] = total/numScores
+        maleTopScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setMaleTopDictionary(maleTopScores)
 
 # --- Calculate the scores for all female and male Games finishers
@@ -171,7 +173,7 @@ def getGamesScores():
         total = 0
         for score in eventScores:
             total += score
-        femaleGamesScores[key] = total/numScores
+        femaleGamesScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleGamesDictionary(femaleGamesScores)
 
     maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
@@ -184,7 +186,7 @@ def getGamesScores():
         total = 0
         for score in eventScores:
             total += score
-        maleGamesScores[key] = total/numScores
+        maleGamesScores[key] = "%0.2f" % (total/numScores)
         saveInfo.setMaleGamesDictionary(maleGamesScores)
 
 # --- Calculate the scores for top 15 female and male regional finishers
@@ -200,7 +202,7 @@ def getRegionalScores():
         total = 0
         for score in eventScores:
             total += score
-        femaleRegionalScores[key] = total/numScores
+        femaleRegionalScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleRegionalDictionary(femaleRegionalScores)
 
     maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
@@ -213,7 +215,7 @@ def getRegionalScores():
         total = 0
         for score in eventScores:
             total += score
-        maleRegionalScores[key] = total/numScores
+        maleRegionalScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setMaleRegionalDictionary(maleRegionalScores)
 
 
@@ -232,7 +234,7 @@ def getOpenScores():
         total = 0
         for score in eventScores:
             total += score
-        femaleOpenScores[key] = total/numScores
+        femaleOpenScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleOpenDictionary(femaleOpenScores)
 
     maleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=1&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
@@ -245,7 +247,7 @@ def getOpenScores():
         total = 0
         for score in eventScores:
             total += score
-        maleOpenScores[key] = total/numScores
+        maleOpenScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setMaleOpenDictionary(maleOpenScores)
 
 def main():

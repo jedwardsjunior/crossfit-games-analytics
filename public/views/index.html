@@ -1,19 +1,16 @@
 <h1> Welcome to CrossFit Games Analytics </h1>
 <img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'>
 <div class="results_table">
-  <select id="gender">
-    <option value="female", label="Female", selected=(gender == 'female')>
-    <option value="male", label="Male", selected=(gender == 'male')>
+  <select ng-model="gender" ng-change="getAthleteScores()">
+    <option value="women", label="Female", ng-selected="gender == female")>
+    <option value="men", label="Male", ng-selected="gender == male")>
   </select>
-  <select id="level">
-    <option value="top", label="Top 10", selected=(level == 'top')>
-    <option value="games", label="Games Competitors", selected=(level == 'games')>
-    <option value="regionals", label="Regionals Competitors", selected=(level == 'regionals')>
-    <option value="open", label="Open Competitors", selected=(level == 'open')>
+  <select ng-model="level" ng-change="getAthleteScores()">
+    <option value="top", label="Top 10", ng-selected="level == top")>
+    <option value="games", label="Games Competitors", ng-selected="level == games")>
+    <option value="regionals", label="Regionals Competitors", ng-selected="level == regionals")>
+    <option value="open", label="Open Competitors", ng-selected="level == open")>
   </select>
-  <button type='submit', name='submit', value='submit', onclick="getAthleteScores()">
-    View Scores
-  </button>
   <table>
     <tr>
       <th> Fran </th>
