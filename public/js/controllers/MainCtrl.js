@@ -15,25 +15,61 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
   $scope.maxPullups = 0;
   $scope.gender="women";
   $scope.level="top";
+  $scope.genderLabel="Female";
+  $scope.levelLabel="Top 10"
 
   $scope.getAthleteScores = function(){
     console.log($scope.gender);
     console.log($scope.level);
+    if($scope.gender=="women") {
+      $scope.genderLabel = "Female";
+    } else {
+      $scope.genderLabel = "Male";
+    }
+
+    if($scope.level=="top") {
+      $scope.levelLabel = "Top 10";
+    } else if($scope.level=="games") {
+      $scope.levelLabel = "Games"
+    } else if($scope.level=="regionals") {
+      $scope.levelLabel = "Regionals"
+    } else {
+      $scope.levelLabel = "Open"
+    }
+
     var division = $scope.gender+"-"+$scope.level;
     console.log(division);
     Athlete.get(division).then(function(scores) {
-    $scope.fran = scores.fran;
-    $scope.helen = scores.helen;
-    $scope.grace = scores.grace;
-    $scope.filthy50 = scores.filthy50;
+    var franMins = Math.floor(parseInt(scores.fran) / 60);
+    var franSecs = parseInt(scores.fran) % 60;
+    franSecs = ("0" + franSecs).slice(-2)
+    $scope.fran = franMins+":"+franSecs;
+    var helenMins = Math.floor(parseInt(scores.helen) / 60);
+    var helenSecs = parseInt(scores.helen) % 60;
+    helenSecs = ("0" + helenSecs).slice(-2)
+    $scope.helen = helenMins+":"+helenSecs;
+    var graceMins = Math.floor(parseInt(scores.grace) / 60);
+    var graceSecs = parseInt(scores.grace) % 60;
+    graceSecs = ("0" + graceSecs).slice(-2)
+    $scope.grace = graceMins+":"+graceSecs;
+    var filthyMins = Math.floor(parseInt(scores.filthy50) / 60);
+    var filthySecs = parseInt(scores.filthy50) % 60;
+    filthySecs = ("0" + filthySecs).slice(-2)
+    $scope.filthy50 = filthyMins+":"+filthySecs;
     $scope.fightGoneBad = scores.fightGoneBad;
-    $scope.sprint400m = scores.sprint400m;
-    $scope.run5k = scores.run5k;
+    var sprintMins = Math.floor(parseInt(scores.sprint400m) / 60);
+    var sprintSecs = parseInt(scores.sprint400m) % 60;
+    sprintSecs = ("0" + sprintSecs).slice(-2)
+    $scope.sprint400m = sprintMins+":"+sprintSecs;
+    var runMins = Math.floor(parseInt(scores.run5k) / 60);
+    var runSecs = parseInt(scores.run5k) % 60;
+    runSecs = ("0" + runSecs).slice(-2)
+    $scope.run5k = runMins+":"+runSecs;
     $scope.cleanAndJerk = scores.cleanAndJerk;
     $scope.snatch = scores.snatch;
     $scope.deadlift = scores.deadlift;
     $scope.backSquat = scores.backSquat;
-    $scope.maxPullups = scores.maxPullups;
+    $scope.maxPullups = Math.floor(scores.maxPullups);
   })};
 
   $scope.getAthleteScores();

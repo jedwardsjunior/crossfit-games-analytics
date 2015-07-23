@@ -24,7 +24,7 @@ module.exports = function(app) {
          "fran": scores[0].Fran,
          "helen": scores[0].Helen,
          "grace": scores[0].Grace,
-         "filthy50": scores[0].filthy50,
+         "filthy50": scores[0]["Filthy 50"],
          "fightGoneBad": scores[0]["Fight Gone Bad"],
          "sprint400m": scores[0]["Sprint 400m"],
          "run5k": scores[0]["Run 5k"],
