@@ -56,7 +56,7 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
     var filthySecs = parseInt(scores.filthy50) % 60;
     filthySecs = ("0" + filthySecs).slice(-2)
     $scope.filthy50 = filthyMins+":"+filthySecs;
-    $scope.fightGoneBad = scores.fightGoneBad;
+    $scope.fightGoneBad = Math.floor(scores.fightGoneBad);
     var sprintMins = Math.floor(parseInt(scores.sprint400m) / 60);
     var sprintSecs = parseInt(scores.sprint400m) % 60;
     sprintSecs = ("0" + sprintSecs).slice(-2)
