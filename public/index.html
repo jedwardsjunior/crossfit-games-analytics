@@ -35,7 +35,34 @@
 </head>
 
 <body ng-app="crossfitApp" ng-controller="MainController">
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
+	<div id="wrapper">
+		<!-- HEADER -->
+		<div id="header">
+	    <!--img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'-->
+	    <h1> Welcome to CrossFit Games Analytics </h1>
+
+			<nav id="navbar" class="navbar navbar-inverse">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">Home</a>
+				</div>
+
+				<!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+				<ul class="nav navbar-nav">
+					<li><a href="/compare">Compare Groups</a></li>
+					<li><a href="/compare">Compare Yourself</a></li>
+					<li><a href="/descriptions">WOD and Max Descriptions</a></li>
+					<li><a href="/links">Related Links</a></li>
+					<li><a href="/about">About CFGA</a></li>
+				</ul>
+			</nav>
+		</div>
+		<!-- ANGULAR DYNAMIC CONTENT -->
+		<div ng-view></div>
+
+		<!-- FOOTER -->
+	  <div id="footer">
+	    <p>Coded by Julia Edwards</p>
+	  </div>
+	</div>
 </body>
 </html>

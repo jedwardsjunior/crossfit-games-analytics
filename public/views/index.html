@@ -1,83 +1,69 @@
-<div id="wrapper">
-
-  <div id="header">
-    <img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'>
-    <h1> Welcome to CrossFit Games Analytics </h1>
-
+<div id="content">
+  <div class="selection">
+    <select ng-model="gender" ng-change="getAthleteScores()">
+      <option value="women", label="Female", ng-selected="gender == female")>
+      <option value="men", label="Male", ng-selected="gender == male")>
+    </select>
+    <select ng-model="level" ng-change="getAthleteScores()">
+      <option value="top", label="Top 10", ng-selected="level == top")>
+      <option value="games", label="Games Competitors", ng-selected="level == games")>
+      <option value="regionals", label="Regionals Competitors", ng-selected="level == regionals")>
+      <option value="open", label="Open Competitors", ng-selected="level == open")>
+    </select>
   </div>
-
-  <div id="content">
-    <div class="selection">
-      <select ng-model="gender" ng-change="getAthleteScores()">
-        <option value="women", label="Female", ng-selected="gender == female")>
-        <option value="men", label="Male", ng-selected="gender == male")>
-      </select>
-      <select ng-model="level" ng-change="getAthleteScores()">
-        <option value="top", label="Top 10", ng-selected="level == top")>
-        <option value="games", label="Games Competitors", ng-selected="level == games")>
-        <option value="regionals", label="Regionals Competitors", ng-selected="level == regionals")>
-        <option value="open", label="Open Competitors", ng-selected="level == open")>
-      </select>
-    </div>
-    <div class="results_table">
-      <table>
-        <tr>
-          <td colspan="2">{{genderLabel}} {{levelLabel}} Competitors</td>
-        </tr>
-        <tr>
-          <td class="name"> Fran </td>
-          <td class="value"> {{fran}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Helen </td>
-          <td class="value"> {{helen}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Grace </td>
-          <td class="value"> {{grace}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Filthy 50 </td>
-          <td class="value"> {{filthy50}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Fight Gone Bad </td>
-          <td class="value"> {{fightGoneBad}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Sprint 400m </td>
-          <td class="value"> {{sprint400m}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Run 5k </td>
-          <td class="value"> {{run5k}} </td>
-        </tr>
-        <tr>
-          <td class="name"> Clean & Jerk </td>
-          <td class="value"> {{cleanAndJerk}} lbs </td>
-        </tr>
-        <tr>
-          <td class="name"> Snatch </td>
-          <td class="value"> {{snatch}} lbs </td>
-        </tr>
-        <tr>
-          <td class="name"> Deadlift </td>
-          <td class="value"> {{deadlift}} lbs </td>
-        </tr>
-        <tr>
-          <td class="name"> Back Squat </td>
-          <td class="value"> {{backSquat}} lbs </td>
-        </tr>
-        <tr>
-          <td class="name"> Max Pull-ups </td>
-          <td class="value"> {{maxPullups}} </td>
-        </tr>
-      </table>
-    </div>
+  <div class="results_table">
+    <table>
+      <tr>
+        <td colspan="2">Averages for {{genderLabel}} {{levelLabel}} Competitors</td>
+      </tr>
+      <tr>
+        <td class="name"> Fran </td>
+        <td class="value"> {{fran}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Helen </td>
+        <td class="value"> {{helen}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Grace </td>
+        <td class="value"> {{grace}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Filthy 50 </td>
+        <td class="value"> {{filthy50}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Fight Gone Bad </td>
+        <td class="value"> {{fightGoneBad}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Sprint 400m </td>
+        <td class="value"> {{sprint400m}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Run 5k </td>
+        <td class="value"> {{run5k}} </td>
+      </tr>
+      <tr>
+        <td class="name"> Clean & Jerk </td>
+        <td class="value"> {{cleanAndJerk}} lbs </td>
+      </tr>
+      <tr>
+        <td class="name"> Snatch </td>
+        <td class="value"> {{snatch}} lbs </td>
+      </tr>
+      <tr>
+        <td class="name"> Deadlift </td>
+        <td class="value"> {{deadlift}} lbs </td>
+      </tr>
+      <tr>
+        <td class="name"> Back Squat </td>
+        <td class="value"> {{backSquat}} lbs </td>
+      </tr>
+      <tr>
+        <td class="name"> Max Pull-ups </td>
+        <td class="value"> {{maxPullups}} </td>
+      </tr>
+    </table>
   </div>
-
-  <div id="footer">
-    <p>Created by Julia Edwards</p>
-  </div>
-
 </div>
