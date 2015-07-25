@@ -1,0 +1,90 @@
+<div id="compare-groups-content">
+  <div class="info">
+    <p>Select the Genders and Levels (i.e. Female Top 10 Games Finishers)
+       you want to compare one at a time and add them using button below.
+       The table will update to show the average scores of the chosen groups
+       for each WOD or Max.
+    </p>
+  </div>
+  <div class="selection">
+    <form name="levelForm" ng-submit="submitLevelForm()">
+    <select ng-model="level">
+      <option value="women-top", label="Female Top 10", ng-selected="level == women-top")>
+      <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games")>
+      <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals")>
+      <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open")>
+      <option value="men-top", label="Male Top 10", ng-selected="level == men-top")>
+      <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games")>
+      <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals")>
+      <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open")>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+  </div>
+
+  <div class="levels_box">
+    <table>
+      <tr ng-repeat="level in levelLabels">
+        <td>{{level}}</td>
+        <td><button ng-click="removeLevel(level)">Remove</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="results_table">
+    <table>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }">WOD or Max</td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="level in levelLabels">{{level}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Fran </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="fran in frans">{{fran}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Helen </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="helen in helens">{{helen}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Grace </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="grace in graces">{{grace}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Filthy 50 </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="filthy50 in filthy50s">{{filthy50}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Fight Gone Bad </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="fgb in fightGoneBads">{{fgb}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Sprint 400m </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="sprint in sprint400ms">{{sprint}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Run 5k </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="run in run5ks">{{run}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Clean & Jerk </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="cj in cleanAndJerks">{{cj}} lbs</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Snatch </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="snatch in snatchs">{{snatch}} lbs</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Deadlift </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="deadlift in deadlifts">{{deadlift}} lbs</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Back Squat </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="backsquat in backSquats">{{backsquat}} lbs</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Max Pull-ups </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="pullup in maxPullups">{{pullup}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

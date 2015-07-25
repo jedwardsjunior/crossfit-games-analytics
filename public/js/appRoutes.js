@@ -9,6 +9,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'MainController'
 		})
 
+		.when('/compareGroups', {
+			templateUrl: 'views/compareGroups.html',
+			controller: 'CompareGroupsController'
+		})
+
 		.when('/descriptions', {
 			templateUrl: 'views/descriptions.html',
 			controller: 'MainController'

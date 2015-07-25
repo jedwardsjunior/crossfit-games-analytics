@@ -29,7 +29,7 @@ body {
 
 #wrapper {
   height:100%;
-	min-height:900px;
+	min-height:1200px;
 	position:relative;
 }
 
@@ -80,27 +80,48 @@ body {
   padding-bottom:100px;
 }
 
+#content .info {
+  width:400px;
+  top:180px;
+  display:block;
+  position:absolute;
+  left:35%;
+}
+
+#content .info p {
+  text-align:center;
+  font-family:aero_maticsregular;
+  font-size: 150%;
+  color:#FFF;
+}
+
+#content .results_table table{
+  width:400px;
+}
+
+#content .results_table td {
+  width: 50%;
+}
+
 .selection {
   display:block;
   width:100%;
   position:absolute;
-  top:160px;
+  top:290px;
   text-align: center;
 }
 
 .results_table {
   padding:0px;
-	width:400px;
   text-align: center;
   display:block;
   position:absolute;
-  top:200px;
+  top:320px;
   left:35%;
   padding-bottom:100px;
 }
 
 .results_table table{
-	width:100%;
 	height:100%;
 	margin:0px;
   padding:0px;
@@ -144,7 +165,6 @@ body {
 
 .results_table td{
 	vertical-align:middle;
-  width:50%;
 
 	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
@@ -223,4 +243,69 @@ body {
   font-size: 200%;
   font-family:aero_maticsregular;;
   color: #cacaca;
+}
+
+
+#compare-groups-content {
+  min-height:1200px;
+  height:100%;
+  width:100%;
+  top:160px;
+  margin-top:50px;
+	float:left;
+  padding-bottom:100px;
+}
+
+#compare-groups-content .info {
+  width:800px;
+  top:180px;
+  display:block;
+  position:absolute;
+  left:20%;
+}
+
+#compare-groups-content .info p {
+  text-align:center;
+  font-family:aero_maticsregular;
+  font-size: 150%;
+  color:#FFF;
+}
+
+
+#compare-groups-content .results_table {
+  top:445px;
+  left:29%;
+}
+
+#compare-groups-content .results_table table {
+  width: 600px;
+  vertical-align:center;
+}
+
+
+
+#compare-groups-content .levels_box {
+  background-color:black;
+  padding:0px;
+	width:300px;
+  height:100px;
+  display:block;
+  position:absolute;
+  top:325px;
+  left:38%;
+  padding-bottom:100px;
+  overflow:scroll;
+}
+
+#compare-groups-content .levels_box table {
+  vertical-align: middle;
+}
+
+#compare-groups-content .levels_box td {
+  color: #FFF;
+}
+
+#compare-groups-content .levels_box td button {
+  color: #FFF;
+  background-color:#dd0000;
 }
