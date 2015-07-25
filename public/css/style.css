@@ -19,7 +19,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height:900px;
+  min-height:1000px;
   height:100%;
   margin:0;
 	padding:0;
@@ -237,11 +237,20 @@ body {
   color: #dd0000;
 }
 
+#descriptions-content ul {
+  margin: 0 auto;
+  padding: 0;
+  display: table;
+  list-style: none;
+}
 
 #descriptions-content li {
-  left:40;
+  text-align:center;
   font-size: 200%;
   font-family:aero_maticsregular;;
+}
+
+#descriptions-content a {
   color: #cacaca;
 }
 
@@ -308,4 +317,28 @@ body {
 #compare-groups-content .levels_box td button {
   color: #FFF;
   background-color:#dd0000;
+}
+
+#about_content {
+  width: 600px;
+  top:180px;
+  display:block;
+  position:absolute;
+  left:25%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#about_content h2 {
+  text-align:center;
+  font-family:aero_maticsregular;
+  font-size: 250%;
+  opacity: 50%;
+  color:#DD0000;
+}
+
+#about_content p {
+  text-align:center;
+  font-family:aero_maticsregular;
+  font-size: 150%;
+  color:#FFF;
 }
