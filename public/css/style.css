@@ -356,9 +356,13 @@ body {
   color:#FFF;
 }
 
+#compare-yourself-content input {
+  width: 100px;
+}
+
 #compare-yourself-content .selection {
-  width:600px;
-  left:28%;
+  width:500px;
+  left:31%;
   text-align:center;
   font-family:aero_maticsregular;
   font-size: 150%;
