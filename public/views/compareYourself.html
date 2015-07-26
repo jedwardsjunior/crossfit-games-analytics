@@ -1,0 +1,149 @@
+<div id="compare-yourself-content">
+  <div class="info">
+    <p>Select the Gender and Level (i.e. Female Top 10 Games Finishers)
+       you want to compare yourself to and then enter your scores in the text
+       boxes below. Once you press submit, a table will appear to show the
+       difference between your scores and the average scores of the comparison group.
+  </div>
+
+  <div class="selection" ng-hide="hiddenForm">
+    <form name="compareForm" ng-submit="submitCompareForm()">
+      Selet Gender and Level to compare with:
+      <br>
+      <select name="selectLevel" ng-model="level">
+        <option value="women-top", label="Female Top 10", ng-selected="level == women-top")>
+        <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games")>
+        <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals")>
+        <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open")>
+        <option value="men-top", label="Male Top 10", ng-selected="level == men-top")>
+        <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games")>
+        <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals")>
+        <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open")>
+      </select>
+      <br>
+      <br>
+      Fran time:<br>
+      <input type="text" ng-model="franMins"> : <input type="text" ng-model="franSeconds">
+      <br>
+      <br>
+      Helen time:<br>
+      <input type="text" ng-model="helenMins"> : <input type="text" ng-model="helenSeconds">
+      <br>
+      <br>
+      Grace time:<br>
+      <input type="text" ng-model="graceMins"> : <input type="text" ng-model="graceSeconds">
+      <br>
+      <br>
+      Filthy 50 time:<br>
+      <input type="text" ng-model="filthy50Mins"> : <input type="text" ng-model="filthy50Seconds">
+      <br>
+      <br>
+      Fight Gone Bad score:<br>
+      <input type="text" ng-model="fightGoneBadScore">
+      <br>
+      <br>
+      Sprint 400m time:<br>
+      <input type="text" ng-model="sprintMins"> : <input type="text" ng-model="sprintSeconds">
+      <br>
+      <br>
+      Run 5k time:<br>
+      <input type="text" ng-model="runMins"> : <input type="text" ng-model="runSeconds">
+      <br>
+      <br>
+      Max Clean&Jerk:<br>
+      <input type="text" ng-model="cleanAndJerkScore"> lbs
+      <br>
+      <br>
+      Max Snatch:<br>
+      <input type="text" ng-model="snatchScore"> lbs
+      <br>
+      <br>
+      Max Deadlift:<br>
+      <input type="text" ng-model="deadliftScore"> lbs
+      <br>
+      <br>
+      Max Back Squat:<br>
+      <input type="text" ng-model="backSquatScore"> lbs
+      <br>
+      <br>
+      Max Unbroken Pull-ups:<br>
+      <input type="text" ng-model="maxPullupsScore">
+      <br>
+      <br>
+      <button type="submit">Compare Yourself</button>
+  </form>
+  </div>
+
+  <div class="results_table">
+    <table>
+      <tbody ng-hide="hiddenTable">
+        <tr>
+          <td class="name">WOD or Max</td>
+          <td>Average {{levelLabel}} Scores</td>
+          <td>Your Scores</td>
+        </tr>
+        <tr>
+          <td class="name"> Fran </td>
+          <td class="value">{{fran}}</td>
+          <td class="value">{{franScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Helen </td>
+          <td class="value">{{helen}}</td>
+          <td class="value">{{helenScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Grace </td>
+          <td class="value">{{grace}}</td>
+          <td class="value">{{graceScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Filthy 50 </td>
+          <td class="value">{{filthy50}}</td>
+          <td class="value">{{filthy50Score}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Fight Gone Bad </td>
+          <td class="value">{{fightGoneBad}}</td>
+          <td class="value">{{fightGoneBadScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Sprint 400m </td>
+          <td class="value">{{sprint400m}}</td>
+          <td class="value">{{sprint400mScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Run 5k </td>
+          <td class="value">{{run5k}}</td>
+          <td class="value">{{run5kScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Clean & Jerk </td>
+          <td class="value">{{cleanAndJerk}} lbs</td>
+          <td class="value">{{cleanAndJerkScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Snatch </td>
+          <td class="value">{{snatch}} lbs</td>
+          <td class="value">{{snatchScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Deadlift </td>
+          <td class="value">{{deadlift}} lbs</td>
+          <td class="value">{{deadliftScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Back Squat </td>
+          <td class="value">{{backSquat}} lbs</td>
+          <td class="value">{{backSquatScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Max Pull-ups </td>
+          <td class="value">{{maxPullups}}</td>
+          <td class="value">{{maxPullupsScore}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  -->
+</div>

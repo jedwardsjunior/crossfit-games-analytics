@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('crossfitApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'CompareGroupsCtrl', 'AthleteService']);
+angular.module('crossfitApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'CompareGroupsCtrl', 'CompareYourselfCtrl', 'AthleteService']);

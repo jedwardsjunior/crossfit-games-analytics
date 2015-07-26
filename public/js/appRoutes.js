@@ -14,6 +14,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'CompareGroupsController'
 		})
 
+		.when('/compareYourself', {
+			templateUrl: 'views/compareYourself.html',
+			controller: 'CompareYourselfController'
+		})
+
 		.when('/descriptions', {
 			templateUrl: 'views/descriptions.html',
 			controller: 'MainController'

@@ -265,7 +265,7 @@ body {
   padding-bottom:100px;
 }
 
-#compare-groups-content .info {
+.info {
   width:800px;
   top:180px;
   display:block;
@@ -273,7 +273,7 @@ body {
   left:20%;
 }
 
-#compare-groups-content .info p {
+.info p {
   text-align:center;
   font-family:aero_maticsregular;
   font-size: 150%;
@@ -341,4 +341,29 @@ body {
   font-family:aero_maticsregular;
   font-size: 150%;
   color:#FFF;
+}
+
+#compare-yourself-content {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#compare-yourself-content .selection {
+  width:600px;
+  left:28%;
+  text-align:center;
+  font-family:aero_maticsregular;
+  font-size: 150%;
+  color:#DD0000;
+  margin-top:30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-bottom: 25px;
+}
+
+#compare-yourself-content .results_table {
+  left:28%;
+}
+
+#compare-yourself-content .results_table table {
+  width: 600px;
+  vertical-align:center;
 }
