@@ -24,8 +24,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'MainController'
 		})
 
+		.when('/links', {
+			templateUrl: 'views/relatedLinks.html',
+			controller: 'MainController'
+		})
+
 		.when('/about', {
 			templateUrl: 'views/about.html',
+			controller: 'MainController'
+		})
+
+		.when('/contact', {
+			templateUrl: 'views/contact.html',
 			controller: 'MainController'
 		});
 
