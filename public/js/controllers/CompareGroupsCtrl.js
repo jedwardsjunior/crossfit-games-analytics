@@ -40,9 +40,9 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     } else if(level=="men-open") {
       levelLabel = "Male Open";
     } else if(level=="women-first") {
-      levelLabel = "First place female";
+      levelLabel = "First Place Female";
     } else {
-      levelLabel = "First place male";
+      levelLabel = "First Place Male";
     }
     return levelLabel;
   }
@@ -65,7 +65,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       level = "women-open";
     } else if(levelLabel=="Male Open") {
       level = "men-open";
-    } else if(levelLabel=="First place female") {
+    } else if(levelLabel=="First Place Female") {
       level = "women-first";
     } else {
       level = "men-first";

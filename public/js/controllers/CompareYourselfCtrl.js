@@ -63,9 +63,9 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     } else if(level=="men-open") {
       levelLabel = "Male Open";
     } else if(level=="women-first") {
-      levelLabel = "First place female";
+      levelLabel = "First Place Female";
     } else {
-      levelLabel = "First place male";
+      levelLabel = "First Place Male";
     }
     return levelLabel;
   }
