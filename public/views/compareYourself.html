@@ -1,24 +1,24 @@
 <div id="compare-yourself-content">
   <div class="info">
     <p>Select the Gender and Level (i.e. Female Top 10 Games Finishers)
-       you want to compare yourself to and then enter your scores in the text
+       you want to compare yourself with and then enter your scores in the text
        boxes below. Once you press submit, a table will appear to show the
        difference between your scores and the average scores of the comparison group.
   </div>
 
   <div class="selection" ng-hide="hiddenForm">
     <form name="compareForm" ng-submit="submitCompareForm()">
-      Selet Gender and Level to compare with:
-      <br>
-      <select name="selectLevel" ng-model="level">
-        <option value="women-top", label="Female Top 10", ng-selected="level == women-top")>
-        <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games")>
-        <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals")>
-        <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open")>
-        <option value="men-top", label="Male Top 10", ng-selected="level == men-top")>
-        <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games")>
-        <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals")>
-        <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open")>
+      Select Gender and Level to compare with:
+      <br/>
+      <select ng-model="level">
+        <option value="women-top", label="Female Top 10", ng-selected="level == women-top"></option>
+        <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games"></option>
+        <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals"></option>
+        <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open"></option>
+        <option value="men-top", label="Male Top 10", ng-selected="level == men-top"></option>
+        <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games"></option>
+        <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals"></option>
+        <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open"></option>
       </select>
       <br>
       <br>
@@ -71,12 +71,12 @@
       <br>
       <br>
       <button type="submit">Compare Yourself</button>
-  </form>
+    </form>
   </div>
 
-  <div class="results_table">
+  <div class="results_table" ng-hide="hiddenTable">
     <table>
-      <tbody ng-hide="hiddenTable">
+      <tbody>
         <tr>
           <td class="name">WOD or Max</td>
           <td>Average {{levelLabel}} Scores</td>

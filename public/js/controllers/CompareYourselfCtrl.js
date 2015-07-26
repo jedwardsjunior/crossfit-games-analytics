@@ -16,23 +16,23 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
   $scope.franMins;
   $scope.franSeconds;
-  $scope.franTime = 0;
+  $scope.franScore = 0;
   $scope.helenMins;
   $scope.helenSeconds;
-  $scope.helenTime = 0;
+  $scope.helenScore = 0;
   $scope.graceMins;
   $scope.graceSeconds;
-  $scope.graceTime = 0;
+  $scope.graceScore = 0;
   $scope.filthy50Mins;
   $scope.filthy50Seconds;
-  $scope.filthy50Time = 0;
+  $scope.filthy50Score = 0;
   $scope.fightGoneBadScore;
   $scope.sprintMins;
   $scope.sprintSeconds;
-  $scope.sprint400mTime = 0;
+  $scope.sprint400mScore = 0;
   $scope.runMins;
   $scope.runSeconds;
-  $scope.run5kTime = 0;
+  $scope.run5kScore = 0;
   $scope.cleanAndJerkScore;
   $scope.snatchScore;
   $scope.deadliftScore;
@@ -118,14 +118,14 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
   $scope.submitCompareForm = function() {
     $scope.levelLabel = getLevelLabel($scope.level);
     getAthleteScores($scope.level);
-    $scope.franTime = $scope.franMins+":"+$scope.franSeconds;
+    $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
     console.log($scope.franTime);
-    $scope.helenTime = $scope.helenMins+":"+$scope.helenSeconds;
+    $scope.helenScore = $scope.helenMins+":"+$scope.helenSeconds;
     console.log($scope.helenTime);
-    $scope.graceTime = $scope.graceMins+":"+$scope.graceSeconds;
+    $scope.graceScore = $scope.graceMins+":"+$scope.graceSeconds;
     console.log($scope.graceTime);
-    $scope.filthy50Time = $scope.filthy50Mins+":"+$scope.filthy50Seconds;
-    $scope.sprint400mTime = $scope.sprintMins+":"+$scope.sprintSeconds;
+    $scope.filthy50Score = $scope.filthy50Mins+":"+$scope.filthy50Seconds;
+    $scope.sprint400mScore = $scope.sprintMins+":"+$scope.sprintSeconds;
     $scope.run5kTime = $scope.runMins+":"+$scope.runSeconds;
     console.log($scope.fightGoneBadScore);
     if ($scope.cleanAndJerkScore) {
