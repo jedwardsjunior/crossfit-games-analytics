@@ -32,7 +32,7 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
   $scope.sprint400mScore = 0;
   $scope.runMins;
   $scope.runSeconds;
-  $scope.run5kScore = 0;
+  $scope.run5kScore;
   $scope.cleanAndJerkScore;
   $scope.snatchScore;
   $scope.deadliftScore;
@@ -60,8 +60,12 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
       levelLabel = "Male Regionals";
     } else if(level=="women-open") {
       levelLabel = "Female Open";
-    } else {
+    } else if(level=="men-open") {
       levelLabel = "Male Open";
+    } else if(level=="women-first") {
+      levelLabel = "First place female";
+    } else {
+      levelLabel = "First place male";
     }
     return levelLabel;
   }
@@ -73,44 +77,93 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     var franMins = Math.floor(parseInt(scores.fran) / 60);
     var franSecs = parseInt(scores.fran) % 60;
     franSecs = ("0" + franSecs).slice(-2)
-    $scope.fran = franMins+":"+franSecs;
+    if(!franMins || !franSecs) {
+      $scope.fran = "No Data";
+    } else {
+      $scope.fran = franMins+":"+franSecs;
+    }
 
     var helenMins = Math.floor(parseInt(scores.helen) / 60);
     var helenSecs = parseInt(scores.helen) % 60;
     helenSecs = ("0" + helenSecs).slice(-2)
-    $scope.helen = helenMins+":"+helenSecs;
+    if(!helenMins || !helenSecs) {
+      $scope.helen = "No Data";
+    } else {
+      $scope.helen = helenMins+":"+helenSecs;
+    }
 
     var graceMins = Math.floor(parseInt(scores.grace) / 60);
     var graceSecs = parseInt(scores.grace) % 60;
     graceSecs = ("0" + graceSecs).slice(-2)
-    $scope.grace = graceMins+":"+graceSecs;
+    if(!graceMins || !graceSecs) {
+      $scope.grace = "No Data";
+    } else {
+      $scope.grace = graceMins+":"+graceSecs;
+    }
 
     var filthyMins = Math.floor(parseInt(scores.filthy50) / 60);
     var filthySecs = parseInt(scores.filthy50) % 60;
     filthySecs = ("0" + filthySecs).slice(-2)
-    $scope.filthy50 = filthyMins+":"+filthySecs;
+    if(!filthyMins || !filthySecs) {
+      $scope.filthy50 = "No Data";
+    } else {
+      $scope.filthy50 = filthyMins+":"+filthySecs;
+    }
 
-    $scope.fightGoneBad = Math.floor(scores.fightGoneBad);
+    if (!scores.fightGoneBad) {
+      $scope.fightGoneBad = "No Data";
+    } else {
+      $scope.fightGoneBad = Math.floor(scores.fightGoneBad);
+    }
 
     var sprintMins = Math.floor(parseInt(scores.sprint400m) / 60);
     var sprintSecs = parseInt(scores.sprint400m) % 60;
     sprintSecs = ("0" + sprintSecs).slice(-2)
-    $scope.sprint400m = sprintMins+":"+sprintSecs;
+    if(!sprintMins || !sprintSecs) {
+      $scope.sprint400m = "No Data";
+    } else {
+      $scope.sprint400m = sprintMins+":"+sprintSecs;
+    }
+
 
     var runMins = Math.floor(parseInt(scores.run5k) / 60);
     var runSecs = parseInt(scores.run5k) % 60;
     runSecs = ("0" + runSecs).slice(-2)
-    $scope.run5k = runMins+":"+runSecs;
+    if(!runMins || !runSecs) {
+      $scope.run5k = "No Data";
+    } else {
+      $scope.run5k = runMins+":"+runSecs;
+    }
 
-    $scope.cleanAndJerk = scores.cleanAndJerk;
+    if (!scores.cleanAndJerk) {
+      $scope.cleanAndJerk = "No Data";
+    } else {
+      $scope.cleanAndJerk = scores.cleanAndJerk+" lbs";
+    }
 
-    $scope.snatch = scores.snatch;
+    if (!scores.snatch) {
+      $scope.snatch = "No Data";
+    } else {
+      $scope.snatch = scores.snatch+" lbs";
+    }
 
-    $scope.deadlift = scores.deadlift;
+    if (!scores.deadlift) {
+      $scope.deadlift = "No Data";
+    } else {
+      $scope.deadlift = scores.deadlift+" lbs";
+    }
 
-    $scope.backSquat = scores.backSquat;
+    if (!scores.backSquat) {
+      $scope.backSquat = "No Data";
+    } else {
+      $scope.backSquat = scores.backSquat+" lbs";
+    }
 
-    $scope.maxPullups = Math.floor(scores.maxPullups);
+    if (!scores.maxPullups) {
+      $scope.maxPullups = "No Data";
+    } else {
+      $scope.maxPullups = Math.floor(scores.maxPullups);
+    }
     });
   };
 
@@ -119,15 +172,35 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     $scope.levelLabel = getLevelLabel($scope.level);
     getAthleteScores($scope.level);
     $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
-    console.log($scope.franTime);
+    if (!$scope.franMins || !$scope.franSeconds) {
+      $scope.franScore = "";
+    }
+
     $scope.helenScore = $scope.helenMins+":"+$scope.helenSeconds;
-    console.log($scope.helenTime);
+    if (!$scope.helenMins || !$scope.helenSeconds) {
+      $scope.helenScore = "";
+    }
+
     $scope.graceScore = $scope.graceMins+":"+$scope.graceSeconds;
-    console.log($scope.graceTime);
+    if (!$scope.graceMins || !!$scope.graceSeconds) {
+      $scope.graceScore = "";
+    }
+
     $scope.filthy50Score = $scope.filthy50Mins+":"+$scope.filthy50Seconds;
+    if (!$scope.filthy50Mins || !$scope.filthy50Seconds) {
+      $scope.filthy50Score = "";
+    }
+
     $scope.sprint400mScore = $scope.sprintMins+":"+$scope.sprintSeconds;
+    if (!$scope.sprintMins || !$scope.sprintSeconds) {
+      $scope.sprint400mScore = "";
+    }
+
     $scope.run5kTime = $scope.runMins+":"+$scope.runSeconds;
-    console.log($scope.fightGoneBadScore);
+    if(!$scope.runMins || !$scope.runSeconds) {
+      $scope.run5kTime = "";
+    }
+
     if ($scope.cleanAndJerkScore) {
       $scope.cleanAndJerkScore = $scope.cleanAndJerkScore + " lbs";
     }

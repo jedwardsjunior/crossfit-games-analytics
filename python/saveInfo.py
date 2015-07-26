@@ -158,7 +158,7 @@ def setFemaleTopDictionary(dictionary):
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
-# Retrieves the dictionary of female Games athletes
+# Retrieves the dictionary of top female Games athletes
 def getMaleTopDictionary():
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
@@ -169,11 +169,51 @@ def getMaleTopDictionary():
     client.close()
     return dictionary
 
-# Resets the dictionary of female Games athletes
+# Resets the dictionary of top female Games athletes
 def setMaleTopDictionary(dictionary):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
     db.drop_collection('men-top')
     indicatorDictionary = db['men-top']
     indicatorDictionary.insert_one(dictionary)
+    client.close()
+
+# Retrieves the dictionary of female Games athletes
+def getFemaleFirst():
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    try:
+        scores = db['women-first'].find()[0]
+    except:
+        scores = {}
+    client.close()
+    return scores
+
+# Resets the dictionary of female Games athletes
+def setFemaleFirst(scores):
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    db.drop_collection('women-first')
+    indicatorDictionary = db['women-first']
+    indicatorDictionary.insert_one(scores)
+    client.close()
+
+# Retrieves the dictionary of female Games athletes
+def getMaleFirst():
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    try:
+        scores = db['men-first'].find()[0]
+    except:
+        scores = {}
+    client.close()
+    return scores
+
+# Resets the dictionary of female Games athletes
+def setMaleFirst(scores):
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    db.drop_collection('men-first')
+    indicatorDictionary = db['men-first']
+    indicatorDictionary.insert_one(scores)
     client.close()

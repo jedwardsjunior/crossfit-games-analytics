@@ -13,10 +13,12 @@
       <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games">
       <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals">
       <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open">
+      <option value="women-first", label="First Place Female", ng-selected="level == women-first">
       <option value="men-top", label="Male Top 10", ng-selected="level == men-top">
       <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games">
       <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals">
       <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open">
+      <option value="men-first", label="First Place Male", ng-selected="level == men-first">
     </select>
     <button type="submit">Add</button>
   </form>
@@ -67,19 +69,19 @@
       </tr>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }" class="name"> Clean & Jerk </td>
-        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="cj in cleanAndJerks">{{cj}} lbs</td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="cj in cleanAndJerks">{{cj}}</td>
       </tr>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }" class="name"> Snatch </td>
-        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="snatch in snatchs">{{snatch}} lbs</td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="snatch in snatchs">{{snatch}}</td>
       </tr>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }" class="name"> Deadlift </td>
-        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="deadlift in deadlifts">{{deadlift}} lbs</td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="deadlift in deadlifts">{{deadlift}}</td>
       </tr>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }" class="name"> Back Squat </td>
-        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="backsquat in backSquats">{{backsquat}} lbs</td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="backsquat in backSquats">{{backsquat}}</td>
       </tr>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }" class="name"> Max Pull-ups </td>

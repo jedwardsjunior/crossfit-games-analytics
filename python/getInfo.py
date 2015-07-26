@@ -134,6 +134,27 @@ def getAthletesScores(url, numToCount=-1, numPages=1):
     return scores
 
 # --- Calculate the scores for top 10 female and male Games finishers
+def getFirstScores():
+    femaleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+    femaleFirstScore = getAthletesScores(femaleFirst, 1)
+    for key in femaleFirstScore.keys():
+        eventScore = femaleFirstScore[key]
+        if len(eventScore) == 0:
+            continue
+        femaleFirstScore[key] = "%0.2f" % (eventScore[0])
+    saveInfo.setFemaleFirst(femaleFirstScore)
+
+    maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleFirstScore = getAthletesScores(maleFirst, 1)
+    for key in maleFirstScore.keys():
+        eventScore = maleFirstScore[key]
+        if len(eventScore) == 0:
+            continue
+        maleFirstScore[key] = "%0.2f" % (eventScore[0])
+    saveInfo.setMaleFirst(maleFirstScore)
+
+
+# --- Calculate the scores for top 10 female and male Games finishers
 def getTopScores():
     femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
     femaleTopScores = getAthletesScores(femaleGames, 10)
@@ -269,11 +290,16 @@ def main():
         print saveInfo.getFemaleOpenDictionary()
         print "\n\nOpen Males:\n"
         print saveInfo.getMaleOpenDictionary()
-    #else:
+        print "\n\nFirst Place Female:\n"
+        print saveInfo.getFemaleFirst()
+        print "\n\First Place Male:\n"
+        print saveInfo.getMaleFirst()
+    else:
         #getTopScores()
         #getGamesScores()
         #getRegionalScores()
         #getOpenScores()
+        getFirstScores()
 
 
 main()

@@ -37,8 +37,12 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       levelLabel = "Male Regionals";
     } else if(level=="women-open") {
       levelLabel = "Female Open";
-    } else {
+    } else if(level=="men-open") {
       levelLabel = "Male Open";
+    } else if(level=="women-first") {
+      levelLabel = "First place female";
+    } else {
+      levelLabel = "First place male";
     }
     return levelLabel;
   }
@@ -59,8 +63,12 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       level = "men-regionals";
     } else if(levelLabel=="Female Open") {
       level = "women-open";
-    } else {
+    } else if(levelLabel=="Male Open") {
       level = "men-open";
+    } else if(levelLabel=="First place female") {
+      level = "women-first";
+    } else {
+      level = "men-first";
     }
     return level;
   }
@@ -72,44 +80,92 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     var franMins = Math.floor(parseInt(scores.fran) / 60);
     var franSecs = parseInt(scores.fran) % 60;
     franSecs = ("0" + franSecs).slice(-2)
-    $scope.frans[level] = franMins+":"+franSecs;
+    if(!franMins || !franSecs) {
+      $scope.frans[level] = "No Data";
+    } else {
+      $scope.frans[level] = franMins+":"+franSecs;
+    }
 
     var helenMins = Math.floor(parseInt(scores.helen) / 60);
     var helenSecs = parseInt(scores.helen) % 60;
     helenSecs = ("0" + helenSecs).slice(-2)
-    $scope.helens[level] = helenMins+":"+helenSecs;
+    if(!helenMins || !helenSecs) {
+      $scope.helens[level] = "No Data";
+    } else {
+      $scope.helens[level] = helenMins+":"+helenSecs;
+    }
 
     var graceMins = Math.floor(parseInt(scores.grace) / 60);
     var graceSecs = parseInt(scores.grace) % 60;
     graceSecs = ("0" + graceSecs).slice(-2)
-    $scope.graces[level] = graceMins+":"+graceSecs;
+    if(!graceMins || !graceSecs) {
+      $scope.graces[level] = "No Data";
+    } else {
+      $scope.graces[level] = graceMins+":"+graceSecs;
+    }
 
     var filthyMins = Math.floor(parseInt(scores.filthy50) / 60);
     var filthySecs = parseInt(scores.filthy50) % 60;
     filthySecs = ("0" + filthySecs).slice(-2)
-    $scope.filthy50s[level] = filthyMins+":"+filthySecs;
+    if(!filthyMins || !filthySecs) {
+      $scope.filthy50s[level] = "No Data";
+    } else {
+      $scope.filthy50s[level] = filthyMins+":"+filthySecs;
+    }
 
-    $scope.fightGoneBads[level] = Math.floor(scores.fightGoneBad);
+    if (!scores.fightGoneBad) {
+      $scope.fightGoneBads[level] = "No Data";
+    } else {
+      $scope.fightGoneBads[level] = Math.floor(scores.fightGoneBad);
+    }
 
     var sprintMins = Math.floor(parseInt(scores.sprint400m) / 60);
     var sprintSecs = parseInt(scores.sprint400m) % 60;
     sprintSecs = ("0" + sprintSecs).slice(-2)
-    $scope.sprint400ms[level] = sprintMins+":"+sprintSecs;
+    if(!sprintMins || !sprintSecs) {
+      $scope.sprint400ms[level] = "No Data";
+    } else {
+      $scope.sprint400ms[level] = sprintMins+":"+sprintSecs;
+    }
 
     var runMins = Math.floor(parseInt(scores.run5k) / 60);
     var runSecs = parseInt(scores.run5k) % 60;
     runSecs = ("0" + runSecs).slice(-2)
-    $scope.run5ks[level] = runMins+":"+runSecs;
+    if(!runMins || !runSecs) {
+      $scope.run5ks[level] = "No Data";
+    } else {
+      $scope.run5ks[level] = runMins+":"+runSecs;
+    }
 
-    $scope.cleanAndJerks[level] = scores.cleanAndJerk;
+    if (!scores.cleanAndJerk) {
+      $scope.cleanAndJerks[level] = "No Data";
+    } else {
+      $scope.cleanAndJerks[level] = scores.cleanAndJerk+" lbs";
+    }
 
-    $scope.snatchs[level] = scores.snatch;
+    if (!scores.snatch) {
+      $scope.snatchs[level] = "No Data";
+    } else {
+      $scope.snatchs[level] = scores.snatch+" lbs";
+    }
 
-    $scope.deadlifts[level] = scores.deadlift;
+    if (!scores.deadlift) {
+      $scope.deadlifts[level] = "No Data";
+    } else {
+      $scope.deadlifts[level] = scores.deadlift+" lbs";
+    }
 
-    $scope.backSquats[level] = scores.backSquat;
+    if (!scores.backSquat) {
+      $scope.backSquats[level] = "No Data";
+    } else {
+      $scope.backSquats[level] = scores.backSquat+" lbs";
+    }
 
-    $scope.maxPullups[level] = Math.floor(scores.maxPullups);
+    if (!scores.maxPullups) {
+      $scope.maxPullups[level] = "No Data";
+    } else {
+      $scope.maxPullups[level] = Math.floor(scores.maxPullups);
+    }
     });
   };
 
