@@ -71,7 +71,6 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
   }
 
   getAthleteScores = function(level){
-    console.log(level);
     Athlete.get(level).then(function(scores) {
 
     var franMins = Math.floor(parseInt(scores.fran) / 60);

@@ -74,7 +74,6 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   }
 
   getAthleteScores = function(level){
-    console.log(level);
     Athlete.get(level).then(function(scores) {
 
     var franMins = Math.floor(parseInt(scores.fran) / 60);
@@ -193,8 +192,6 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       $scope.levelLabels.push(levelLabel);
       getAthleteScores($scope.level);
     }
-    console.log($scope.levels);
-    console.log($scope.levelLabels);
   }
 
   $scope.removeLevel = function(levelLabel) {
@@ -207,8 +204,6 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       removeAthleteScores(level);
 
     }
-    console.log($scope.levels);
-    console.log($scope.levelLabels);
   }
 
 }]);
