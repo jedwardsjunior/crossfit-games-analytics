@@ -19,201 +19,224 @@ MONGODB_URI = 'mongodb://%s:%s@ds047652.mongolab.com:47652/crossfit-games-scores
 
 
 # Retrieves the dictionary of female Games athletes
-def getFemaleGamesDictionary():
+def getFemaleGamesDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "women-games-%s" % year
     try:
-        dictionary = db['women-games'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setFemaleGamesDictionary(dictionary):
+def setFemaleGamesDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('women-games')
-    indicatorDictionary = db['women-games']
+    collection = "women-games-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
+    indicatorDictionary.insert_one(dictionary)
+    client.close()
+
+### --- TODO 7/30: STOPPED WORK HERE. NEED TO KEEP UPDATING ALL OTHER FUNCTIONS
+### ---  TO BE COMPATIBLE WITH YEAR INPUT #----
+
+# Retrieves the dictionary of female Games athletes
+def getMaleGamesDictionary(year):
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    collection = "men-games-%s" % year
+    try:
+        dictionary = db[collection].find()[0]
+    except:
+        dictionary = {}
+    client.close()
+    return dictionary
+
+# Resets the dictionary of female Games athletes
+def setMaleGamesDictionary(dictionary, year):
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    collection = "men-games-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getMaleGamesDictionary():
+def getFemaleRegionalDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "women-regionals-%s" % year
     try:
-        dictionary = db['men-games'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setMaleGamesDictionary(dictionary):
+def setFemaleRegionalDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('men-games')
-    indicatorDictionary = db['men-games']
+    collection = "women-regionals-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getFemaleRegionalDictionary():
+def getMaleRegionalDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "men-regionals-%s" % year
     try:
-        dictionary = db['women-regionals'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setFemaleRegionalDictionary(dictionary):
+def setMaleRegionalDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('women-regionals')
-    indicatorDictionary = db['women-regionals']
+    collection = "men-regionals-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getMaleRegionalDictionary():
+def getFemaleOpenDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "women-open-%s" % year
     try:
-        dictionary = db['men-regionals'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setMaleRegionalDictionary(dictionary):
+def setFemaleOpenDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('men-regionals')
-    indicatorDictionary = db['men-regionals']
+    collection = "women-open-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getFemaleOpenDictionary():
+def getMaleOpenDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "men-open-%s" % year
     try:
-        dictionary = db['women-open'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setFemaleOpenDictionary(dictionary):
+def setMaleOpenDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('women-open')
-    indicatorDictionary = db['women-open']
+    collection = "women-open-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getMaleOpenDictionary():
+def getFemaleTopDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "women-top-%s" % year
     try:
-        dictionary = db['men-open'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of female Games athletes
-def setMaleOpenDictionary(dictionary):
+def setFemaleTopDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('men-open')
-    indicatorDictionary = db['men-open']
-    indicatorDictionary.insert_one(dictionary)
-    client.close()
-
-# Retrieves the dictionary of female Games athletes
-def getFemaleTopDictionary():
-    client = pymongo.MongoClient(MONGODB_URI)
-    db = client.get_default_database()
-    try:
-        dictionary = db['women-top'].find()[0]
-    except:
-        dictionary = {}
-    client.close()
-    return dictionary
-
-# Resets the dictionary of female Games athletes
-def setFemaleTopDictionary(dictionary):
-    client = pymongo.MongoClient(MONGODB_URI)
-    db = client.get_default_database()
-    db.drop_collection('women-top')
-    indicatorDictionary = db['women-top']
+    collection = "women-top-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of top female Games athletes
-def getMaleTopDictionary():
+def getMaleTopDictionary(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "men-top-%s" % year
     try:
-        dictionary = db['men-top'].find()[0]
+        dictionary = db[collection].find()[0]
     except:
         dictionary = {}
     client.close()
     return dictionary
 
 # Resets the dictionary of top female Games athletes
-def setMaleTopDictionary(dictionary):
+def setMaleTopDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('men-top')
-    indicatorDictionary = db['men-top']
+    collection = "men-top-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getFemaleFirst():
+def getFemaleFirst(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "women-first-%s" % year
     try:
-        scores = db['women-first'].find()[0]
+        scores = db[collection].find()[0]
     except:
         scores = {}
     client.close()
     return scores
 
 # Resets the dictionary of female Games athletes
-def setFemaleFirst(scores):
+def setFemaleFirst(scores, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('women-first')
-    indicatorDictionary = db['women-first']
+    collection = "women-first-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(scores)
     client.close()
 
 # Retrieves the dictionary of female Games athletes
-def getMaleFirst():
+def getMaleFirst(year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
+    collection = "men-first-%s" % year
     try:
-        scores = db['men-first'].find()[0]
+        scores = db[collection].find()[0]
     except:
         scores = {}
     client.close()
     return scores
 
 # Resets the dictionary of female Games athletes
-def setMaleFirst(scores):
+def setMaleFirst(scores, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    db.drop_collection('men-first')
-    indicatorDictionary = db['men-first']
+    collection = "men-first-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(scores)
     client.close()

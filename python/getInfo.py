@@ -51,8 +51,7 @@ def getAthleteLinks(url):
     return links
 
 
-
-def getAthletesScores(url, numToCount=-1, numPages=1):
+def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
 
     # --- Get an empty scores dictionary with the necessary keys
     scores = getEmptyScoresDictionary()
@@ -66,7 +65,8 @@ def getAthletesScores(url, numToCount=-1, numPages=1):
     for i in range(1, numPages+1):
         print "Processing",i
         # --- Get all the links to the athlete bios ---
-        links = getAthleteLinks(url % i)
+        url = url % (str(i), str(year))
+        links = getAthleteLinks(url)
 
         # --- In some cases, we only want the top N competitors' info.
         # --- If this is true, then numToCount will be passed in equal
@@ -134,30 +134,30 @@ def getAthletesScores(url, numToCount=-1, numPages=1):
     return scores
 
 # --- Calculate the scores for top 10 female and male Games finishers
-def getFirstScores():
-    femaleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
-    femaleFirstScore = getAthletesScores(femaleFirst, 1)
+def getFirstScores(year):
+    femaleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+    femaleFirstScore = getAthletesScores(femaleFirst, 1, 1, year)
     for key in femaleFirstScore.keys():
         eventScore = femaleFirstScore[key]
         if len(eventScore) == 0:
             continue
         femaleFirstScore[key] = "%0.2f" % (eventScore[0])
-    saveInfo.setFemaleFirst(femaleFirstScore)
+    saveInfo.setFemaleFirst(femaleFirstScore, year)
 
-    maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
-    maleFirstScore = getAthletesScores(maleFirst, 1)
+    maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleFirstScore = getAthletesScores(maleFirst, 1, 1, year)
     for key in maleFirstScore.keys():
         eventScore = maleFirstScore[key]
         if len(eventScore) == 0:
             continue
         maleFirstScore[key] = "%0.2f" % (eventScore[0])
-    saveInfo.setMaleFirst(maleFirstScore)
+    saveInfo.setMaleFirst(maleFirstScore, year)
 
 
 # --- Calculate the scores for top 10 female and male Games finishers
-def getTopScores():
-    femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
-    femaleTopScores = getAthletesScores(femaleGames, 10)
+def getTopScores(year):
+    femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+    femaleTopScores = getAthletesScores(femaleGames, 10, 1, year)
     for key in femaleTopScores.keys():
         eventScores = femaleTopScores[key]
         numScores = len(eventScores)
@@ -167,10 +167,10 @@ def getTopScores():
         for score in eventScores:
             total += score
         femaleTopScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setFemaleTopDictionary(femaleTopScores)
+    saveInfo.setFemaleTopDictionary(femaleTopScores, year)
 
-    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
-    maleTopScores = getAthletesScores(maleGames, 10)
+    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleTopScores = getAthletesScores(maleGames, 10, 1, year)
     for key in maleTopScores.keys():
         eventScores = maleTopScores[key]
         numScores = len(eventScores)
@@ -180,12 +180,12 @@ def getTopScores():
         for score in eventScores:
             total += score
         maleTopScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setMaleTopDictionary(maleTopScores)
+    saveInfo.setMaleTopDictionary(maleTopScores, year)
 
 # --- Calculate the scores for all female and male Games finishers
-def getGamesScores():
-    femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
-    femaleGamesScores = getAthletesScores(femaleGames)
+def getGamesScores(year):
+    femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+    femaleGamesScores = getAthletesScores(femaleGames, -1, 1, year)
     for key in femaleGamesScores.keys():
         eventScores = femaleGamesScores[key]
         numScores = len(eventScores)
@@ -195,10 +195,10 @@ def getGamesScores():
         for score in eventScores:
             total += score
         femaleGamesScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setFemaleGamesDictionary(femaleGamesScores)
+    saveInfo.setFemaleGamesDictionary(femaleGamesScores, year)
 
-    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=14&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
-    maleGamesScores = getAthletesScores(maleGames)
+    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleGamesScores = getAthletesScores(maleGames, -1, 1, year)
     for key in maleGamesScores.keys():
         eventScores = maleGamesScores[key]
         numScores = len(eventScores)
@@ -208,13 +208,13 @@ def getGamesScores():
         for score in eventScores:
             total += score
         maleGamesScores[key] = "%0.2f" % (total/numScores)
-        saveInfo.setMaleGamesDictionary(maleGamesScores)
+        saveInfo.setMaleGamesDictionary(maleGamesScores, year)
 
 # --- Calculate the scores for top 15 female and male regional finishers
 # --- from all regions
-def getRegionalScores():
-    femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
-    femaleRegionalScores = getAthletesScores(femaleRegionals, 15, 17)
+def getRegionalScores(year):
+    femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+    femaleRegionalScores = getAthletesScores(femaleRegionals, 15, 17, year)
     for key in femaleRegionalScores.keys():
         eventScores = femaleRegionalScores[key]
         numScores = len(eventScores)
@@ -224,10 +224,10 @@ def getRegionalScores():
         for score in eventScores:
             total += score
         femaleRegionalScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setFemaleRegionalDictionary(femaleRegionalScores)
+    saveInfo.setFemaleRegionalDictionary(femaleRegionalScores, year)
 
-    maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
-    maleRegionalScores = getAthletesScores(maleRegionals, 15, 17)
+    maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+    maleRegionalScores = getAthletesScores(maleRegionals, 15, 17, year)
     for key in maleRegionalScores.keys():
         eventScores = maleRegionalScores[key]
         numScores = len(eventScores)
@@ -237,16 +237,16 @@ def getRegionalScores():
         for score in eventScores:
             total += score
         maleRegionalScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setMaleRegionalDictionary(maleRegionalScores)
+    saveInfo.setMaleRegionalDictionary(maleRegionalScores, year)
 
 
 # --- Calculate the scores for top 600 female and male Open finishers
 # --- worldwide
-def getOpenScores():
+def getOpenScores(year):
     # --- Note: instead of numPages representing the region, it represents the
     # --- actual pagination (so the '%s' is in a new spot)
-    femaleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=2&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
-    femaleOpenScores = getAthletesScores(femaleOpen, 100, 6)
+    femaleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=2&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
+    femaleOpenScores = getAthletesScores(femaleOpen, 100, 6, year)
     for key in femaleOpenScores.keys():
         eventScores = femaleOpenScores[key]
         numScores = len(eventScores)
@@ -256,10 +256,10 @@ def getOpenScores():
         for score in eventScores:
             total += score
         femaleOpenScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setFemaleOpenDictionary(femaleOpenScores)
+    saveInfo.setFemaleOpenDictionary(femaleOpenScores, year)
 
-    maleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=1&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=14&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
-    maleOpenScores = getAthletesScores(maleOpen, 100, 6)
+    maleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=1&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
+    maleOpenScores = getAthletesScores(maleOpen, 100, 6, year)
     for key in maleOpenScores.keys():
         eventScores = maleOpenScores[key]
         numScores = len(eventScores)
@@ -269,37 +269,38 @@ def getOpenScores():
         for score in eventScores:
             total += score
         maleOpenScores[key] = "%0.2f" % (total/numScores)
-    saveInfo.setMaleOpenDictionary(maleOpenScores)
+    saveInfo.setMaleOpenDictionary(maleOpenScores, year)
 
 def main():
     cont = raw_input("Test? (Y/N)")
+    year = raw_input("Year? (YY format): ")
     if cont=='Y':
         print "Top Females:\n"
-        print saveInfo.getFemaleTopDictionary()
+        print saveInfo.getFemaleTopDictionary(year)
         print "\n\nTop Males:\n"
-        print saveInfo.getMaleTopDictionary()
+        print saveInfo.getMaleTopDictionary(year)
         print "\n\nGames Females:\n"
-        print saveInfo.getFemaleGamesDictionary()
+        print saveInfo.getFemaleGamesDictionary(year)
         print "\n\nGames Males:\n"
-        print saveInfo.getMaleGamesDictionary()
+        print saveInfo.getMaleGamesDictionary(year)
         print "\n\nRegional Females:\n"
-        print saveInfo.getFemaleRegionalDictionary()
+        print saveInfo.getFemaleRegionalDictionary(year)
         print "\n\nRegional Males:\n"
-        print saveInfo.getMaleRegionalDictionary()
+        print saveInfo.getMaleRegionalDictionary(year)
         print "\n\nOpen Females:\n"
-        print saveInfo.getFemaleOpenDictionary()
+        print saveInfo.getFemaleOpenDictionary(year)
         print "\n\nOpen Males:\n"
-        print saveInfo.getMaleOpenDictionary()
+        print saveInfo.getMaleOpenDictionary(year)
         print "\n\nFirst Place Female:\n"
-        print saveInfo.getFemaleFirst()
+        print saveInfo.getFemaleFirst(year)
         print "\n\First Place Male:\n"
-        print saveInfo.getMaleFirst()
+        print saveInfo.getMaleFirst(year)
     else:
-        #getTopScores()
-        #getGamesScores()
-        #getRegionalScores()
-        #getOpenScores()
-        getFirstScores()
+        #getTopScores(year)
+        #getGamesScores(year)
+        getRegionalScores(year)
+        getOpenScores(year)
+        getFirstScores(year)
 
 
 main()

@@ -70,8 +70,8 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     return levelLabel;
   }
 
-  getAthleteScores = function(level){
-    Athlete.get(level).then(function(scores) {
+  getAthleteScores = function(level, year){
+    Athlete.get(level, year).then(function(scores) {
 
     var franMins = Math.floor(parseInt(scores.fran) / 60);
     var franSecs = parseInt(scores.fran) % 60;
@@ -169,7 +169,7 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
   $scope.submitCompareForm = function() {
     $scope.levelLabel = getLevelLabel($scope.level);
-    getAthleteScores($scope.level);
+    getAthleteScores($scope.level, "14");
     $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
     if (!$scope.franMins || !$scope.franSeconds) {
       $scope.franScore = "";

@@ -38,7 +38,7 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
     }
 
     var division = $scope.gender+"-"+$scope.level;
-    Athlete.get(division).then(function(scores) {
+    Athlete.get(division, "14").then(function(scores) {
       var franMins = Math.floor(parseInt(scores.fran) / 60);
       var franSecs = parseInt(scores.fran) % 60;
       franSecs = ("0" + franSecs).slice(-2)
