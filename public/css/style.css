@@ -39,7 +39,7 @@ body {
 }
 
 #header h1 {
-  margin-left:20%;
+  margin-left:25%;
   font-family:Impact;
   font-size: 400%;
   color: #DD0000;
@@ -56,6 +56,16 @@ body {
 .navbar-inverse {
   background-color:#000;
   font-family:aero_maticsregular;
+}
+
+.navbar-header {
+  position: relative;
+  left: 300px;
+}
+
+#navbar ul {
+  position: relative;
+  left: 300px;
 }
 
 #footer {

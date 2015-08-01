@@ -147,7 +147,7 @@ def getMaleOpenDictionary(year):
 def setMaleOpenDictionary(dictionary, year):
     client = pymongo.MongoClient(MONGODB_URI)
     db = client.get_default_database()
-    collection = "women-open-%s" % year
+    collection = "men-open-%s" % year
     db.drop_collection(collection)
     indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(dictionary)

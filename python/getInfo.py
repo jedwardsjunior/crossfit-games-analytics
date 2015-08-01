@@ -65,8 +65,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
     for i in range(1, numPages+1):
         print "Processing",i
         # --- Get all the links to the athlete bios ---
-        url = url % (str(i), str(year))
-        links = getAthleteLinks(url)
+        links = getAthleteLinks(url % (str(i), str(year)))
 
         # --- In some cases, we only want the top N competitors' info.
         # --- If this is true, then numToCount will be passed in equal
@@ -293,14 +292,14 @@ def main():
         print saveInfo.getMaleOpenDictionary(year)
         print "\n\nFirst Place Female:\n"
         print saveInfo.getFemaleFirst(year)
-        print "\n\First Place Male:\n"
+        print "\n\nFirst Place Male:\n"
         print saveInfo.getMaleFirst(year)
     else:
         #getTopScores(year)
         #getGamesScores(year)
-        getRegionalScores(year)
+        #getRegionalScores(year)
         getOpenScores(year)
-        getFirstScores(year)
+        #getFirstScores(year)
 
 
 main()
