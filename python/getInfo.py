@@ -109,13 +109,17 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                 if (kgIndex is not -1):
                                     kgs = eval("%0.2f" % eval(contents[0:kgIndex]*2.20462))
                                     print "\n\nKgs =",kgs,"\n\n"
-                                    scores[key].append(kgs)
+                                    # Some people embellish their scores
+                                    if (kgs < 700):
+                                        scores[key].append(kgs)
 
                                 # --- Remove the "lb" of lb values ---
                                 elif (lbIndex is not -1):
                                     lbs = eval("%0.2f" % eval(contents[0:lbIndex]))
                                     print "Lbs =",lbs
-                                    scores[key].append(lbs)
+                                    # Some people embellish their scores
+                                    if (lbs < 700):
+                                        scores[key].append(lbs)
 
                                 # --- Convert time values to total seconds ---
                                 elif (timeIndex is not -1):
