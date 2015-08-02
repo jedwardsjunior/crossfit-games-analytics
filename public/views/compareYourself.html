@@ -22,6 +22,13 @@
         <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open"></option>
         <option value="men-first", label="First Place Male", ng-selected="level == men-first">
       </select>
+      <select ng-model="year" ng-change="getAthleteScores()">
+        <option value="15", label="2015", ng-selected="year == 15">
+        <option value="14", label="2014", ng-selected="year == 14">
+        <option value="13", label="2013", ng-selected="year == 13">
+        <option value="12", label="2012", ng-selected="year == 12">
+        <option value="11", label="2011", ng-selected="year == 11">
+      </select>
       <br>
       <br>
       Fran time:<br>

@@ -41,31 +41,32 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
   $scope.level="women-top";
   $scope.levelLabel = "Female Top 10";
+  $scope.year = "15";
   $scope.hiddenForm = false;
   $scope.hiddenTable = true;
 
-  getLevelLabel = function(level) {
+  getLevelLabel = function(level, year) {
     var levelLabel = "";
     if(level=="women-top") {
-      levelLabel = "Female Top 10";
+      levelLabel = "Female Top 10 (20"+year+")";
     } else if (level=="men-top") {
-      levelLabel = "Male Top 10";
+      levelLabel = "Male Top 10 (20"+year+")";
     } else if(level=="women-games") {
-      levelLabel = "Female Games";
+      levelLabel = "Female Games (20"+year+")";
     } else if(level=="men-games") {
-      levelLabel = "Male Games";
+      levelLabel = "Male Games (20"+year+")";
     } else if(level=="women-regionals") {
-      levelLabel = "Female Regionals";
+      levelLabel = "Female Regionals (20"+year+")";
     } else if(level=="men-regionals") {
-      levelLabel = "Male Regionals";
+      levelLabel = "Male Regionals (20"+year+")";
     } else if(level=="women-open") {
-      levelLabel = "Female Open";
+      levelLabel = "Female Open (20"+year+")";
     } else if(level=="men-open") {
-      levelLabel = "Male Open";
+      levelLabel = "Male Open (20"+year+")";
     } else if(level=="women-first") {
-      levelLabel = "First Place Female";
+      levelLabel = "First Place Female (20"+year+")";
     } else {
-      levelLabel = "First Place Male";
+      levelLabel = "First Place Male (20"+year+")";
     }
     return levelLabel;
   }
@@ -168,8 +169,8 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
 
   $scope.submitCompareForm = function() {
-    $scope.levelLabel = getLevelLabel($scope.level);
-    getAthleteScores($scope.level, "14");
+    $scope.levelLabel = getLevelLabel($scope.level, $scope.year);
+    getAthleteScores($scope.level, $scope.year);
     $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
     if (!$scope.franMins || !$scope.franSeconds) {
       $scope.franScore = "";

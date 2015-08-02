@@ -15,66 +15,74 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   $scope.maxPullups = {};
 
   $scope.level="women-top";
+  $scope.year = "15";
   $scope.levels = [];
   $scope.levelLabels = [];
 
   $scope.tableWidth = 600;
   $scope.tdWidth = $scope.tableWidth/($scope.levels.length+1);
 
-  getLevelLabel = function(level) {
+  getLevelLabel = function(level, year) {
     var levelLabel = "";
     if(level=="women-top") {
-      levelLabel = "Female Top 10";
+      levelLabel = "Female Top 10 (20"+year+")";
     } else if (level=="men-top") {
-      levelLabel = "Male Top 10";
+      levelLabel = "Male Top 10 (20"+year+")";
     } else if(level=="women-games") {
-      levelLabel = "Female Games";
+      levelLabel = "Female Games (20"+year+")";
     } else if(level=="men-games") {
-      levelLabel = "Male Games";
+      levelLabel = "Male Games (20"+year+")";
     } else if(level=="women-regionals") {
-      levelLabel = "Female Regionals";
+      levelLabel = "Female Regionals (20"+year+")";
     } else if(level=="men-regionals") {
-      levelLabel = "Male Regionals";
+      levelLabel = "Male Regionals (20"+year+")";
     } else if(level=="women-open") {
-      levelLabel = "Female Open";
+      levelLabel = "Female Open (20"+year+")";
     } else if(level=="men-open") {
-      levelLabel = "Male Open";
+      levelLabel = "Male Open (20"+year+")";
     } else if(level=="women-first") {
-      levelLabel = "First Place Female";
+      levelLabel = "First Place Female (20"+year+")";
     } else {
-      levelLabel = "First Place Male";
+      levelLabel = "First Place Male (20"+year+")";
     }
     return levelLabel;
   }
 
   getLevel = function(levelLabel) {
-    var level = "";
+    var level = ""
+    console.log(levelLabel)
+    var year = levelLabel.substring(levelLabel.length - 3, levelLabel.length - 1);
+    levelLabel = levelLabel.substring(0, levelLabel.length - 7);
+    console.log(levelLabel)
     if(levelLabel=="Female Top 10") {
-      level = "women-top";
+      level = "women-top-"+year;
     } else if (levelLabel=="Male Top 10") {
-      level = "men-top";
+      level = "men-top-"+year;
     } else if(levelLabel=="Female Games") {
-      level = "women-games";
+      level = "women-games-"+year;
     } else if(levelLabel=="Male Games") {
-      level = "men-games";
+      level = "men-games-"+year;
     } else if(levelLabel=="Female Regionals") {
-      level = "women-regionals";
+      level = "women-regionals-"+year;
     } else if(levelLabel=="Male Regionals") {
-      level = "men-regionals";
+      level = "men-regionals-"+year;
     } else if(levelLabel=="Female Open") {
-      level = "women-open";
+      level = "women-open-"+year;
     } else if(levelLabel=="Male Open") {
-      level = "men-open";
+      level = "men-open-"+year;
     } else if(levelLabel=="First Place Female") {
-      level = "women-first";
+      level = "women-first-"+year;
     } else {
-      level = "men-first";
+      level = "men-first-"+year;
     }
     return level;
   }
 
   getAthleteScores = function(level, year){
     Athlete.get(level, year).then(function(scores) {
+    // Hack so I don't have to change all the 'level' keys to
+    // insert in the dictionary
+    level = level+"-"+year;
 
     var franMins = Math.floor(parseInt(scores.fran) / 60);
     var franSecs = parseInt(scores.fran) % 60;
@@ -186,11 +194,11 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   }
 
   $scope.submitLevelForm = function() {
-    if ($scope.levels.indexOf($scope.level) == -1) {
-      $scope.levels.push($scope.level);
-      var levelLabel = getLevelLabel($scope.level)
+    if ($scope.levels.indexOf($scope.level+"-"+$scope.year) == -1) {
+      $scope.levels.push($scope.level+"-"+$scope.year);
+      var levelLabel = getLevelLabel($scope.level, $scope.year)
       $scope.levelLabels.push(levelLabel);
-      getAthleteScores($scope.level, "14");
+      getAthleteScores($scope.level, $scope.year);
     }
   }
 
@@ -199,6 +207,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     if (index > -1) {
       $scope.levelLabels.splice(index, 1);
       var level = getLevel(levelLabel);
+      console.log(level);
       var levelIndex = $scope.levels.indexOf(level);
       $scope.levels.splice(levelIndex, 1);
       removeAthleteScores(level);

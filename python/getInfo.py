@@ -295,11 +295,11 @@ def main():
         print "\n\nFirst Place Male:\n"
         print saveInfo.getMaleFirst(year)
     else:
-        #getTopScores(year)
-        #getGamesScores(year)
-        #getRegionalScores(year)
+        getTopScores(year)
+        getGamesScores(year)
+        getRegionalScores(year)
         getOpenScores(year)
-        #getFirstScores(year)
+        getFirstScores(year)
 
 
 main()

@@ -16,7 +16,8 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
   $scope.gender="women";
   $scope.level="top";
   $scope.genderLabel="Female";
-  $scope.levelLabel="Top 10"
+  $scope.levelLabel="Top 10";
+  $scope.year = "15";
 
   $scope.getAthleteScores = function(){
     if($scope.gender=="women") {
@@ -38,7 +39,7 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
     }
 
     var division = $scope.gender+"-"+$scope.level;
-    Athlete.get(division, "14").then(function(scores) {
+    Athlete.get(division, $scope.year).then(function(scores) {
       var franMins = Math.floor(parseInt(scores.fran) / 60);
       var franSecs = parseInt(scores.fran) % 60;
       franSecs = ("0" + franSecs).slice(-2)
