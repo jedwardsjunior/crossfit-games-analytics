@@ -39,10 +39,21 @@
     </table>
   </div>
 
-  <div class="results_table">
+  <div class="results_table" ng-hide="hiddenTable">
     <table>
       <tr>
-        <td ng-style="{ width: {{tdWidth}} }">WOD or Max</td>
+        <td ng-style="{ width: {{tdWidth}} }">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" id="groupDifferential" type="button" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </button>
+           WOD or Max
+            <ul class="dropdown-menu">
+              <li><a ng-click="viewScores()">View Scores</a></li>
+              <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+            </ul>
+          </div>
+        </td>
         <td ng-style="{ width: {{tdWidth}} }" ng-repeat="level in levelLabels">{{level}}</td>
       </tr>
       <tr>
@@ -95,4 +106,73 @@
       </tr>
     </table>
   </div>
+
+  <div class="results_table" ng-hide="hiddenDiff">
+    <table>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" id="groupDifferential" type="button" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </button>
+           WOD or Max (Diff)
+            <ul class="dropdown-menu">
+              <li><a ng-click="viewScores()">View Scores</a></li>
+              <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+            </ul>
+          </div>
+        </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="level in levelLabels">{{level}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Fran </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="franDiff in franDiffs">{{franDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Helen </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="helenDiff in helenDiffs">{{helenDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Grace </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="graceDiff in graceDiffs">{{graceDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Filthy 50 </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="filthy50Diff in filthy50Diffs">{{filthy50Diff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Fight Gone Bad </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="fgbDiff in fightGoneBadDiffs">{{fgbDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Sprint 400m </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="sprintDiff in sprint400mDiffs">{{sprintDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Run 5k </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="runDiff in run5kDiffs">{{runDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Clean & Jerk </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="cjDiff in cleanAndJerkDiffs">{{cleanAndJerks[cjDiff]}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Snatch </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="snatchDiff in snatchDiffs">{{snatchDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Deadlift </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="deadliftDiff in deadliftDiffs">{{deadliftDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Back Squat </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="backsquatDiff in backSquatDiffs">{{backsquatDiff}}</td>
+      </tr>
+      <tr>
+        <td ng-style="{ width: {{tdWidth}} }" class="name"> Max Pull-ups </td>
+        <td ng-style="{ width: {{tdWidth}} }" ng-repeat="pullupDiff in maxPullupDiffs">{{pullupDiff}}</td>
+      </tr>
+    </table>
+  </div>
+
 </div>

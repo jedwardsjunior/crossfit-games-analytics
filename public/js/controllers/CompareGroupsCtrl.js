@@ -14,6 +14,19 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   $scope.backSquats = {};
   $scope.maxPullups = {};
 
+  $scope.franDiffs = [];
+  $scope.helenDiffs = [];
+  $scope.graceDiffs = [];
+  $scope.filthy50Diffs = [];
+  $scope.fightGoneBadDiffs = [];
+  $scope.sprint400mDiffs = [];
+  $scope.run5kDiffs = [];
+  $scope.cleanAndJerkDiffs = [];
+  $scope.snatchDiffs = [];
+  $scope.deadliftDiffs = [];
+  $scope.backSquatDiffs = [];
+  $scope.maxPullupDiffs = [];
+
   $scope.level="women-top";
   $scope.year = "15";
   $scope.levels = [];
@@ -21,6 +34,8 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
 
   $scope.tableWidth = 600;
   $scope.tdWidth = $scope.tableWidth/($scope.levels.length+1);
+  $scope.hiddenDiff = true;
+  $scope.hiddenTable = false;
 
   getLevelLabel = function(level, year) {
     var levelLabel = "";
@@ -173,7 +188,10 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     } else {
       $scope.maxPullups[level] = Math.floor(scores.maxPullups);
     }
+
+    sortDiffs();
     });
+
   };
 
   removeAthleteScores = function(level) {
@@ -190,7 +208,96 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       delete $scope.deadlifts[level];
       delete $scope.backSquats[level];
       delete $scope.maxPullups[level];
+      sortDiffs();
     }
+  }
+
+  convertTimesToSeconds = function(time) {
+    if (time.length == 4) {
+      seconds = parseInt(time.substring(0, 1) * 60);
+    } else {
+      seconds = parseInt(time.substring(0, 2) * 60);
+    }
+    seconds = seconds + parseInt(time.substring(time.length-2, time.length));
+    console.log("Seconds = "+seconds);
+    return seconds;
+  }
+
+  mergeSort = function(list) {
+    if (list.length <= 1) {
+      return list;
+    }
+
+    var a = list.slice(0, list.length/2);
+    var b = list.slice(list.length/2, list.length);
+
+    a = mergeSort(a);
+    b = mergeSort(b)
+
+    return merge(a, b);
+  }
+
+  merge = function(a, b) {
+    var sorted = [];
+
+    while ( a.length > 1 && b.length > 1 ) {
+      if ( a[0] < b[0] ) {
+        sorted.push(b[0]);
+        b.splice(0, 1);
+      } else {
+        sorted.push(a[0]);
+        a.splice(0, 1);
+      }
+    }
+     while ( a.length > 0 ) {
+       sorted.push(a[0]);
+       a.splice(0, 1);
+     }
+     while ( b.length > 0 ) {
+       sorted.push(b[0]);
+       b.splice(0, 1);
+     }
+     return sorted;
+  }
+
+
+  sortDiffs = function() {
+
+    /*
+    $scope.helenDiffs = [];
+    $scope.graceDiffs = [];
+    $scope.filthy50Diffs = [];
+    $scope.fightGoneBadDiffs = [];
+    $scope.sprint400mDiffs = [];
+    $scope.run5kDiffs = [];
+    $scope.cleanAndJerkDiffs = [];
+    $scope.snatchDiffs = [];
+    $scope.deadliftDiffs = [];
+    $scope.backSquatDiffs = [];
+    $scope.maxPullupDiffs = [];
+    */
+    console.log($scope.frans);
+    var franArray = [];
+    for (fran in $scope.frans) {
+      console.log($scope.frans[fran]);
+      franArray.push(convertTimesToSeconds($scope.frans[fran]));
+    }
+    console.log(franArray);
+    $scope.franDiffs = mergeSort(franArray);
+    console.log($scope.franDiffs);
+    /*
+    $scope.helens = {};
+    $scope.graces = {};
+    $scope.filthy50s = {};
+    $scope.fightGoneBads = {};
+    $scope.sprint400ms = {};
+    $scope.run5ks = {};
+    $scope.cleanAndJerks = {};
+    $scope.snatchs = {};
+    $scope.deadlifts = {};
+    $scope.backSquats = {};
+    $scope.maxPullups = {};*/
+
   }
 
   $scope.submitLevelForm = function() {
@@ -211,8 +318,19 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       var levelIndex = $scope.levels.indexOf(level);
       $scope.levels.splice(levelIndex, 1);
       removeAthleteScores(level);
-
     }
+  }
+
+  $scope.viewScores = function() {
+    console.log("View Scores!");
+    $scope.hiddenDiff = true;
+    $scope.hiddenTable = false;
+  }
+
+  $scope.viewDifferentials = function() {
+    console.log("View Differentials!");
+    $scope.hiddenDiff = false;
+    $scope.hiddenTable = true;
   }
 
 }]);
