@@ -14,18 +14,31 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   $scope.backSquats = {};
   $scope.maxPullups = {};
 
-  $scope.franDiffs = [];
-  $scope.helenDiffs = [];
-  $scope.graceDiffs = [];
-  $scope.filthy50Diffs = [];
-  $scope.fightGoneBadDiffs = [];
-  $scope.sprint400mDiffs = [];
-  $scope.run5kDiffs = [];
-  $scope.cleanAndJerkDiffs = [];
-  $scope.snatchDiffs = [];
-  $scope.deadliftDiffs = [];
-  $scope.backSquatDiffs = [];
-  $scope.maxPullupDiffs = [];
+  $scope.franDiffs = {};
+  $scope.helenDiffs = {};
+  $scope.graceDiffs = {};
+  $scope.filthy50Diffs = {};
+  $scope.fightGoneBadDiffs = {};
+  $scope.sprint400mDiffs = {};
+  $scope.run5kDiffs = {};
+  $scope.cleanAndJerkDiffs = {};
+  $scope.snatchDiffs = {};
+  $scope.deadliftDiffs = {};
+  $scope.backSquatDiffs = {};
+  $scope.maxPullupDiffs = {};
+
+  $scope.franKeys = [];
+  $scope.helenKeys = [];
+  $scope.graceKeys = [];
+  $scope.filthy50Keys = [];
+  $scope.fightGoneBadKeys = [];
+  $scope.sprint400mKeys = [];
+  $scope.run5kKeys = [];
+  $scope.cleanAndJerkKeys = [];
+  $scope.snatchKeys = [];
+  $scope.deadliftKeys = [];
+  $scope.backSquatKeys = [];
+  $scope.maxPullupKeys = [];
 
   $scope.level="women-top";
   $scope.year = "15";
@@ -93,6 +106,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     return level;
   }
 
+  /* Add a new level to the comparison table */
   getAthleteScores = function(level, year){
     Athlete.get(level, year).then(function(scores) {
     // Hack so I don't have to change all the 'level' keys to
@@ -188,12 +202,13 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     } else {
       $scope.maxPullups[level] = Math.floor(scores.maxPullups);
     }
-
+    updateKeys();
     sortDiffs();
     });
 
   };
 
+  /* Remove a level from the comparison table */
   removeAthleteScores = function(level) {
     if($scope.frans[level] != "") {
       delete $scope.frans[level];
@@ -208,10 +223,28 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       delete $scope.deadlifts[level];
       delete $scope.backSquats[level];
       delete $scope.maxPullups[level];
+      updateKeys();
       sortDiffs();
     }
   }
 
+  /** Keys needed to properly display differentials in Differential Mode */
+  updateKeys = function() {
+    $scope.franKeys = Object.keys($scope.frans);
+    $scope.helenKeys = Object.keys($scope.helens);
+    $scope.graceKeys = Object.keys($scope.graces);
+    $scope.filthy50Keys = Object.keys($scope.filthy50s);
+    $scope.fightGoneBadKeys = Object.keys($scope.fightGoneBads);
+    $scope.sprint400mKeys = Object.keys($scope.sprint400ms);
+    $scope.run5kKeys = Object.keys($scope.run5ks);
+    $scope.cleanAndJerkKeys = Object.keys($scope.cleanAndJerks);
+    $scope.snatchKeys = Object.keys($scope.snatchs);
+    $scope.deadliftKeys = Object.keys($scope.deadlifts);
+    $scope.backSquatKeys = Object.keys($scope.backSquats);
+    $scope.maxPullupKeys = Object.keys($scope.maxPullups);
+  }
+
+  /** Converts standard MM:SS format to seconds for comparison */
   convertTimesToSeconds = function(time) {
     if (time.length == 4) {
       seconds = parseInt(time.substring(0, 1) * 60);
@@ -223,6 +256,23 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     return seconds;
   }
 
+  /** Converts seconds to standard MM:SS format */
+  convertSecondsToTimes = function(seconds) {
+    time = Math.floor(seconds/60) + ":";
+    if (parseInt(seconds % 60) < 10) {
+      time = time + "0" +seconds % 60;
+    } else {
+      time = time + seconds % 60;
+    }
+    console.log(time);
+    return time;
+  }
+
+  convertWeightToNumber = function(weight) {
+    return weight.substring(0,weight.length - 4);
+  }
+
+  /** Merge sorts from largest --> smallest (for scores) */
   mergeSort = function(list) {
     if (list.length <= 1) {
       return list;
@@ -240,7 +290,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   merge = function(a, b) {
     var sorted = [];
 
-    while ( a.length > 1 && b.length > 1 ) {
+    while ( a.length > 0 && b.length > 0 ) {
       if ( a[0] < b[0] ) {
         sorted.push(b[0]);
         b.splice(0, 1);
@@ -260,44 +310,219 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
      return sorted;
   }
 
+  /** Merge sorts from smallest --> largest (for times) */
+  mergeSortTimes = function(list) {
+    if (list.length <= 1) {
+      return list;
+    }
 
+    var a = list.slice(0, list.length/2);
+    var b = list.slice(list.length/2, list.length);
+
+    a = mergeSortTimes(a);
+    b = mergeSortTimes(b)
+
+    return mergeTimes(a, b);
+  }
+
+  mergeTimes = function(a, b) {
+    var sorted = [];
+
+    while ( a.length > 0 && b.length > 0 ) {
+      if ( a[0] > b[0] ) {
+        sorted.push(b[0]);
+        b.splice(0, 1);
+      } else {
+        sorted.push(a[0]);
+        a.splice(0, 1);
+      }
+    }
+     while ( a.length > 0 ) {
+       sorted.push(a[0]);
+       a.splice(0, 1);
+     }
+     while ( b.length > 0 ) {
+       sorted.push(b[0]);
+       b.splice(0, 1);
+     }
+     return sorted;
+  }
+
+  /** Returns a dictionary with the keys corresponding to the differentials
+      time for times (i.e. Fran or Helen) **/
+  convertTimesToDifferentials = function(list, dictionary) {
+    diffDict = {};
+    if(list.length > 0) {
+      var keys = Object.keys(dictionary);
+      firstTime = convertSecondsToTimes(list[0]);
+      firstKey = "";
+      for (j=0; j<keys.length; j++) {
+        if (dictionary[keys[j]] == firstTime) {
+          firstKey = keys[j];
+          keys.splice(j, 1);
+          break;
+        }
+      }
+
+      diffDict[firstKey] = firstTime;
+      for (i = 1; i < list.length; i++) {
+        matchingKey = "";
+        for (j=0; j<keys.length; j++) {
+          if (dictionary[keys[j]] == convertSecondsToTimes(list[i])) {
+            matchingKey = keys[j];
+            keys.splice(j, 1);
+            break;
+          }
+        }
+        list[i] = list[i] - list[0];
+        diffDict[matchingKey] = "+"+list[i]+" seconds";
+      }
+    }
+    return diffDict;
+  }
+
+  /** Returns a dictionary with the keys corresponding to the differentials
+      time for scores (1RMs) **/
+  convertWeightsToDifferentials = function(list, dictionary) {
+    diffDict = {};
+    if(list.length > 0) {
+      var keys = Object.keys(dictionary);
+      firstScore = list[0];
+      firstKey = "";
+      for (j=0; j<keys.length; j++) {
+        if (dictionary[keys[j]] == list[0]+" lbs") {
+          firstKey = keys[j];
+          keys.splice(j, 1);
+          break;
+        }
+      }
+
+      diffDict[firstKey] = firstScore;
+      for (i = 1; i < list.length; i++) {
+        matchingKey = "";
+        for (j=0; j<keys.length; j++) {
+          if (dictionary[keys[j]] == list[i]+" lbs") {
+            matchingKey = keys[j];
+            keys.splice(j, 1);
+            break;
+          }
+        }
+        list[i] = list[i] - firstScore;
+        diffDict[matchingKey] = parseFloat(list[i]).toFixed(2)+" lbs";
+      }
+    }
+    return diffDict;
+  }
+
+  /** Returns a dictionary with the keys corresponding to the differentials
+      time for scores (i.e. 1RMs and FGB/Pullups) **/
+  convertScoresToDifferentials = function(list, dictionary) {
+    diffDict = {};
+    if(list.length > 0) {
+      var keys = Object.keys(dictionary);
+      firstScore = list[0];
+      firstKey = "";
+      for (j=0; j<keys.length; j++) {
+        if (dictionary[keys[j]] == list[0]) {
+          firstKey = keys[j];
+          keys.splice(j, 1);
+          break;
+        }
+      }
+
+      diffDict[firstKey] = firstScore;
+      for (i = 1; i < list.length; i++) {
+        matchingKey = "";
+        for (j=0; j<keys.length; j++) {
+          if (dictionary[keys[j]] == list[i]) {
+            matchingKey = keys[j];
+            keys.splice(j, 1);
+            break;
+          }
+        }
+        list[i] = list[i] - firstScore;
+        diffDict[matchingKey] = list[i];
+      }
+    }
+    return diffDict;
+  }
+
+  /** Updates the differentials every time a new level is added */
   sortDiffs = function() {
-
-    /*
-    $scope.helenDiffs = [];
-    $scope.graceDiffs = [];
-    $scope.filthy50Diffs = [];
-    $scope.fightGoneBadDiffs = [];
-    $scope.sprint400mDiffs = [];
-    $scope.run5kDiffs = [];
-    $scope.cleanAndJerkDiffs = [];
-    $scope.snatchDiffs = [];
-    $scope.deadliftDiffs = [];
-    $scope.backSquatDiffs = [];
-    $scope.maxPullupDiffs = [];
-    */
-    console.log($scope.frans);
     var franArray = [];
     for (fran in $scope.frans) {
-      console.log($scope.frans[fran]);
       franArray.push(convertTimesToSeconds($scope.frans[fran]));
     }
-    console.log(franArray);
-    $scope.franDiffs = mergeSort(franArray);
-    console.log($scope.franDiffs);
-    /*
-    $scope.helens = {};
-    $scope.graces = {};
-    $scope.filthy50s = {};
-    $scope.fightGoneBads = {};
-    $scope.sprint400ms = {};
-    $scope.run5ks = {};
-    $scope.cleanAndJerks = {};
-    $scope.snatchs = {};
-    $scope.deadlifts = {};
-    $scope.backSquats = {};
-    $scope.maxPullups = {};*/
+    $scope.franDiffs = convertTimesToDifferentials(mergeSortTimes(franArray), $scope.frans);
 
+    var helenArray = [];
+    for (helen in $scope.helens) {
+      helenArray.push(convertTimesToSeconds($scope.helens[helen]));
+    }
+    $scope.helenDiffs = convertTimesToDifferentials(mergeSortTimes(helenArray), $scope.helens);
+
+    var graceArray = [];
+    for (grace in $scope.graces) {
+      graceArray.push(convertTimesToSeconds($scope.graces[grace]));
+    }
+    $scope.graceDiffs = convertTimesToDifferentials(mergeSortTimes(graceArray), $scope.graces);
+
+    var filthyArray = [];
+    for (filthy in $scope.filthy50s) {
+      filthyArray.push(convertTimesToSeconds($scope.filthy50s[filthy]));
+    }
+    $scope.filthy50Diffs = convertTimesToDifferentials(mergeSortTimes(filthyArray), $scope.filthy50s);
+
+    var fgbArray = [];
+    for (fgb in $scope.fightGoneBads) {
+      fgbArray.push($scope.fightGoneBads[fgb]);
+    }
+    $scope.fightGoneBadDiffs = convertScoresToDifferentials(mergeSort(fgbArray), $scope.fightGoneBads);
+
+    var sprintArray = [];
+    for (sprint in $scope.sprint400ms) {
+      sprintArray.push(convertTimesToSeconds($scope.sprint400ms[sprint]));
+    }
+    $scope.sprint400mDiffs = convertTimesToDifferentials(mergeSortTimes(sprintArray), $scope.sprint400ms);
+
+
+    var runArray = [];
+    for (run in $scope.run5ks) {
+      runArray.push(convertTimesToSeconds($scope.run5ks[run]));
+    }
+    $scope.run5kDiffs = convertTimesToDifferentials(mergeSortTimes(runArray), $scope.run5ks);
+
+
+    var cjArray = [];
+    for (cj in $scope.cleanAndJerks) {
+      cjArray.push(convertWeightToNumber($scope.cleanAndJerks[cj]));
+    }
+    $scope.cleanAndJerkDiffs = convertWeightsToDifferentials(mergeSort(cjArray), $scope.cleanAndJerks);
+
+    var snatchArray = [];
+    for (snatch in $scope.snatchs) {
+      snatchArray.push(convertWeightToNumber($scope.snatchs[snatch]));
+    }
+    $scope.snatchDiffs = convertWeightsToDifferentials(mergeSort(snatchArray), $scope.snatchs);
+
+    var deadliftArray = [];
+    for (deadlift in $scope.deadlifts) {
+      deadliftArray.push(convertWeightToNumber($scope.deadlifts[deadlift]));
+    }
+    $scope.deadliftDiffs = convertWeightsToDifferentials(mergeSort(deadliftArray), $scope.deadlifts);
+
+    var backsquatArray = [];
+    for (backsquat in $scope.backSquats) {
+      backsquatArray.push(convertWeightToNumber($scope.backSquats[backsquat]));
+    }
+    $scope.backSquatDiffs = convertWeightsToDifferentials(mergeSort(backsquatArray), $scope.backSquats);
+
+
+    var pullupArray = [];
+    for (pullup in $scope.maxPullups) {
+      pullupArray.push($scope.maxPullups[pullup]);
+    }
+    $scope.maxPullupDiffs = convertScoresToDifferentials(mergeSort(pullupArray), $scope.maxPullups);
   }
 
   $scope.submitLevelForm = function() {
