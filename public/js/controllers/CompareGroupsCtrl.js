@@ -78,10 +78,10 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
 
   getLevel = function(levelLabel) {
     var level = ""
-    console.log(levelLabel)
+    //console.log(levelLabel)
     var year = levelLabel.substring(levelLabel.length - 3, levelLabel.length - 1);
     levelLabel = levelLabel.substring(0, levelLabel.length - 7);
-    console.log(levelLabel)
+    //console.log(levelLabel)
     if(levelLabel=="Female Top 10") {
       level = "women-top-"+year;
     } else if (levelLabel=="Male Top 10") {
@@ -252,7 +252,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
       seconds = parseInt(time.substring(0, 2) * 60);
     }
     seconds = seconds + parseInt(time.substring(time.length-2, time.length));
-    console.log("Seconds = "+seconds);
+    //console.log("Seconds = "+seconds);
     return seconds;
   }
 
@@ -264,7 +264,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     } else {
       time = time + seconds % 60;
     }
-    console.log(time);
+    //console.log(time);
     return time;
   }
 
@@ -539,7 +539,7 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
     if (index > -1) {
       $scope.levelLabels.splice(index, 1);
       var level = getLevel(levelLabel);
-      console.log(level);
+      //console.log(level);
       var levelIndex = $scope.levels.indexOf(level);
       $scope.levels.splice(levelIndex, 1);
       removeAthleteScores(level);
@@ -547,13 +547,13 @@ angular.module('CompareGroupsCtrl', []).controller('CompareGroupsController', ['
   }
 
   $scope.viewScores = function() {
-    console.log("View Scores!");
+    //console.log("View Scores!");
     $scope.hiddenDiff = true;
     $scope.hiddenTable = false;
   }
 
   $scope.viewDifferentials = function() {
-    console.log("View Differentials!");
+    //console.log("View Differentials!");
     $scope.hiddenDiff = false;
     $scope.hiddenTable = true;
   }

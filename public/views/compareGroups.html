@@ -43,16 +43,17 @@
     <table>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }">
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" id="groupDifferential" type="button" data-toggle="dropdown" href="#">
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </button>
-           WOD or Max
-            <ul class="dropdown-menu">
-              <li><a ng-click="viewScores()">View Scores</a></li>
-              <li><a ng-click="viewDifferentials()">View Differentials</a></li>
-            </ul>
-          </div>
+            <div class="dropdown" style="float:left">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="viewScores()">View Scores</a></li>
+                <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+              </ul>
+            </div>
+            <div style="float:center">WOD or Max</div>
+            <div style="clear:both"></div>
         </td>
         <td ng-style="{ width: {{tdWidth}} }" ng-repeat="level in levelLabels">{{level}}</td>
       </tr>
@@ -111,16 +112,17 @@
     <table>
       <tr>
         <td ng-style="{ width: {{tdWidth}} }">
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" id="groupDifferential" type="button" data-toggle="dropdown" href="#">
+          <div class="dropdown" style="float:left">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </button>
-           WOD or Max (Diff)
             <ul class="dropdown-menu">
               <li><a ng-click="viewScores()">View Scores</a></li>
               <li><a ng-click="viewDifferentials()">View Differentials</a></li>
             </ul>
           </div>
+          <div style="float:center">WOD or Max</div>
+          <div style="clear:both"></div>
         </td>
         <td ng-style="{ width: {{tdWidth}} }" ng-repeat="level in levelLabels">{{level}}</td>
       </tr>
