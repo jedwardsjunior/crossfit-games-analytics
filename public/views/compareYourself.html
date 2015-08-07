@@ -86,7 +86,19 @@
     <table>
       <tbody>
         <tr>
-          <td class="name">WOD or Max</td>
+          <td class="name">
+            <div class="dropdown" style="float:left">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="viewScores()">View Scores</a></li>
+                <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+              </ul>
+            </div>
+            <div style="float:center">WOD or Max</div>
+            <div style="clear:both"></div>
+          </td>
           <td>Average {{levelLabel}} Scores</td>
           <td>Your Scores</td>
         </tr>
@@ -127,22 +139,22 @@
         </tr>
         <tr>
           <td class="name"> Clean & Jerk </td>
-          <td class="value">{{cleanAndJerk}} lbs</td>
+          <td class="value">{{cleanAndJerk}}</td>
           <td class="value">{{cleanAndJerkScore}}</td>
         </tr>
         <tr>
           <td class="name"> Snatch </td>
-          <td class="value">{{snatch}} lbs</td>
+          <td class="value">{{snatch}}</td>
           <td class="value">{{snatchScore}}</td>
         </tr>
         <tr>
           <td class="name"> Deadlift </td>
-          <td class="value">{{deadlift}} lbs</td>
+          <td class="value">{{deadlift}}</td>
           <td class="value">{{deadliftScore}}</td>
         </tr>
         <tr>
           <td class="name"> Back Squat </td>
-          <td class="value">{{backSquat}} lbs</td>
+          <td class="value">{{backSquat}}</td>
           <td class="value">{{backSquatScore}}</td>
         </tr>
         <tr>
@@ -153,5 +165,88 @@
       </tbody>
     </table>
   </div>
-  -->
+
+  <div class="results_table" ng-hide="hiddenDiff">
+    <table>
+      <tbody>
+        <tr>
+          <td class="name">
+            <div class="dropdown" style="float:left">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="viewScores()">View Scores</a></li>
+                <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+              </ul>
+            </div>
+            <div style="float:center">WOD or Max (Diff)</div>
+            <div style="clear:both"></div>
+          </td>
+          <td>Average {{levelLabel}} Scores</td>
+          <td>Your Scores</td>
+        </tr>
+        <tr>
+          <td class="name"> Fran </td>
+          <td class="value">{{franDiff}}</td>
+          <td class="value">{{franScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Helen </td>
+          <td class="value">{{helenDiff}}</td>
+          <td class="value">{{helenScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Grace </td>
+          <td class="value">{{graceDiff}}</td>
+          <td class="value">{{graceScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Filthy 50 </td>
+          <td class="value">{{filthy50Diff}}</td>
+          <td class="value">{{filthy50ScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Fight Gone Bad </td>
+          <td class="value">{{fightGoneBadDiff}}</td>
+          <td class="value">{{fightGoneBadScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Sprint 400m </td>
+          <td class="value">{{sprint400mDiff}}</td>
+          <td class="value">{{sprint400mScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Run 5k </td>
+          <td class="value">{{run5kDiff}}</td>
+          <td class="value">{{run5kScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Clean & Jerk </td>
+          <td class="value">{{cleanAndJerkDiff}}</td>
+          <td class="value">{{cleanAndJerkScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Snatch </td>
+          <td class="value">{{snatchDiff}}</td>
+          <td class="value">{{snatchScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Deadlift </td>
+          <td class="value">{{deadliftDiff}}</td>
+          <td class="value">{{deadliftScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Back Squat </td>
+          <td class="value">{{backSquatDiff}}</td>
+          <td class="value">{{backSquatScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Max Pull-ups </td>
+          <td class="value">{{maxPullupsDiff}}</td>
+          <td class="value">{{maxPullupsScoreDiff}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
