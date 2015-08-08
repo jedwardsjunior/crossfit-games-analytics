@@ -197,8 +197,12 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     });
   };
 
+
   /** Converts standard MM:SS format to seconds for comparison */
   convertTimesToSeconds = function(time) {
+    if(time == "No Data") {
+      return time;
+    }
     if (time.length == 4) {
       seconds = parseInt(time.substring(0, 1) * 60);
     } else {
@@ -210,66 +214,111 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
   }
 
   compareScores = function() {
+
     var competitorFranSecs = convertTimesToSeconds($scope.fran);
     var athleteFranSecs = parseInt($scope.franMins * 60) + parseInt($scope.franSeconds);
-    if (athleteFranSecs) {
-      if (athleteFranSecs < competitorFranSecs) {
-        $scope.franDiff = "+"+parseInt(competitorFranSecs-athleteFranSecs)+" seconds";
+    if(competitorFranSecs == "No Data") {
+      $scope.franDiff = "No Data";
+      if (athleteFranSecs) {
         $scope.franScoreDiff = $scope.franMins+":"+$scope.franSeconds;
       } else {
-        $scope.franDiff = $scope.fran;
-        $scope.franScoreDiff = "+"+parseInt(athleteFranSecs-competitorFranSecs)+" seconds";
+        $scope.franScoreDiff = "No Data";
       }
     } else {
-      $scope.franDiff = $scope.fran;
-      $scope.franScoreDiff = "No Data";
+      if (athleteFranSecs) {
+        if (athleteFranSecs < competitorFranSecs) {
+          $scope.franDiff = "+"+parseInt(competitorFranSecs-athleteFranSecs)+" seconds";
+          $scope.franScoreDiff = $scope.franMins+":"+$scope.franSeconds;
+        } else {
+          $scope.franDiff = $scope.fran;
+          $scope.franScoreDiff = "+"+parseInt(athleteFranSecs-competitorFranSecs)+" seconds";
+        }
+      } else {
+        $scope.franDiff = $scope.fran;
+        $scope.franScoreDiff = "No Data";
+      }
     }
 
     var competitorHelenSecs = convertTimesToSeconds($scope.helen);
     var athleteHelenSecs = parseInt($scope.helenMins * 60) + parseInt($scope.helenSeconds);
-    if (athleteHelenSecs) {
-      if (athleteHelenSecs < competitorHelenSecs) {
-        $scope.helenDiff = "+"+parseInt(competitorHelenSecs-athleteHelenSecs)+" seconds";
+    if(competitorHelenSecs == "No Data") {
+      $scope.helenDiff = "No Data";
+      if (athleteHelenSecs) {
         $scope.helenScoreDiff = $scope.helenMins+":"+$scope.helenSeconds;
       } else {
-        $scope.helenDiff = $scope.helen;
-        $scope.helenScoreDiff = "+"+parseInt(athleteHelenSecs-competitorHelenSecs)+" seconds";
+        $scope.helenScoreDiff = "No Data";
       }
     } else {
-        $scope.helenDiff = $scope.helen;
-        $scope.helenScoreDiff = "No Data";
+      if (athleteHelenSecs) {
+        if (athleteHelenSecs < competitorHelenSecs) {
+          $scope.helenDiff = "+"+parseInt(competitorHelenSecs-athleteHelenSecs)+" seconds";
+          $scope.helenScoreDiff = $scope.helenMins+":"+$scope.helenSeconds;
+        } else {
+          $scope.helenDiff = $scope.helen;
+          $scope.helenScoreDiff = "+"+parseInt(athleteHelenSecs-competitorHelenSecs)+" seconds";
+        }
+      } else {
+          $scope.helenDiff = $scope.helen;
+          $scope.helenScoreDiff = "No Data";
+      }
     }
 
     var competitorGraceSecs = convertTimesToSeconds($scope.grace);
     var athleteGraceSecs = parseInt($scope.graceMins * 60) + parseInt($scope.graceSeconds);
-    if (athleteGraceSecs) {
-      if (athleteGraceSecs < competitorGraceSecs) {
-        $scope.graceDiff = "+"+parseInt(competitorGraceSecs-athleteGraceSecs)+" seconds";
+    if(competitorGraceSecs == "No Data") {
+      $scope.graceDiff = "No Data";
+      if (athleteGraceSecs) {
         $scope.graceScoreDiff = $scope.graceMins+":"+$scope.graceSeconds;
       } else {
-        $scope.graceDiff = $scope.grace;
-        $scope.graceScoreDiff = "+"+parseInt(athleteGraceSecs-competitorGraceSecs)+" seconds";
+        $scope.graceScoreDiff = "No Data";
       }
     } else {
-        $scope.graceDiff = $scope.grace;
-        $scope.graceScoreDiff = "No Data";
+      if (athleteGraceSecs) {
+        if (athleteGraceSecs < competitorGraceSecs) {
+          $scope.graceDiff = "+"+parseInt(competitorGraceSecs-athleteGraceSecs)+" seconds";
+          $scope.graceScoreDiff = $scope.graceMins+":"+$scope.graceSeconds;
+        } else {
+          $scope.graceDiff = $scope.grace;
+          $scope.graceScoreDiff = "+"+parseInt(athleteGraceSecs-competitorGraceSecs)+" seconds";
+        }
+      } else {
+          $scope.graceDiff = $scope.grace;
+          $scope.graceScoreDiff = "No Data";
+      }
     }
 
     var competitorFilthy50Secs = convertTimesToSeconds($scope.filthy50);
     var athleteFilthy50Secs = parseInt($scope.filthy50Mins * 60) + parseInt($scope.filthy50Seconds);
-    if (athleteFilthy50Secs) {
-      if (athleteFilthy50Secs < competitorFilthy50Secs) {
-        $scope.filthy50Diff = "+"+parseInt(competitorFilthy50Secs-athleteFilthy50Secs)+" seconds";
+    if(competitorFilthy50Secs == "No Data") {
+      $scope.filthy50Diff = "No Data";
+      if (athleteFilthy50Secs) {
         $scope.filthy50ScoreDiff = $scope.filthy50Mins+":"+$scope.filthy50Seconds;
       } else {
-        $scope.filthy50Diff = $scope.filthy50;
-        $scope.filthy50ScoreDiff = "+"+parseInt(athleteFilthy50Secs-competitorFilthy50Secs)+" seconds";
+        $scope.filthy50ScoreDiff = "No Data";
       }
     } else {
-        $scope.filthy50Diff = $scope.filthy50;
-        $scope.filthy50ScoreDiff = "No Data";
+      if (athleteFilthy50Secs) {
+        if (athleteFilthy50Secs < competitorFilthy50Secs) {
+          $scope.filthy50Diff = "+"+parseInt(competitorFilthy50Secs-athleteFilthy50Secs)+" seconds";
+          $scope.filthy50ScoreDiff = $scope.filthy50Mins+":"+$scope.filthy50Seconds;
+        } else {
+          $scope.filthy50Diff = $scope.filthy50;
+          $scope.filthy50ScoreDiff = "+"+parseInt(athleteFilthy50Secs-competitorFilthy50Secs)+" seconds";
+        }
+      } else {
+          $scope.filthy50Diff = $scope.filthy50;
+          $scope.filthy50ScoreDiff = "No Data";
+      }
     }
 
+    if($scope.fightGoneBad == "No Data") {
+      $scope.fightGoneBadDiff = "No Data";
+      if ($scope.fightGoneBadScore) {
+        $scope.fightGoneBadScoreDiff = $scope.fightGoneBadScore;
+      } else {
+        $scope.fightGoneBadScoreDiff = "No Data";
+      }
+    }
     if ($scope.fightGoneBadScore) {
       if ($scope.fightGoneBadScore < $scope.fightGoneBad) {
         $scope.fightGoneBadDiff = $scope.fightGoneBad;
@@ -285,118 +334,193 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
     var competitorSprint400mSecs = convertTimesToSeconds($scope.sprint400m);
     var athleteSprint400mSecs = parseInt($scope.sprintMins * 60) + parseInt($scope.sprintSeconds);
-    if (athleteSprint400mSecs) {
-      if (athleteSprint400mSecs < competitorSprint400mSecs) {
-        $scope.sprint400mDiff = "+"+parseInt(competitorSprint400mSecs-athleteSprint400mSecs)+" seconds";
+    if(competitorSprint400mSecs == "No Data") {
+      $scope.sprint400mDiff = "No Data";
+      if (athleteSprint400mSecs) {
         $scope.sprint400mScoreDiff = $scope.sprintMins+":"+$scope.sprintSeconds;
       } else {
-        $scope.sprint400mDiff = $scope.sprint400m;
-        $scope.sprint400mScoreDiff = "+"+parseInt(athleteSprint400mSecs-competitorSprint400mSecs)+" seconds";
+        $scope.sprint400mScoreDiff = "No Data";
       }
     } else {
-        $scope.sprint400mDiff = $scope.sprint400m;
-        $scope.sprint400mScoreDiff = "No Data";
+      if (athleteSprint400mSecs) {
+        if (athleteSprint400mSecs < competitorSprint400mSecs) {
+          $scope.sprint400mDiff = "+"+parseInt(competitorSprint400mSecs-athleteSprint400mSecs)+" seconds";
+          $scope.sprint400mScoreDiff = $scope.sprintMins+":"+$scope.sprintSeconds;
+        } else {
+          $scope.sprint400mDiff = $scope.sprint400m;
+          $scope.sprint400mScoreDiff = "+"+parseInt(athleteSprint400mSecs-competitorSprint400mSecs)+" seconds";
+        }
+      } else {
+          $scope.sprint400mDiff = $scope.sprint400m;
+          $scope.sprint400mScoreDiff = "No Data";
+      }
     }
 
     var competitorRun5kSecs = convertTimesToSeconds($scope.run5k);
     var athleteRun5kSecs = parseInt($scope.runMins * 60) + parseInt($scope.runSeconds);
-    if (athleteRun5kSecs) {
-      if (athleteRun5kSecs < competitorRun5kSecs) {
-        $scope.run5kDiff = "+"+parseInt(competitorRun5kSecs-athleteRun5kSecs)+" seconds";
+    if(competitorRun5kSecs == "No Data") {
+      $scope.run5kDiff = "No Data";
+      if (athleteRun5kSecs) {
         $scope.run5kScoreDiff = $scope.runMins+":"+$scope.runSeconds;
       } else {
-        $scope.run5kDiff = $scope.run5k;
-        $scope.run5kScoreDiff = "+"+parseInt(athleteRun5kSecs-competitorRun5kSecs)+" seconds";
-      }
-    } else {
-        $scope.run5kDiff = $scope.run5k;
         $scope.run5kScoreDiff = "No Data";
+      }
+    } else {
+      if (athleteRun5kSecs) {
+        if (athleteRun5kSecs < competitorRun5kSecs) {
+          $scope.run5kDiff = "+"+parseInt(competitorRun5kSecs-athleteRun5kSecs)+" seconds";
+          $scope.run5kScoreDiff = $scope.runMins+":"+$scope.runSeconds;
+        } else {
+          $scope.run5kDiff = $scope.run5k;
+          $scope.run5kScoreDiff = "+"+parseInt(athleteRun5kSecs-competitorRun5kSecs)+" seconds";
+        }
+      } else {
+          $scope.run5kDiff = $scope.run5k;
+          $scope.run5kScoreDiff = "No Data";
+      }
     }
 
-    if ($scope.cleanAndJerkScore) {
-      var athleteCleanAndJerk = $scope.cleanAndJerkScore.substring(0, $scope.cleanAndJerkScore.length - 4);
-      var competitorCleanAndJerk = $scope.cleanAndJerk.substring(0, $scope.cleanAndJerk.length - 4);
-      if (athleteCleanAndJerk < competitorCleanAndJerk) {
-        $scope.cleanAndJerkDiff = $scope.cleanAndJerk;
-        $scope.cleanAndJerkScoreDiff = "-" + parseInt(competitorCleanAndJerk-athleteCleanAndJerk) + " lbs";
-      } else {
-        $scope.cleanAndJerkDiff = "-" + parseInt(athleteCleanAndJerk-competitorCleanAndJerk) + " lbs";
+    if($scope.cleanAndJerk == "No Data") {
+      $scope.cleanAndJerkDiff = "No Data";
+      if ($scope.cleanAndJerkScore) {
         $scope.cleanAndJerkScoreDiff = $scope.cleanAndJerkScore;
-      }
-    } else {
-        $scope.cleanAndJerkDiff = $scope.cleanAndJerk;
+      } else {
         $scope.cleanAndJerkScoreDiff = "No Data";
+      }
+    } else {
+      if ($scope.cleanAndJerkScore) {
+        var athleteCleanAndJerk = $scope.cleanAndJerkScore.substring(0, $scope.cleanAndJerkScore.length - 4);
+        var competitorCleanAndJerk = $scope.cleanAndJerk.substring(0, $scope.cleanAndJerk.length - 4);
+        if (athleteCleanAndJerk < competitorCleanAndJerk) {
+          $scope.cleanAndJerkDiff = $scope.cleanAndJerk;
+          $scope.cleanAndJerkScoreDiff = "-" + parseInt(competitorCleanAndJerk-athleteCleanAndJerk) + " lbs";
+        } else {
+          $scope.cleanAndJerkDiff = "-" + parseInt(athleteCleanAndJerk-competitorCleanAndJerk) + " lbs";
+          $scope.cleanAndJerkScoreDiff = $scope.cleanAndJerkScore;
+        }
+      } else {
+          $scope.cleanAndJerkDiff = $scope.cleanAndJerk;
+          $scope.cleanAndJerkScoreDiff = "No Data";
+      }
     }
 
-    if ($scope.snatchScore) {
-      var athleteSnatch = $scope.snatchScore.substring(0, $scope.snatchScore.length - 4);
-      var competitorSnatch = $scope.snatch.substring(0, $scope.snatch.length - 4);
-      console.log(competitorSnatch);
-      console.log(athleteSnatch);
-      if (athleteSnatch < parseInt(competitorSnatch)) {
-        console.log("HERE");
-        $scope.snatchDiff = $scope.snatch;
-        $scope.snatchScoreDiff = "-" + parseInt(competitorSnatch - athleteSnatch) + " lbs";
-      } else {
-        $scope.snatchDiff = "-"+parseInt(athleteSnatch - competitorSnatch) + " lbs";
+    if($scope.snatch == "No Data") {
+      $scope.snatchDiff = "No Data";
+      if ($scope.snatchScore) {
         $scope.snatchScoreDiff = $scope.snatchScore;
-      }
-    } else {
-        $scope.snatchDiff = $scope.snatch;
+      } else {
         $scope.snatchScoreDiff = "No Data";
+      }
+    } else {
+      if ($scope.snatchScore) {
+        var athleteSnatch = $scope.snatchScore.substring(0, $scope.snatchScore.length - 4);
+        var competitorSnatch = $scope.snatch.substring(0, $scope.snatch.length - 4);
+        if (athleteSnatch < parseInt(competitorSnatch)) {
+          $scope.snatchDiff = $scope.snatch;
+          $scope.snatchScoreDiff = "-" + parseInt(competitorSnatch - athleteSnatch) + " lbs";
+        } else {
+          $scope.snatchDiff = "-"+parseInt(athleteSnatch - competitorSnatch) + " lbs";
+          $scope.snatchScoreDiff = $scope.snatchScore;
+        }
+      } else {
+          $scope.snatchDiff = $scope.snatch;
+          $scope.snatchScoreDiff = "No Data";
+      }
     }
 
-    if ($scope.deadliftScore) {
-      var athleteDeadlift = $scope.deadliftScore.substring(0, $scope.deadliftScore.length - 4);
-      var competitorDeadlift = $scope.deadlift.substring(0, $scope.deadlift.length - 4);
-
-      if (athleteDeadlift < competitorDeadlift) {
-        $scope.deadliftDiff = $scope.deadlift;
-        $scope.deadliftScoreDiff = "-" + parseInt(competitorDeadlift - athleteDeadlift) + " lbs";
-      } else {
-        $scope.deadliftDiff = "-"+parseInt(athleteDeadlift - competitorDeadlift) + " lbs";
+    if($scope.deadlift == "No Data") {
+      $scope.deadliftDiff = "No Data";
+      if ($scope.deadliftScore) {
         $scope.deadliftScoreDiff = $scope.deadliftScore;
-      }
-    } else {
-        $scope.deadliftDiff = $scope.deadlift;
+      } else {
         $scope.deadliftScoreDiff = "No Data";
-    }
-
-    if ($scope.backSquatScore) {
-      var athleteBackSquat = $scope.backSquatScore.substring(0, $scope.backSquatScore.length - 4);
-      var competitorBackSquat = $scope.backSquat.substring(0, $scope.backSquat.length - 4);
-
-      if (athleteBackSquat < competitorBackSquat) {
-        $scope.backSquatDiff = $scope.backSquat;
-        $scope.backSquatScoreDiff = "-" + parseInt(competitorBackSquat - athleteBackSquat) + " lbs";
-      } else {
-        $scope.backSquatDiff = "-"+parseInt(athleteBackSquat - competitorBackSquat) + " lbs";
-        $scope.backSquatScoreDiff = $scope.backSquat;
       }
     } else {
-        $scope.backSquatDiff = $scope.backSquat;
+      if ($scope.deadliftScore) {
+        var athleteDeadlift = $scope.deadliftScore.substring(0, $scope.deadliftScore.length - 4);
+        var competitorDeadlift = $scope.deadlift.substring(0, $scope.deadlift.length - 4);
+
+        if (athleteDeadlift < competitorDeadlift) {
+          $scope.deadliftDiff = $scope.deadlift;
+          $scope.deadliftScoreDiff = "-" + parseInt(competitorDeadlift - athleteDeadlift) + " lbs";
+        } else {
+          $scope.deadliftDiff = "-"+parseInt(athleteDeadlift - competitorDeadlift) + " lbs";
+          $scope.deadliftScoreDiff = $scope.deadliftScore;
+        }
+      } else {
+          $scope.deadliftDiff = $scope.deadlift;
+          $scope.deadliftScoreDiff = "No Data";
+      }
+    }
+
+    if($scope.backSquat == "No Data") {
+      $scope.backSquatDiff = "No Data";
+      if ($scope.backSquatScore) {
+        $scope.backSquatScoreDiff = $scope.backSquatScore;
+      } else {
         $scope.backSquatScoreDiff = "No Data";
-    }
-
-    if ($scope.maxPullupsScore) {
-      if ($scope.maxPullupsScore < $scope.maxPullups) {
-        $scope.maxPullupsDiff = $scope.maxPullups;
-        $scope.maxPullupsScoreDiff = "-"+parseInt($scope.maxPullups-$scope.maxPullupsScore);
-      } else {
-        $scope.maxPullupsDiff = "-"+parseInt($scope.maxPullupsScore-$scope.maxPullups);
-        $scope.maxPullupsScoreDiff = $scope.maxPullupsScore;
       }
     } else {
-        $scope.maxPullupsDiff = $scope.maxPullups;
+      if ($scope.backSquatScore) {
+        var athleteBackSquat = $scope.backSquatScore.substring(0, $scope.backSquatScore.length - 4);
+        var competitorBackSquat = $scope.backSquat.substring(0, $scope.backSquat.length - 4);
+
+        if (athleteBackSquat < competitorBackSquat) {
+          $scope.backSquatDiff = $scope.backSquat;
+          $scope.backSquatScoreDiff = "-" + parseInt(competitorBackSquat - athleteBackSquat) + " lbs";
+        } else {
+          $scope.backSquatDiff = "-"+parseInt(athleteBackSquat - competitorBackSquat) + " lbs";
+          $scope.backSquatScoreDiff = $scope.backSquat;
+        }
+      } else {
+          $scope.backSquatDiff = $scope.backSquat;
+          $scope.backSquatScoreDiff = "No Data";
+      }
+    }
+
+    if($scope.maxPullups == "No Data") {
+      $scope.maxPullupsDiff = "No Data";
+      if ($scope.maxPullupsScore) {
+        $scope.maxPullupsScoreDiff = $scope.maxPullupsScore;
+      } else {
         $scope.maxPullupsScoreDiff = "No Data";
+      }
+    } else {
+      if ($scope.maxPullupsScore) {
+        if ($scope.maxPullupsScore < $scope.maxPullups) {
+          $scope.maxPullupsDiff = $scope.maxPullups;
+          $scope.maxPullupsScoreDiff = "-"+parseInt($scope.maxPullups-$scope.maxPullupsScore);
+        } else {
+          $scope.maxPullupsDiff = "-"+parseInt($scope.maxPullupsScore-$scope.maxPullups);
+          $scope.maxPullupsScoreDiff = $scope.maxPullupsScore;
+        }
+      } else {
+          $scope.maxPullupsDiff = $scope.maxPullups;
+          $scope.maxPullupsScoreDiff = "No Data";
+      }
     }
   }
 
+  convertZeros = function() {
+    if ($scope.franSeconds == "0") { $scope.franSeconds = "00"; }
+    if ($scope.helenSeconds == "0") { $scope.helenSeconds = "00"; }
+    if ($scope.graceSeconds == "0") { $scope.graceSeconds = "00"; }
+    if ($scope.filthy50Seconds == "0") { $scope.filthy50Seconds = "00"; }
+    if ($scope.sprintSeconds == "0") { $scope.sprintSeconds = "00"; }
+    if ($scope.runSeconds == "0") { $scope.runSeconds = "00"; }
+  }
 
   $scope.submitCompareForm = function() {
+    if(!$scope.compareForm.$valid) {
+       return;
+    }
+
+    convertZeros();
+
     $scope.levelLabel = getLevelLabel($scope.level, $scope.year);
     getAthleteScores($scope.level, $scope.year);
     $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
+    console.log($scope.franScore);
     if (!$scope.franMins || !$scope.franSeconds) {
       $scope.franScore = "";
     }
