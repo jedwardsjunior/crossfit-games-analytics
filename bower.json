@@ -6,6 +6,7 @@
 		"font-awesome": "latest",
 		"animate.css": "latest",
 		"angular": "1.4.x",
-		"angular-route": "1.4.x"
+		"angular-route": "1.4.x",
+		"angular-cookies": "1.4.x"
 	}
 }

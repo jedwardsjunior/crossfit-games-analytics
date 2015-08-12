@@ -1,5 +1,5 @@
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete', function($scope, Athlete) {
+angular.module('MainCtrl', []).controller('MainController', ['$scope', '$rootScope', 'Athlete', 'User', function($scope, $rootScope, Athlete, User) {
 
   $scope.fran = 0;
   $scope.helen = 0;
@@ -18,6 +18,41 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Athlete'
   $scope.genderLabel="Female";
   $scope.levelLabel="Top 10";
   $scope.year = "15";
+
+  /** User Authentication stuff */
+  user = null;
+  allUsers = [];
+  deleteUser = deleteUser;
+
+  // For Authentication
+  //initController();
+
+  function initController() {
+    loadCurrentUser();
+    loadAllUsers();
+  }
+
+  function loadCurrentUser() {
+    User.GetByUsername($rootScope.globals.currentUser.username)
+      .then(function (userName) {
+          user = userName;
+      });
+  }
+
+  function loadAllUsers() {
+    User.GetAll()
+      .then(function (users) {
+          allUsers = users;
+      });
+  }
+
+  function deleteUser(id) {
+    User.Delete(id)
+    .then(function () {
+        loadAllUsers();
+    });
+  }
+
 
   $scope.getAthleteScores = function(){
     if($scope.gender=="women") {

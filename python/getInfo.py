@@ -110,7 +110,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                     kgs = eval("%0.2f" % eval(contents[0:kgIndex]*2.20462))
                                     print "\n\nKgs =",kgs,"\n\n"
                                     # Some people embellish their scores
-                                    if (kgs < 700):
+                                    if (kgs < 600):
                                         scores[key].append(kgs)
 
                                 # --- Remove the "lb" of lb values ---
@@ -118,7 +118,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                     lbs = eval("%0.2f" % eval(contents[0:lbIndex]))
                                     print "Lbs =",lbs
                                     # Some people embellish their scores
-                                    if (lbs < 700):
+                                    if (lbs < 600):
                                         scores[key].append(lbs)
 
                                 # --- Convert time values to total seconds ---
@@ -129,7 +129,8 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                 # --- Fight Gone Bad and Max Pull Ups are already
                                 # --- formatted correctly
                                 else:
-                                    scores[key].append(eval(contents))
+                                    if (eval(contents) < 600):
+                                        scores[key].append(eval(contents))
                             except:
                                 continue
 

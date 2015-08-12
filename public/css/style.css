@@ -408,3 +408,13 @@ body {
   opacity: 50%;
   color:#FFF;
 }
+
+.login {
+  font-family: aero_maticsregular;
+  color: #FFF;
+}
+
+.register {
+  font-family: aero_maticsregular;
+  color: #FFF;
+}

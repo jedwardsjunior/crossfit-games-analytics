@@ -37,7 +37,21 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/contact', {
 			templateUrl: 'views/contact.html',
 			controller: 'MainController'
-		});
+		})
+
+		.when('/login', {
+      controller: 'LoginController',
+      templateUrl: 'views/login.html',
+      controllerAs: 'vm'
+    })
+
+    .when('/register', {
+	    controller: 'RegisterController',
+	    templateUrl: 'views/register.html',
+	    controllerAs: 'vm'
+    })
+
+		.otherwise({ redirectTo: '/login' });
 
 
 	$locationProvider.html5Mode(true);
