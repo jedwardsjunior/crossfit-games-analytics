@@ -54,16 +54,8 @@ module.exports = function(app) {
    });
 
 
-   app.get('/api/users/:user_id', function(req, res) {
-     User.findById(req.params.user_id, function(err, user) {
-          if (err)
-              res.send(err);
-          res.json(user);
-      });
-   });
-
    app.get('/api/users/:username', function(req, res) {
-     User.findOne({name: new RegExp('^'+req.params.username+'$', "i")}, function(err, user) {
+     User.findOne({"username": new RegExp('^'+req.params.username+'$', "i")}, function(err, user) {
           if (err)
               res.send(err);
           res.json(user);
@@ -71,7 +63,6 @@ module.exports = function(app) {
    });
 
    app.post('/api/users', function(req, res) {
-     console.log("HERE");
      var user = new User();      // create a new instance of the User model
      user.firstName = req.body.firstName;  // set the user's name (comes from the request)
      user.lastName = req.body.lastName;
@@ -118,13 +109,12 @@ module.exports = function(app) {
         });
    });
 
-   app.get('/api/authenticate', function(req, res) {
+   app.post('/api/authenticate', function(req, res) {
      var response;
-
-     User.findOne({name: new RegExp('^'+req.params.username+'$', "i")}, function(err, user) {
+     User.findOne({"username": new RegExp('^'+req.body.username+'$', "i")}, function(err, user) {
           if (err)
               res.send(err);
-          if (user !== null && user.password === req.params.password) {
+          if (user !== null && user.password === req.body.password) {
               response = { success: true };
           } else {
               response = { success: false, message: 'Username or password is incorrect' };

@@ -32,11 +32,7 @@
 	<script src="js/services/AthleteService.js"></script>
   <script src="js/services/AuthenticationService.js"></script>
   <script src="js/services/FlashService.js"></script>
-  <!-- Real user service that uses an api -->
   <script src="js/services/UserService.js"></script>
-
-  <!-- Fake user service for demo that uses local storage
-  <script src="app-services/user.service.local-storage.js"></script> -->
 
 
   <script>
@@ -51,12 +47,14 @@
   </script>
 </head>
 
-<body ng-app="crossfitApp" ng-controller="MainController">
+<body ng-app="crossfitApp" ng-controller="LoginController">
 	<div id="wrapper">
 		<!-- HEADER -->
 		<div id="header">
 	    <!--img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'-->
 	    <h1> Welcome to CrossFit Analytics </h1>
+			<button ng-click="loginLogout()" class="btn btn-primary">{{loginText}}</button>
+
 
 			<nav id="navbar" class="navbar navbar-inverse">
 				<div class="navbar-header">

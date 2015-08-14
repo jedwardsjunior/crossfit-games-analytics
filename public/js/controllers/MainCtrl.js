@@ -1,5 +1,5 @@
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController', ['$scope', '$rootScope', 'Athlete', 'User', function($scope, $rootScope, Athlete, User) {
+angular.module('MainCtrl', []).controller('MainController', ['$rootScope', '$scope', 'Athlete', 'User', function($rootScope, $scope, Athlete, User) {
 
   $scope.fran = 0;
   $scope.helen = 0;
@@ -20,30 +20,19 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', '$rootSco
   $scope.year = "15";
 
   /** User Authentication stuff */
-  user = null;
-  allUsers = [];
-  deleteUser = deleteUser;
+  $scope.user = null;
 
   // For Authentication
-  //initController();
+  initController();
 
   function initController() {
     loadCurrentUser();
-    loadAllUsers();
   }
 
   function loadCurrentUser() {
-    User.GetByUsername($rootScope.globals.currentUser.username)
-      .then(function (userName) {
-          user = userName;
-      });
-  }
-
-  function loadAllUsers() {
-    User.GetAll()
-      .then(function (users) {
-          allUsers = users;
-      });
+    if($rootScope.globals.currentUser) {
+      $scope.user = $rootScope.globals.currentUser.username;
+    }
   }
 
   function deleteUser(id) {

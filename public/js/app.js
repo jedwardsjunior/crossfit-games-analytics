@@ -11,6 +11,7 @@ angular.module('crossfitApp', ['ngRoute', 'ngCookies', 'appRoutes', 'MainCtrl', 
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
 
+      /**
       $rootScope.$on('$locationChangeStart', function (event, next, current) {
           // redirect to login page if not logged in and trying to access a restricted page
           var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
@@ -18,5 +19,5 @@ angular.module('crossfitApp', ['ngRoute', 'ngCookies', 'appRoutes', 'MainCtrl', 
           if (restrictedPage && !loggedIn) {
               $location.path('/login');
           }
-      });
+      });*/
   }
