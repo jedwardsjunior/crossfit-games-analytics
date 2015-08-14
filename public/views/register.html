@@ -18,7 +18,7 @@
             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-            <label for="password">Password</label>
+            <label for="password">Password (Note: please select a password that is not associated with any other personal accounts. This website is in its early stages and security precautions are still in the works. Thank you for your understanding!)</label>
             <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
         </div>
