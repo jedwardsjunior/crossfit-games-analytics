@@ -1,7 +1,15 @@
 // app/routes.js
-var mongoose = require('mongoose')
-var athleteSchema = require('./models/athleteScores');
-var User = require('./models/userModel')
+var mongoose       = require('mongoose')
+var athleteSchema  = require('./models/athleteScores');
+var User           = require('./models/userModel')
+var session        = require('express-session')
+var nodemailer     = require('nodemailer');
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+var bcrypt         = require('bcrypt-nodejs');
+var async          = require('async');
+var crypto         = require('crypto');
+
 
 module.exports = function(app) {
 
@@ -35,7 +43,7 @@ module.exports = function(app) {
          "backSquat": scores[0]["Back Squat"],
          "maxPullups": scores[0]["Max Pull-ups"]
        };
-       console.log(response);
+       //console.log(response);
        res.send(response); // return all scores in JSON format
      });
    });
@@ -48,7 +56,7 @@ module.exports = function(app) {
        if (err)
          res.send(err);
 
-       console.log(users);
+       //console.log(users);
        res.json(users); // return all users
      });
    });
@@ -63,7 +71,18 @@ module.exports = function(app) {
    });
 
    app.post('/api/users', function(req, res) {
-     var user = new User();      // create a new instance of the User model
+      var user = new User();
+      user.firstName = req.body.firstName;  // set the user's name (comes from the request)
+      user.lastName = req.body.lastName;
+      user.username = req.body.username;
+      user.password = req.body.password;
+
+      user.save(function(err) {
+        req.logIn(user, function(err) {
+          res.redirect('/');
+        });
+      });
+     /**var user = new User();      // create a new instance of the User model
      user.firstName = req.body.firstName;  // set the user's name (comes from the request)
      user.lastName = req.body.lastName;
      user.username = req.body.username;
@@ -75,7 +94,7 @@ module.exports = function(app) {
           res.send(err);
         }
        res.end('{"success" : "Updated Successfully", "status" : 200}');
-     });
+     });*/
    });
 
    app.put('/api/users/:user_id', function(req, res) {
@@ -109,20 +128,154 @@ module.exports = function(app) {
         });
    });
 
-   app.post('/api/authenticate', function(req, res) {
-     var response;
+   /**
+   app.post('/api/authenticate', function(req, res, next) {
      User.findOne({"username": new RegExp('^'+req.body.username+'$', "i")}, function(err, user) {
-          if (err)
-              res.send(err);
-          if (user !== null && user.password === req.body.password) {
-              response = { success: true };
-          } else {
-              response = { success: false, message: 'Username or password is incorrect' };
-          }
+         var response;
+         if (err)
+             res.send(err);
+         if (user !== null && user.password === req.body.password) {
+             response = { success: true };
+         } else {
+             response = { success: false, message: 'Username or password is incorrect' };
+         }
 
-          res.json(response);
+         res.json(response);
       });
-   });
+    });*/
+
+    app.post('/api/login', function(req, res, next) {
+      passport.authenticate('local', function(err, user, info) {
+        if (err) {
+          res.send({ success: false, message: err });
+        } else {
+          if (!user) {
+            res.send({ success: false, message: 'Username or password is incorrect' });
+          } else {
+            req.logIn(user, function(err) {
+              if (err) {
+                res.send({ success: false, message: err });
+              } else {
+                res.json({ success: true });
+              }
+            });
+          }
+        }
+      })(req, res, next);
+    });
+
+   app.post('/forgot', function(req, res, next) {
+      async.waterfall([
+        function(done) {
+          crypto.randomBytes(20, function(err, buf) {
+            var token = buf.toString('hex');
+            done(err, token);
+          });
+        },
+        function(token, done) {
+          User.findOne({ username: req.body.username }, function(err, user) {
+            if (!user) {
+              return res.send({success: false, message: 'No account with that email address exists.'});
+            }
+
+            user.resetPasswordToken = token;
+            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+            user.save(function(err) {
+              done(err, token, user);
+            });
+          });
+        },
+        function(token, user, done) {
+          var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'crossfitanalytics@gmail.com',
+              pass: 'malibu1993'
+            }
+          });
+          var mailOptions = {
+            to: user.username,
+            from: 'crossfitanalytics@gmail.com',
+            subject: 'CrossFit Analytics Password Reset',
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+              'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+              'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+              'If you did not request this, please ignore this email and your password will remain unchanged.'+ '\n\n' +
+              'Have a great day!\n-The CrossFit Analytics Team'
+
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            done(err, 'done');
+            return res.json({success: true});
+          });
+        }
+      ], function(err) {
+        if (err) return res.json({success: false, message: err });
+        //res.redirect('/forgot');
+      });
+    });
+
+    app.get('/checkReset/:token', function(req, res) {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          return res.json( {success: false, message:'Password reset token is invalid or has expired.'} );
+        }
+        //console.log(user);
+        return res.json(user);
+      });
+    });
+
+    app.post('/reset/:token', function(req, res) {
+      async.waterfall([
+        function(done) {
+          User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+            if (!user) {
+              return res.redirect('back');
+            }
+            //console.log("In reset");
+            //console.log(req.body);
+            //console.log(user);
+            user.password = req.body.newPassword;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+              //console.log("Logged In");
+              req.logIn(user, function(err) {
+                done(err, user);
+              });
+            });
+          });
+        },
+        function(user, done) {
+          //console.log(user);
+          var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'crossfitanalytics@gmail.com',
+              pass: 'malibu1993'
+            }
+          });
+          var mailOptions = {
+            to: user.username,
+            from: 'crossfitanalytics@gmail.com',
+            subject: 'Your CrossFit Analytics password has been changed',
+            text: 'Hello,\n\n' +
+              'This is a confirmation that the password for your CrossFit Analytics account ' + user.username + ' has just been changed.\n\n'+
+              'If you did not authorize this change, please visit '+'http://' + req.headers.host + '/forgot to request another password reset.' +'\n\n'+
+              'Have a great day!\n-The CrossFit Analytics Team'
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            //console.log(mailOptions);
+            done(err);
+          });
+        }
+      ], function(err) {
+        res.redirect('/');
+      });
+    });
+
 
    // frontend routes =========================================================
    // route to handle all angular requests

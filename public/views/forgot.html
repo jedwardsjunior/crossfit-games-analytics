@@ -1,0 +1,41 @@
+<div class="forgot col-md-6 col-md-offset-3">
+    <h2>Forgot Email or Password</h2>
+    <p>Click the option below that applies to you</p>
+    <div ng-show="vm.flashInfo" class="alert alert-info">{{vm.flashInfo.message}}</div>
+    <div ng-show="vm.flashError" class="alert alert-danger">{{vm.flashError.message}}</div>
+    <div ng-show="vm.flashSuccess" class="alert alert-success">{{vm.flashSuccess.message}}</div>
+
+    <form name="selectForgotOption" role="form" ng-init="vm.email=false">
+      <input type="radio" ng-model="vm.email" ng-value="true" name="option" class="form-control">Forgot Email</input>
+      <input type="radio" ng-model="vm.email" ng-value="false" name="option" class="form-control">Forgot Password</input>
+    </form>
+    <br>
+    <br>
+
+    <form ng-show="vm.email" name="forgotEmailForm" ng-submit="vm.checkForEmail()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+            <label for="username">Enter your email to check if it is already registered:</label>
+            <input type="email" name="email" id="email" class="form-control" ng-model="vm.emailAddress" required />
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Submit</button>
+            <a href="/login" class="btn btn-link">Login</a>
+            <a href="/register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+
+    <form ng-hide="vm.email" name="forgotPasswordForm" ng-submit="vm.resetPassword()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Enter your email to reset your password:</label>
+            <input type="email" name="password" id="password" class="form-control" ng-model="vm.user.username" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Email is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Submit</button>
+            <a href="/login" class="btn btn-link">Login</a>
+            <a href="/register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+
+</div>

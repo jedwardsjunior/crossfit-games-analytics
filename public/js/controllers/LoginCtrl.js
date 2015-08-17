@@ -8,18 +8,18 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
 
     function initController() {
         // reset login status
-        console.log("Here");
+        //console.log("Here");
         if (Authentication.IsUserLoggedIn() == "Log out") {
           $location.path('/');
         }
     };
 
     $scope.loginLogout =function() {
-      console.log("LoginLogout()");
+      //console.log("LoginLogout()");
       if (Authentication.IsUserLoggedIn() == "Log out") {
         Authentication.ClearCredentials();
         $scope.loginText = Authentication.IsUserLoggedIn();
-        console.log("loginLogout(): "+$scope.loginText);
+        //console.log("loginLogout(): "+$scope.loginText);
       }
       $location.path('/login');
     };
@@ -30,9 +30,10 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
             if (response.success) {
                 Authentication.SetCredentials(vm.username, vm.password);
                 $scope.loginText = Authentication.IsUserLoggedIn();
-                console.log("login(): "+$scope.loginText);
+                //console.log("login(): "+$scope.loginText);
                 $window.location.reload();
             } else {
+                //console.log("ERROR IN LOGIN");
                 Flash.Error(response.message);
                 vm.flash = $rootScope.flash;
                 vm.dataLoading = false;

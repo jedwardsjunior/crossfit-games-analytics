@@ -520,7 +520,7 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     $scope.levelLabel = getLevelLabel($scope.level, $scope.year);
     getAthleteScores($scope.level, $scope.year);
     $scope.franScore = $scope.franMins+":"+$scope.franSeconds;
-    console.log($scope.franScore);
+    //console.log($scope.franScore);
     if (!$scope.franMins || !$scope.franSeconds) {
       $scope.franScore = "";
     }

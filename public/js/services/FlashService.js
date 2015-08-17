@@ -3,6 +3,7 @@ angular.module('FlashService', []).factory('Flash', ['$rootScope', function ($ro
 
       service.Success = Success;
       service.Error = Error;
+      service.Info = Info;
 
       initService();
 
@@ -40,6 +41,14 @@ angular.module('FlashService', []).factory('Flash', ['$rootScope', function ($ro
               type: 'error',
               keepAfterLocationChange: keepAfterLocationChange
           };
+      }
+
+      function Info(message, keepAfterLocationChange) {
+        $rootScope.flash = {
+            message: message,
+            type: 'info',
+            keepAfterLocationChange: keepAfterLocationChange
+        };
       }
   }
 ]);

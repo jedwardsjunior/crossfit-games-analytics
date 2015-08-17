@@ -26,7 +26,7 @@
       <option value="13", label="2013", ng-selected="year == 13">
       <option value="12", label="2012", ng-selected="year == 12">
     </select>
-    <button type="submit">Add</button>
+    <button class="btn btn-primary" type="submit">Add</button>
   </form>
   </div>
 
@@ -34,7 +34,7 @@
     <table>
       <tr ng-repeat="level in levelLabels">
         <td class="label">{{level}}</td>
-        <td><button ng-click="removeLevel(level)">Remove</button></td>
+        <td><button class="btn btn-primary" ng-click="removeLevel(level)">Remove</button></td>
       </tr>
     </table>
   </div>
@@ -178,3 +178,9 @@
   </div>
 
 </div>
+
+<!--<script>
+  $(function() {
+    $('select').selectBoxIt();
+  });
+</script>-->

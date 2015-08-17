@@ -21,9 +21,15 @@ angular.module('AuthenticationService', []).factory('Authentication', ['$http', 
 
       /* Use this for real authentication
        ----------------------------------------------*/
-      $http.post('/api/authenticate', { username: username, password: password })
+      $http.post('/api/login', { username: username, password: password })
           .success(function (response) {
+              //console.log("RESPONSE");
+              //console.log(response);
               callback(response);
+          })
+          .failure(function (response) {
+            //console.log("FAILURE");
+            callback(response);
           });
 
     }

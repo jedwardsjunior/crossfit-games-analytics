@@ -51,6 +51,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 	    controllerAs: 'vm'
     })
 
+		.when('/forgot', {
+	    controller: 'ForgotController',
+	    templateUrl: 'views/forgot.html',
+	    controllerAs: 'vm'
+    })
+
+		.when('/reset/:token', {
+			controller: 'ResetController',
+			templateUrl: 'views/reset.html',
+			controllerAs: 'vm'
+		})
+
 		.otherwise({ redirectTo: '/login' });
 
 

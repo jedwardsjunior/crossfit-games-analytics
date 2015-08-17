@@ -15,7 +15,7 @@ angular.module('RegisterCtrl', []).controller('RegisterController', ['User', '$l
         // User is not already registered
         } else {
           User.Create(vm.user).then( function(response) {
-            // Successfully created
+            // User successfully created
             if (response.status == 200) {
               Flash.Success('Registration successful', true);
               vm.flash = $rootScope.flash;
