@@ -5,6 +5,8 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
     vm.flash = $rootScope.flash;
 
     $scope.loginText = Authentication.IsUserLoggedIn();
+    $scope.loggedIn;
+
 
     function initController() {
         // reset login status
@@ -12,6 +14,7 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
         if (Authentication.IsUserLoggedIn() == "Log out") {
           $location.path('/');
         }
+        $scope.loggedIn = isUserLoggedIn();
     };
 
     $scope.loginLogout =function() {
@@ -19,10 +22,19 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
       if (Authentication.IsUserLoggedIn() == "Log out") {
         Authentication.ClearCredentials();
         $scope.loginText = Authentication.IsUserLoggedIn();
+        $scope.loggedIn = isUserLoggedIn();
         //console.log("loginLogout(): "+$scope.loginText);
       }
       $location.path('/login');
     };
+
+    function isUserLoggedIn() {
+      if ($scope.loginText == "Log out") {
+         return true;
+      } else {
+        return false;
+      }
+    }
 
     function login() {
         vm.dataLoading = true;
@@ -30,6 +42,7 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$rootScope', '$s
             if (response.success) {
                 Authentication.SetCredentials(vm.username, vm.password);
                 $scope.loginText = Authentication.IsUserLoggedIn();
+                $scope.loggedIn = isUserLoggedIn();
                 //console.log("login(): "+$scope.loginText);
                 $window.location.reload();
             } else {

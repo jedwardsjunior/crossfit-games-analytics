@@ -45,6 +45,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
       controllerAs: 'vm'
     })
 
+		.when('/profile', {
+			controller: 'ProfileController',
+			templateUrl: 'views/profile.html'
+		})
+
     .when('/register', {
 	    controller: 'RegisterController',
 	    templateUrl: 'views/register.html',

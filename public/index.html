@@ -35,6 +35,7 @@
 	<script src="js/controllers/RegisterCtrl.js"></script>
 	<script src="js/controllers/ForgotCtrl.js"></script>
 	<script src="js/controllers/ResetCtrl.js"></script>
+	<script src="js/controllers/ProfileCtrl.js"></script>
 	<script src="js/services/AthleteService.js"></script>
   <script src="js/services/AuthenticationService.js"></script>
   <script src="js/services/FlashService.js"></script>
@@ -58,6 +59,7 @@
 		<div id="header">
 	    <!--img class="logo", src='../images/logo.png', alt='CrossFit Games Analytics'-->
 			<button ng-click="loginLogout()" class="btn btn-primary">{{loginText}}</button>
+			<button ng-show="loggedIn" class="btn btn-default"><a href="/profile"><span class="glyphicon glyphicon-user"></span></a></button>
 	    <h1> Welcome to CrossFit Analytics </h1>
 
 

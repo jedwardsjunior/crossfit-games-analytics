@@ -78,9 +78,30 @@ module.exports = function(app) {
       user.password = req.body.password;
 
       user.save(function(err) {
-        if (err) return res.
         req.logIn(user, function(err) {
-          res.redirect('/');
+          var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'crossfitanalytics@gmail.com',
+              pass: 'malibu1993'
+            }
+          });
+          var mailOptions = {
+            to: user.username,
+            from: 'crossfitanalytics@gmail.com',
+            subject: 'Welcome to CrossFit Analytics, '+user.firstName+'!',
+            text: 'Dear '+user.firstName+','+'\n\n'+
+              'Thank you for signing up for a CrossFit Analytics account! You can use your account to save your scores and times to quickly perform comparisons and analyses.'+'\n'+
+              'You can now access your profile and update your information at http://' + req.headers.host + '/profile/.'+'\n\n' +
+              'CrossFit Analytics is still in its early stages, so we recommend that you check back frequently for new content and analytical tools.'+'\n\n' +
+              'Finally, if you have any questions or comments, please do not hesitate to contact us at crossfitanalytics@gmail.com.'+ '\n\n' +
+              'We look forward to working with you!\n-The CrossFit Analytics Team'
+
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            res.redirect('/');
+          });
+
         });
       });
      /**var user = new User();      // create a new instance of the User model

@@ -1,5 +1,5 @@
 // public/js/app.js
-angular.module('crossfitApp', ['ngRoute', 'ngCookies', 'appRoutes', 'MainCtrl', 'CompareGroupsCtrl', 'CompareYourselfCtrl', 'AthleteService', 'LoginCtrl', 'RegisterCtrl', 'ForgotCtrl', 'ResetCtrl', 'AuthenticationService', 'FlashService', 'UserService'])
+angular.module('crossfitApp', ['ngRoute', 'ngCookies', 'appRoutes', 'MainCtrl', 'CompareGroupsCtrl', 'CompareYourselfCtrl', 'AthleteService', 'LoginCtrl', 'RegisterCtrl', 'ForgotCtrl', 'ResetCtrl', 'ProfileCtrl', 'AuthenticationService', 'FlashService', 'UserService'])
        .run(run);
 
   run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
