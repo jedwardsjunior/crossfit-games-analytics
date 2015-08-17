@@ -78,6 +78,7 @@ module.exports = function(app) {
       user.password = req.body.password;
 
       user.save(function(err) {
+        if (err) return res.
         req.logIn(user, function(err) {
           res.redirect('/');
         });
