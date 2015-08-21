@@ -119,52 +119,49 @@ module.exports = function(app) {
      });*/
    });
 
-   app.put('/api/users/:user_id', function(req, res) {
+   app.put('/api/users/:username', function(req, res) {
      // use our user model to find the user we want
-        User.findById(req.params.user_id, function(err, user) {
-          if (err)
-              res.send(err);
+        User.findOne({ username: req.params.username }, function(err, user) {
+          if (err) {
+            res.send(err);
+          } else {
+            user.firstName = req.body.firstName;  // update the user's info
+            user.lastName = req.body.lastName;
+            user.username = req.body.username;
+            user.password = req.body.password;
+            user.fran = req.body.fran;
+            user.grace = req.body.grace,
+            user.helen = req.body.helen,
+            user.filthy50 = req.body.filthy50,
+            user.fightGoneBad = req.body.fightGoneBad,
+            user.sprint400m = req.body.sprint400m,
+            user.run5k = req.body.run5k,
+            user.cleanAndJerk = req.body.cleanAndJerk,
+            user.snatch = req.body.snatch,
+            user.deadlift = req.body.deadlift,
+            user.backSquat = req.body.backSquat,
+            user.pullups = req.body.pullups
 
-          user.firstName = req.body.firstName;  // update the user's info
-          user.lasttName = req.body.lastName;
-          user.username = req.body.username;
-          user.password = req.body.password;
+            // save the user
+            user.save(function(err) {
+                if (err)
+                    res.send(err);
 
-          // save the user
-          user.save(function(err) {
-              if (err)
-                  res.send(err);
-
-              res.json({ message: 'User updated!' });
-          });
+                res.json({ message: 'User updated!' });
+            });
+          }
         });
    });
 
-   app.delete('/api/users/:user_id', function(req, res) {
+   app.delete('/api/users/:username', function(req, res) {
      User.remove({
-        _id: req.params.user_id
+        username: req.params.username
         }, function(err, user) {
             if (err)
                 res.send(err);
             res.json({ message: 'User successfully deleted' });
         });
    });
-
-   /**
-   app.post('/api/authenticate', function(req, res, next) {
-     User.findOne({"username": new RegExp('^'+req.body.username+'$', "i")}, function(err, user) {
-         var response;
-         if (err)
-             res.send(err);
-         if (user !== null && user.password === req.body.password) {
-             response = { success: true };
-         } else {
-             response = { success: false, message: 'Username or password is incorrect' };
-         }
-
-         res.json(response);
-      });
-    });*/
 
     app.post('/api/login', function(req, res, next) {
       passport.authenticate('local', function(err, user, info) {

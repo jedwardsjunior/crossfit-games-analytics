@@ -38,11 +38,11 @@ angular.module('UserService', []).factory('User', ['$http', function ($http) {
     }
 
     function Update(user) {
-        return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
+        return $http.put('/api/users/' + user.username, user).then(handleSuccess, handleError('Error updating user'));
     }
 
-    function Delete(id) {
-        return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
+    function Delete(user) {
+        return $http.delete('/api/users/' + user).then(handleSuccess, handleError('Error deleting user'));
     }
 
     // private functions

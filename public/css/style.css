@@ -550,3 +550,11 @@ fieldset[disabled] .btn-link:focus {
   font-family:aero_maticsregular;
   color: #FFF;
 }
+
+.profile_table {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding: 0px;
+  top:auto;
+  left: 30%;
+}

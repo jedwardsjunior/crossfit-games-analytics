@@ -1,5 +1,5 @@
 // public/js/controllers/CompareYourselfCtrl.js
-angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController', ['$scope', 'Athlete', function($scope, Athlete) {
+angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController', ['$scope', 'Athlete', 'User', function($scope, Athlete, User) {
 
   $scope.fran = 0;
   $scope.helen = 0;

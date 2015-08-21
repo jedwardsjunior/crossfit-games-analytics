@@ -1,3 +1,155 @@
 <div class="profile col-md-6 col-md-offset-3">
-    <h2>{{user.firstName}} {{user.lastName}}</h2>
+  <div ng-show="flash" class="alert alert-danger">{{flash.message}}</div>
+    <h2 style="text-align: center">{{user.firstName}} {{user.lastName}}</h2>
+    <div class="results_table profile_table" id="profileInfo">
+      <table id="profileInfo">
+        <tr>
+          <td colspan="2">Personal Information</td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td>
+            <span ng-hide="editing.firstName.editing">{{user.firstName}}<a ng-click="edit('firstName')"class="glyphicon glyphicon-pencil"></a></span>
+            <input ng-show="editing.firstName.editing" ng-model="user.firstName" ng-blur="doneEditing('firstName')" autofocus />
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td>
+            <span ng-hide="editing.lastName.editing">{{user.lastName}}<a ng-click="edit('lastName')"class="glyphicon glyphicon-pencil"></a></span>
+            <input ng-show="editing.lastName.editing" ng-model="user.lastName" ng-blur="doneEditing('lastName')" autofocus />
+          </td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>
+            <span ng-hide="editing.username.editing">{{user.username}}<a ng-click="edit('username')"class="glyphicon glyphicon-pencil"></a></span>
+            <input ng-show="editing.username.editing" ng-model="user.username" ng-blur="doneEditing('username')" autofocus />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="results_table profile_table" id="profileStats" >
+      <table class="results_table">
+        <tr>
+          <td colspan="2">Scores and Maxes</td>
+        </tr>
+        <tr>
+          <td>Fran time:</td>
+          <td>
+            <span ng-hide="editing.fran.editing">{{user.fran}}<a ng-click="edit('fran')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.fran.editing" ng-submit="doneEditing('fran')" autofocus>
+              <input type="number" ng-model="editing.franMins">:<input type="number" ng-model="editing.franSeconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Grace time:</td>
+          <td>
+            <span ng-hide="editing.grace.editing">{{user.grace}}<a ng-click="edit('grace')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.grace.editing" ng-submit="doneEditing('grace')" autofocus>
+              <input type="number" ng-model="editing.graceMins">:<input type="number" ng-model="editing.graceSeconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Helen time:</td>
+          <td>
+            <span ng-hide="editing.helen.editing">{{user.helen}}<a ng-click="edit('helen')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.helen.editing" ng-submit="doneEditing('helen')" autofocus>
+              <input type="number" ng-model="editing.helenMins">:<input type="number" ng-model="editing.helenSeconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Filthy 50 time:</td>
+          <td>
+            <span ng-hide="editing.filthy50.editing">{{user.filthy50}}<a ng-click="edit('filthy50')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.filthy50.editing" ng-submit="doneEditing('filthy50')" autofocus>
+              <input type="number" ng-model="editing.filthy50Mins">:<input type="number" ng-model="editing.filthy50Seconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Fight Gone Bad score:</td>
+          <td>
+            <span ng-hide="editing.fightGoneBad.editing">{{user.fightGoneBad}}<a ng-click="edit('fightGoneBad')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.fightGoneBad.editing" ng-submit="doneEditing('fightGoneBad')" autofocus >
+              <input ng-model="user.fightGoneBad"/>
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Sprint 400m time:</td>
+          <td>
+            <span ng-hide="editing.sprint400m.editing">{{user.sprint400m}}<a ng-click="edit('sprint400m')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.sprint400m.editing" ng-submit="doneEditing('sprint400m')" autofocus>
+              <input type="number" ng-model="editing.sprint400mMins">:<input type="number" ng-model="editing.sprint400mSeconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Run 5k time:</td>
+          <td>
+            <span ng-hide="editing.run5k.editing">{{user.run5k}}<a ng-click="edit('run5k')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.run5k.editing" ng-submit="doneEditing('run5k')" autofocus>
+              <input type="number" ng-model="editing.run5kMins">:<input type="number" ng-model="editing.run5kSeconds">
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Max Clean & Jerk:</td>
+          <td>
+            <span ng-hide="editing.cleanAndJerk.editing">{{user.cleanAndJerk}}<a ng-click="edit('cleanAndJerk')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.cleanAndJerk.editing" ng-submit="doneEditing('cleanAndJerk')" autofocus>
+              <input  ng-model="editing.cleanAndJerk"></input>
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Max Snatch:</td>
+          <td>
+            <span ng-hide="editing.snatch.editing">{{user.snatch}}<a ng-click="edit('snatch')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.snatch.editing" ng-submit="doneEditing('snatch')" autofocus>
+              <input  ng-model="editing.snatch"></input>
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>          </td>
+        </tr>
+        <tr>
+          <td>Max Deadlift:</td>
+          <td>
+            <span ng-hide="editing.deadlift.editing">{{user.deadlift}}<a ng-click="edit('deadlift')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.deadlift.editing" ng-submit="doneEditing('deadlift')" autofocus>
+              <input  ng-model="editing.deadlift"></input>
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Max Back Squat:</td>
+          <td>
+            <span ng-hide="editing.backSquat.editing">{{user.backSquat}}<a ng-click="edit('backSquat')"class="glyphicon glyphicon-pencil"></a></span>
+            <form ng-show="editing.backSquat.editing" ng-submit="doneEditing('backSquat')" autofocus>
+              <input  ng-model="editing.backSquat"></input>
+              <button class="btn btn-primary" type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Max Unbroken Pullups:</td>
+          <td>
+            <span ng-hide="editing.pullups.editing">{{user.pullups}}<a ng-click="edit('pullups')"class="glyphicon glyphicon-pencil"></a></span>
+            <input ng-show="editing.pullups.editing" ng-model="user.pullups" ng-blur="doneEditing('pullups')" autofocus />
+          </td>
+        </tr>
+      </table>
+  </div>
 </div>

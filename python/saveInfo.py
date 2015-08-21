@@ -12,11 +12,33 @@
 import json
 import sys
 import pymongo
+import time
 
 USERNAME = 'cfstrength'
 PASSWORD = 'malibu1993'
 MONGODB_URI = 'mongodb://%s:%s@ds047652.mongolab.com:47652/crossfit-games-scores' %(USERNAME, PASSWORD)
 
+def backupUserDB():
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    collection = "users"
+    dictionary = {}
+    try:
+        rightNow = time.strftime("%c")
+        print rightNow
+        users = db[collection].find()
+        userList = []
+        for user in users:
+            userList.append(user)
+        print userList
+        dictionary[rightNow] = userList
+        print dictionary
+        backupUsers = db['backup-users']
+        print backupUsers
+        backupUsers.insert_one(dictionary)
+    except:
+        print "Error retriving dictionary"
+    client.close()
 
 # Retrieves the dictionary of female Games athletes
 def getFemaleGamesDictionary(year):
@@ -240,3 +262,8 @@ def setMaleFirst(scores, year):
     indicatorDictionary = db[collection]
     indicatorDictionary.insert_one(scores)
     client.close()
+
+def main():
+    backupUserDB()
+
+main()
