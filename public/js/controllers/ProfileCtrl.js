@@ -25,9 +25,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
     function checkForScoreUpdates() {
       convertZeros();
 
-      console.log("HERE");
       if ($scope.editing.franMins && $scope.editing.franSeconds) {
-        console.log("FRAN");
         $scope.user.fran = $scope.editing.franMins+":"+$scope.editing.franSeconds;
       }
 
@@ -52,16 +50,17 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
       }
 
       if ($scope.editing.cleanAndJerk) {
-        $scope.user.cleanAndJerk = $scope.editing.cleanAndJerk + " lbs";
+        console.log("CLEAN AND JERK");
+        $scope.user.cleanAndJerk = $scope.editing.cleanAndJerkScore + " lbs";
       }
       if ($scope.editing.snatch) {
-        $scope.user.snatch = $scope.editing.snatch+ " lbs";
+        $scope.user.snatch = $scope.editing.snatchScore+ " lbs";
       }
       if ($scope.editing.deadlift) {
-        $scope.user.deadlift = $scope.editing.deadlift+ " lbs";
+        $scope.user.deadlift = $scope.editing.deadliftScore+ " lbs";
       }
       if ($scope.editing.backSquat) {
-        $scope.user.backSquat = $scope.editing.backSquat+ " lbs";
+        $scope.user.backSquat = $scope.editing.backSquatScore+ " lbs";
       }
     }
 
