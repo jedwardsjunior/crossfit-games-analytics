@@ -159,7 +159,7 @@
           <td>
             <span ng-hide="editing.fran.editing">{{user.fran}}<a ng-click="edit('fran')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.fran.editing" ng-submit="doneEditing('fran')" autofocus>
-              <input  type="number" ng-model="editing.franMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.franSeconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.franMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.franSeconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -169,7 +169,7 @@
           <td>
             <span ng-hide="editing.grace.editing">{{user.grace}}<a ng-click="edit('grace')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.grace.editing" ng-submit="doneEditing('grace')" autofocus>
-              <input type="number" ng-model="editing.graceMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.graceSeconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.graceMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.graceSeconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -179,7 +179,7 @@
           <td>
             <span ng-hide="editing.helen.editing">{{user.helen}}<a ng-click="edit('helen')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.helen.editing" ng-submit="doneEditing('helen')" autofocus>
-              <input type="number" ng-model="editing.helenMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.helenSeconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.helenMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.helenSeconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -189,7 +189,7 @@
           <td>
             <span ng-hide="editing.filthy50.editing">{{user.filthy50}}<a ng-click="edit('filthy50')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.filthy50.editing" ng-submit="doneEditing('filthy50')" autofocus>
-              <input type="number" ng-model="editing.filthy50Mins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.filthy50Seconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.filthy50Mins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.filthy50Seconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -199,7 +199,7 @@
           <td>
             <span ng-hide="editing.fightGoneBad.editing">{{user.fightGoneBad}}<a ng-click="edit('fightGoneBad')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.fightGoneBad.editing" ng-submit="doneEditing('fightGoneBad')" autofocus >
-              <input type="number" ng-model="user.fightGoneBad">
+              <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="user.fightGoneBad">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -209,7 +209,7 @@
           <td>
             <span ng-hide="editing.sprint400m.editing">{{user.sprint400m}}<a ng-click="edit('sprint400m')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.sprint400m.editing" ng-submit="doneEditing('sprint400m')" autofocus>
-              <input type="number" ng-model="editing.sprintMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.sprintSeconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.sprintMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.sprintSeconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -219,7 +219,7 @@
           <td>
             <span ng-hide="editing.run5k.editing">{{user.run5k}}<a ng-click="edit('run5k')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.run5k.editing" ng-submit="doneEditing('run5k')" autofocus>
-              <input type="number" ng-model="editing.runMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.runSeconds">
+              <input type="text" pattern="[1-9]|[0-5][1-9]" ng-model="editing.runMins">:<input type="text" pattern="[0-5][0-9]" ng-model="editing.runSeconds">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -229,7 +229,7 @@
           <td>
             <span ng-hide="editing.cleanAndJerk.editing">{{user.cleanAndJerk}}<a ng-click="edit('cleanAndJerk')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.cleanAndJerk.editing" ng-submit="doneEditing('cleanAndJerk')" autofocus>
-              <input type="number" ng-model="editing.cleanAndJerkScore"> lbs
+              <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="editing.cleanAndJerkScore"> lbs
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -239,7 +239,7 @@
           <td>
             <span ng-hide="editing.snatch.editing">{{user.snatch}}<a ng-click="edit('snatch')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.snatch.editing" ng-submit="doneEditing('snatch')" autofocus>
-              <input type="number" ng-model="editing.snatchScore"> lbs
+              <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="editing.snatchScore"> lbs
               <button class="btn btn-primary" type="submit">Done</button>
             </form>          </td>
         </tr>
@@ -248,7 +248,7 @@
           <td>
             <span ng-hide="editing.deadlift.editing">{{user.deadlift}}<a ng-click="edit('deadlift')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.deadlift.editing" ng-submit="doneEditing('deadlift')" autofocus>
-              <input type="number" ng-model="editing.deadliftScore"> lbs
+              <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="editing.deadliftScore"> lbs
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -258,7 +258,7 @@
           <td>
             <span ng-hide="editing.backSquat.editing">{{user.backSquat}}<a ng-click="edit('backSquat')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.backSquat.editing" ng-submit="doneEditing('backSquat')" autofocus>
-              <input type="number" ng-model="editing.backSquatScore"> lbs
+              <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="editing.backSquatScore"> lbs
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
@@ -268,7 +268,7 @@
           <td>
             <span ng-hide="editing.pullups.editing">{{user.pullups}}<a ng-click="edit('pullups')"class="glyphicon glyphicon-pencil"></a></span>
             <form class="profileEditing" ng-show="editing.pullups.editing" ng-submit="doneEditing('pullups')" autofocus >
-              <input type="number" ng-model="user.pullups">
+              <input type="text" pattern="[1-9]?[0-9]?" ng-model="user.pullups">
               <button class="btn btn-primary" type="submit">Done</button>
             </form>
           </td>
