@@ -246,7 +246,15 @@ fieldset[disabled] .btn-link:focus {
   display:block;
   width:100%;
   position:absolute;
-  top:290px;
+  top:280px;
+  text-align: center;
+}
+
+.compare-yourself-selection {
+  display:block;
+  width:100%;
+  position:absolute;
+  top:400px;
   text-align: center;
 }
 
@@ -256,6 +264,16 @@ fieldset[disabled] .btn-link:focus {
   display:block;
   position:absolute;
   top:320px;
+  left:35%;
+  padding-bottom:100px;
+}
+
+.compare-yourself-results {
+  padding:0px;
+  text-align: center;
+  display:block;
+  position:absolute;
+  top:425px;
   left:35%;
   padding-bottom:100px;
 }
@@ -499,7 +517,7 @@ fieldset[disabled] .btn-link:focus {
   width: 100px;
 }
 
-#compare-yourself-content .selection {
+#compare-yourself-content .compare-yourself-selection {
   width:500px;
   left:31%;
   text-align:center;

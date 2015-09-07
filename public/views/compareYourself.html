@@ -4,9 +4,13 @@
        you want to compare yourself with and then enter your scores in the text
        boxes below. Once you press submit, a table will appear to show the
        difference between your scores and the average scores of the comparison group.
+       <br/><br/>
+       If you are not already logged in, you can log in now (or register for a CFA profile)
+       to keep track of your scores and automatically populate the fields below.
   </div>
 
-  <div class="selection" ng-hide="hiddenForm">
+
+  <div class="compare-yourself-selection" ng-hide="hiddenForm">
     <form name="compareForm" ng-submit="submitCompareForm()">
       Select Gender and Level to compare with:
       <br/>
@@ -82,7 +86,7 @@
     </form>
   </div>
 
-  <div class="results results_table" ng-hide="hiddenTable">
+  <div class="compare-yourself-results results_table" ng-hide="hiddenTable">
     <table>
       <tbody>
         <tr>
@@ -166,7 +170,7 @@
     </table>
   </div>
 
-  <div class="results results_table" ng-hide="hiddenDiff">
+  <div class="compare-yourself-results results_table" ng-hide="hiddenDiff">
     <table>
       <tbody>
         <tr>
