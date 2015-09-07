@@ -682,3 +682,21 @@ fieldset[disabled] .btn-link:focus {
   margin-left: 30%;
   border-bottom: thin solid white;
 }
+
+.profileEditing {
+  width: 100%;
+  display: inline-block;
+}
+
+.profileEditing input {
+  width: 25%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.profileEditing button {
+  height: 3em;
+  width: 5em;
+  display: table;
+  margin-left: 34%;
+}
