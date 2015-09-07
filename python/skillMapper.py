@@ -1,8 +1,10 @@
 import saveInfo
 
+# TBD by Cheryl
 skills = ["Quads", "Hamstrings", "Shoulders", "Abs", "Back", "Biceps", "Triceps", "Calves",
           "Power", "Endurance", "Mobility"]
 
+# TBD by Cheryl
 skillMap = {
     "Fran" : [skills[9], skills[2], skills[0]],
     "Helen": [skills[0], skills[9], skills[2]],

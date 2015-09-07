@@ -1,7 +1,26 @@
 <div class="profile col-md-6 col-md-offset-3">
   <div ng-show="flash" class="alert alert-danger">{{flash.message}}</div>
-    <h2 style="text-align: center">{{user.firstName}} {{user.lastName}}</h2>
-    <div class="results_table profile_table" id="profileInfo">
+  <div ng-show="flashInfo" class="alert alert-info">{{flashInfo.message}}</div>
+
+    <!--<h2 style="text-align: center">{{user.firstName}} {{user.lastName}}</h2>-->
+    <div class="profile_table" id="profileInfo">
+      <table id="userBasics">
+        <tr>
+          <td rowspan="2"><img src="/images/logo.png" style="width: 200px"></td>
+          <td rowspan="2">
+            <h2> {{user.firstName}} {{user.lastName}} </h2>
+            {{user.username}}
+          </td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td><button class="btn btn-primary" data-toggle="modal" data-target="#updatePhoto">Upload Photo</button></td>
+          <td><button class="btn btn-primary" data-toggle="modal" data-target="#updateInfoForm">Update Information</button></td>
+        </tr>
+      </table>
+
+      <!--
       <table id="profileInfo">
         <tr>
           <td colspan="2">Personal Information</td>
@@ -28,9 +47,110 @@
           </td>
         </tr>
       </table>
+    -->
     </div>
-    <div class="results_table profile_table" id="profileStats" >
-      <table class="results_table">
+
+    <div class="modal fade" id="updateInfoForm" role="dialog">
+      <form>
+        <label for="firstNameInput">First Name: </label>
+        <input id="firstNameInput" type="text" ng-model="newFirstName">
+        <label for="lastNameInput">Last Name: </label>
+        <input id="lastNameInput" type="text" ng-model="newLastName">
+        <i>Unfortunately, you cannot update your email address at this time. Sorry for the inconvenience!<br/></i>
+        <button class="btn btn-primary" ng-click="updateInformation()" data-dismiss="modal">Submit</button>
+      </form>
+    </div>
+
+    <div class="modal fade" id="updatePhoto" role="dialog">
+        <i>This part of the website is currently under construction. Thank you for your patience!<br/></i>
+        <button class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+
+    <div class="title">
+      <h1>Scores and Maxes</h1>
+    </div>
+
+    <div class="results_table scores_table" id="profileStats" >
+
+      <table ng-hide="updating" class="results_table" id="scoresInfo">
+        <tr>
+          <td colspan="2">Scores and Maxes</td>
+        </tr>
+        <tr>
+          <td>Fran time:</td>
+          <td>
+            {{user.fran}}
+          </td>
+        </tr>
+        <tr>
+          <td>Grace time:</td>
+          <td>
+            {{user.grace}}
+          </td>
+        </tr>
+        <tr>
+          <td>Helen time:</td>
+          <td>
+            {{user.helen}}
+          </td>
+        </tr>
+        <tr>
+          <td>Filthy 50 time:</td>
+          <td>
+            {{user.filthy50}}
+          </td>
+        </tr>
+        <tr>
+          <td>Fight Gone Bad score:</td>
+          <td>
+            {{user.fightGoneBad}}
+          </td>
+        </tr>
+        <tr>
+          <td>Sprint 400m time:</td>
+          <td>
+            {{user.sprint400m}}
+          </td>
+        </tr>
+        <tr>
+          <td>Run 5k time:</td>
+          <td>
+            {{user.run5k}}
+          </td>
+        </tr>
+        <tr>
+          <td>Max Clean & Jerk:</td>
+          <td>
+            {{user.cleanAndJerk}}
+          </td>
+        </tr>
+        <tr>
+          <td>Max Snatch:</td>
+          <td>
+            {{user.snatch}}
+          </td>
+        </tr>
+        <tr>
+          <td>Max Deadlift:</td>
+          <td>
+            {{user.deadlift}}
+          </td>
+        </tr>
+        <tr>
+          <td>Max Back Squat:</td>
+          <td>
+            {{user.backSquat}}
+          </td>
+        </tr>
+        <tr>
+          <td>Max Unbroken Pullups:</td>
+          <td>
+            {{user.pullups}}
+          </td>
+        </tr>
+      </table>
+
+      <table ng-show="updating" class="results_table" id="scoresInfoUpdating">
         <tr>
           <td colspan="2">Scores and Maxes</td>
         </tr>
@@ -154,5 +274,8 @@
           </td>
         </tr>
       </table>
+
+      <button ng-hide="updating" class="btn btn-primary" ng-click="updating = true">Update Scores and Maxes</button>
+      <button ng-show="updating" class="btn btn-primary" ng-click="updating = false">Done Updating</button>
   </div>
 </div>

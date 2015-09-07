@@ -239,7 +239,7 @@ fieldset[disabled] .btn-link:focus {
   text-align: center;
 }
 
-.results_table {
+.results {
   padding:0px;
   text-align: center;
   display:block;
@@ -554,7 +554,120 @@ fieldset[disabled] .btn-link:focus {
 .profile_table {
   margin-top: 10px;
   margin-bottom: 0px;
-  padding: 0px;
-  top:auto;
-  left: 30%;
+  width:70%;
+  margin-left:15%;
+}
+
+#profileInfo {
+  border: medium solid white;
+  padding: 10px;
+  margin-top: 50px;
+
+}
+
+#userBasics {
+  width: 100%;
+}
+
+#userBasics td {
+  width: 50%;
+  padding-right: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#userBasics td h2 {
+  border-bottom: thin solid white;
+  display: inline-block;
+}
+
+#updateInfoForm form {
+  padding: 10px;
+  width: 300px;
+  display: inline-block;
+  margin-top:300px;
+  margin-left: 40%;
+  background-color: black;
+  text-align: center;
+  font-size: 15pt;
+}
+
+
+#updateInfoForm form input{
+  margin-bottom: 10px;
+  display:block;
+  margin-left: 8%;
+  color: black;
+}
+
+#updateInfoForm button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+#updatePhoto {
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 300px;
+  height: 200px;
+  margin-top:300px;
+  margin-left: 40%;
+  background-color: black;
+  text-align: center;
+  font-size: 15pt;
+}
+
+#updatePhoto button {
+  margin-top: 20px;
+}
+
+.scores_table {
+  padding-bottom:100px;
+  margin-top: 10px;
+  width:70%;
+  margin-left:13%;
+  position:absolute;
+}
+
+.scores_table button {
+  width: 70%;
+  height: 3em;
+  margin-left: 15%;
+  margin-top: 15px;
+}
+
+
+#scoresInfo {
+  width: 100%;
+}
+
+#scoresInfo td {
+  width: 50%;
+  padding-right: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#scoresInfoUpdating {
+  width: 100%;
+}
+
+#scoresInfoUpdating td {
+  width: 50%;
+  padding-right: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#scoresInfoUpdating td a{
+  float: right;
+}
+
+.title h1 {
+  display: inline-block;
+  margin-top: 75px;
+  margin-left: 30%;
+  border-bottom: thin solid white;
 }

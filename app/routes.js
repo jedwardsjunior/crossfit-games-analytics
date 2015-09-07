@@ -295,11 +295,15 @@ module.exports = function(app) {
       });
     });
 
+    /*app.get("/:route", function(req, res) {
+      res.redirect(req.params.route);
+    });
+    */
 
    // frontend routes =========================================================
    // route to handle all angular requests
-   app.get('*', function(req, res){
-     res.sendfile('./public/index.html');
+   app.get('/*', function(req, res){
+      res.sendfile('./public/index.html');
    });
 
  };

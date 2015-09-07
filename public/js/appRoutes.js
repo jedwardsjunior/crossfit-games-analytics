@@ -3,11 +3,6 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
 	$routeProvider
-		// home page
-		.when('/', {
-			templateUrl: 'views/index.html',
-			controller: 'MainController'
-		})
 
 		.when('/compareGroups', {
 			templateUrl: 'views/compareGroups.html',
@@ -68,9 +63,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controllerAs: 'vm'
 		})
 
+		// home page
+		.when('/', {
+			templateUrl: 'views/index.html',
+			controller: 'MainController'
+		})
+
 		.otherwise({ redirectTo: '/login' });
 
 
 	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
 
 }]);

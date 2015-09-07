@@ -1,5 +1,33 @@
 angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$location', '$rootScope', '$scope', 'Authentication', 'Flash', function(User, $location, $rootScope, $scope, Authentication, Flash) {
 
+  $scope.updating = false;
+
+  $scope.updateInformation = function() {
+    console.log("HERE");
+    if (!$scope.newFirstName && !$scope.newLastName) {
+      console.log("NOPE");
+      return;
+    }
+
+    if ($scope.newFirstName) {
+      $scope.user.firstName = $scope.newFirstName;
+       $scope.newFirstName = null;
+    }
+
+    if ($scope.newLastName) {
+      $scope.user.lastName = $scope.newLastName;
+      $scope.newLastName = null;
+    }
+
+    User.Update($scope.user).then(
+      function(userRes) {
+        return;
+      }, function(error) {
+        Flash.Error("There was a problem updating profile information. Please try again.")
+        $scope.flash = $rootScope.flash;
+      }
+    );
+  }
 
     $scope.edit = function(item) {
       if ($scope.editing[item] && $scope.editing[item].item) {
@@ -9,8 +37,8 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
         $scope.editing[item] = { item : val };
         $scope.editing[item].editing = true;
       }
-      console.log($scope.editing);
-      console.log($scope.user);
+      //console.log($scope.editing);
+      //console.log($scope.user);
     }
 
     convertZeros = function() {
@@ -49,17 +77,16 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
         $scope.user.run5k = $scope.editing.runMins+":"+$scope.editing.runSeconds;
       }
 
-      if ($scope.editing.cleanAndJerk) {
-        console.log("CLEAN AND JERK");
+      if ($scope.editing.cleanAndJerkScore) {
         $scope.user.cleanAndJerk = $scope.editing.cleanAndJerkScore + " lbs";
       }
-      if ($scope.editing.snatch) {
+      if ($scope.editing.snatchScore) {
         $scope.user.snatch = $scope.editing.snatchScore+ " lbs";
       }
-      if ($scope.editing.deadlift) {
+      if ($scope.editing.deadliftScore) {
         $scope.user.deadlift = $scope.editing.deadliftScore+ " lbs";
       }
-      if ($scope.editing.backSquat) {
+      if ($scope.editing.backSquatScore) {
         $scope.user.backSquat = $scope.editing.backSquatScore+ " lbs";
       }
     }
@@ -75,8 +102,8 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
           $scope.flash = $rootScope.flash;
         }
       );
-      console.log($scope.editing);
-      console.log($scope.user);
+      //console.log($scope.editing);
+      //console.log($scope.user);
     }
 
     function init() {

@@ -1,3 +1,4 @@
+// Retrieves user information for login, logout, updates, and displaying user information
 angular.module('UserService', []).factory('User', ['$http', function ($http) {
 
     var service = {};

@@ -1,3 +1,4 @@
+// Displays Flash error, success, and info messages
 angular.module('FlashService', []).factory('Flash', ['$rootScope', function ($rootScope) {
       var service = {};
 

@@ -23,6 +23,7 @@ var userSchema = new Schema(
     "deadlift": String,
     "backSquat": String,
     "pullups": String,
+    "image": { data: Buffer, contentType: String },
     "resetPasswordToken": String,
     "resetPasswordExpires": Date
   },

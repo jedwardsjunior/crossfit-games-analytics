@@ -1,3 +1,4 @@
+// This can probably all be replaced with Passport calls and functionality
 angular.module('AuthenticationService', []).factory('Authentication', ['$http', '$cookieStore', '$rootScope', '$timeout', function ($http, $cookieStore, $rootScope, $timeout) {
 
     var service = {};
