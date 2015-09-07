@@ -1,8 +1,8 @@
 // public/js/controllers/CompareYourselfCtrl.js
-angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController', ['$scope', 'Athlete', 'User', function($scope, Athlete, User) {
+angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController', ['$scope', 'Athlete', 'User', '$rootScope', function($scope, Athlete, User, $rootScope) {
 
   $scope.fran = 0;
-  $scope.helen = 0;
+  $scope.sprint = 0;
   $scope.grace = 0;
   $scope.filthy50 = 0;
   $scope.fightGoneBad = 0;
@@ -383,13 +383,13 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     if($scope.cleanAndJerk == "No Data") {
       $scope.cleanAndJerkDiff = "No Data";
       if ($scope.cleanAndJerkScore) {
-        $scope.cleanAndJerkScoreDiff = $scope.cleanAndJerkScore;
+        $scope.cleanAndJerkScoreDiff = $scope.cleanAndJerkScore + "lbs";
       } else {
         $scope.cleanAndJerkScoreDiff = "No Data";
       }
     } else {
       if ($scope.cleanAndJerkScore) {
-        var athleteCleanAndJerk = $scope.cleanAndJerkScore.substring(0, $scope.cleanAndJerkScore.length - 4);
+        var athleteCleanAndJerk = $scope.cleanAndJerkScore;
         var competitorCleanAndJerk = $scope.cleanAndJerk.substring(0, $scope.cleanAndJerk.length - 4);
         if (athleteCleanAndJerk < competitorCleanAndJerk) {
           $scope.cleanAndJerkDiff = $scope.cleanAndJerk;
@@ -407,13 +407,13 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     if($scope.snatch == "No Data") {
       $scope.snatchDiff = "No Data";
       if ($scope.snatchScore) {
-        $scope.snatchScoreDiff = $scope.snatchScore;
+        $scope.snatchScoreDiff = $scope.snatchScore + "lbs";
       } else {
         $scope.snatchScoreDiff = "No Data";
       }
     } else {
       if ($scope.snatchScore) {
-        var athleteSnatch = $scope.snatchScore.substring(0, $scope.snatchScore.length - 4);
+        var athleteSnatch = $scope.snatchScore;
         var competitorSnatch = $scope.snatch.substring(0, $scope.snatch.length - 4);
         if (athleteSnatch < parseInt(competitorSnatch)) {
           $scope.snatchDiff = $scope.snatch;
@@ -431,13 +431,13 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     if($scope.deadlift == "No Data") {
       $scope.deadliftDiff = "No Data";
       if ($scope.deadliftScore) {
-        $scope.deadliftScoreDiff = $scope.deadliftScore;
+        $scope.deadliftScoreDiff = $scope.deadliftScore + "lbs";
       } else {
         $scope.deadliftScoreDiff = "No Data";
       }
     } else {
       if ($scope.deadliftScore) {
-        var athleteDeadlift = $scope.deadliftScore.substring(0, $scope.deadliftScore.length - 4);
+        var athleteDeadlift = $scope.deadliftScore;
         var competitorDeadlift = $scope.deadlift.substring(0, $scope.deadlift.length - 4);
 
         if (athleteDeadlift < competitorDeadlift) {
@@ -456,13 +456,13 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     if($scope.backSquat == "No Data") {
       $scope.backSquatDiff = "No Data";
       if ($scope.backSquatScore) {
-        $scope.backSquatScoreDiff = $scope.backSquatScore;
+        $scope.backSquatScoreDiff = $scope.backSquatScore + "lbs";
       } else {
         $scope.backSquatScoreDiff = "No Data";
       }
     } else {
       if ($scope.backSquatScore) {
-        var athleteBackSquat = $scope.backSquatScore.substring(0, $scope.backSquatScore.length - 4);
+        var athleteBackSquat = $scope.backSquatScore;
         var competitorBackSquat = $scope.backSquat.substring(0, $scope.backSquat.length - 4);
 
         if (athleteBackSquat < competitorBackSquat) {
@@ -551,16 +551,16 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     }
 
     if ($scope.cleanAndJerkScore) {
-      $scope.cleanAndJerkScore = $scope.cleanAndJerkScore + " lbs";
+      $scope.cleanAndJerkScore = $scope.cleanAndJerkScore;
     }
     if ($scope.snatchScore) {
-      $scope.snatchScore = $scope.snatchScore+ " lbs";
+      $scope.snatchScore = $scope.snatchScore;
     }
     if ($scope.deadliftScore) {
-      $scope.deadliftScore = $scope.deadliftScore+ " lbs";
+      $scope.deadliftScore = $scope.deadliftScore;
     }
     if ($scope.backSquatScore) {
-      $scope.backSquatScore = $scope.backSquatScore+ " lbs";
+      $scope.backSquatScore = $scope.backSquatScore;
     }
     $scope.hiddenForm = true;
     $scope.hiddenTable = false;
@@ -577,5 +577,56 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
     $scope.hiddenDiff = false;
     $scope.hiddenTable = true;
   }
+
+  function init() {
+    if ($rootScope.globals.currentUser) {
+      User.GetByUsername($rootScope.globals.currentUser.username).then(
+        function(userRes) {
+          //console.log(user);
+          if(!userRes.data.username) {
+            return;
+          } else {
+            var user = userRes.data;
+            $scope.franScore = user.fran;
+            $scope.helenScore = user.helen;
+            $scope.graceScore = user.grace;
+            $scope.filthy50Score = user.filthy50;
+            $scope.fightGoneBadScore = parseInt(user.fightGoneBad);
+            $scope.sprint400mScore = user.sprint400m;
+            $scope.run5kScore = user.run5k;
+            $scope.cleanAndJerkScore = parseInt(user.cleanAndJerk.substring(0, user.cleanAndJerk.length - 4));
+            $scope.snatchScore = parseInt(user.snatch.substring(0, user.snatch.length - 4));
+            $scope.deadliftScore = parseInt(user.deadlift.substring(0, user.deadlift.length - 4));
+            $scope.backSquatScore = parseInt(user.backSquat.substring(0, user.backSquat.length - 4));
+            $scope.maxPullupsScore = parseInt(user.pullups);
+
+            var franColon = user.fran.indexOf(":")
+            $scope.franMins = parseInt(user.fran.substring(0, franColon));
+            $scope.franSeconds = parseInt(user.fran.substring(franColon+1, user.fran.length));
+            var helenColon = user.helen.indexOf(":")
+            $scope.helenMins = parseInt(user.helen.substring(0, helenColon));
+            $scope.helenSeconds = parseInt(user.helen.substring(helenColon+1, user.helen.length));
+            var graceColon = user.grace.indexOf(":")
+            $scope.graceMins = parseInt(user.grace.substring(0, graceColon));
+            $scope.graceSeconds = parseInt(user.grace.substring(graceColon+1, user.grace.length));
+            var filthy50Colon = user.filthy50.indexOf(":")
+            $scope.filthy50Mins = parseInt(user.filthy50.substring(0, filthy50Colon));
+            $scope.filthy50Seconds = parseInt(user.filthy50.substring(filthy50Colon+1, user.filthy50.length));
+            var sprintColon = user.sprint400m.indexOf(":")
+            $scope.sprintMins = parseInt(user.sprint400m.substring(0, sprintColon));
+            $scope.sprintSeconds = parseInt(user.sprint400m.substring(sprintColon+1, user.sprint400m.length));
+            var runColon = user.run5k.indexOf(":")
+            $scope.runMins = parseInt(user.run5k.substring(0, runColon));
+            $scope.runSeconds = parseInt(user.run5k.substring(runColon+1, user.run5k.length));
+
+          }
+        }, function(error) {
+          return;
+        }
+      );
+    }
+  }
+
+  init();
 
 }]);
