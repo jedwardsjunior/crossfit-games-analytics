@@ -107,23 +107,19 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['User','$loca
     }
 
     function init() {
-      if (Authentication.IsUserLoggedIn() == "Log out") {
-        User.GetByUsername($rootScope.globals.currentUser.username).then(
-          function(userRes) {
-            //console.log(user);
-            if(!userRes.data.username) {
-              //$location.path('/login');
-            } else {
-              $scope.user = userRes.data;
-              $scope.editing = jQuery.extend({}, $scope.user);
-            }
-          }, function(error) {
+      User.GetByUsername($rootScope.globals.currentUser.username).then(
+        function(userRes) {
+          //console.log(user);
+          if(!userRes.data.username) {
             $location.path('/login');
+          } else {
+            $scope.user = userRes.data;
+            $scope.editing = jQuery.extend({}, $scope.user);
           }
-        );
-      } else {
-        $location.path('/login');
-      }
+        }, function(error) {
+          $location.path('/login');
+        }
+      );
     };
 
     init();
