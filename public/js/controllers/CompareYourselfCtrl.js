@@ -602,22 +602,22 @@ angular.module('CompareYourselfCtrl', []).controller('CompareYourselfController'
 
             var franColon = user.fran.indexOf(":")
             $scope.franMins = parseInt(user.fran.substring(0, franColon));
-            $scope.franSeconds = parseInt(user.fran.substring(franColon+1, user.fran.length));
+            $scope.franSeconds = user.fran.substring(franColon+1, user.fran.length);
             var helenColon = user.helen.indexOf(":")
             $scope.helenMins = parseInt(user.helen.substring(0, helenColon));
-            $scope.helenSeconds = parseInt(user.helen.substring(helenColon+1, user.helen.length));
+            $scope.helenSeconds = user.helen.substring(helenColon+1, user.helen.length);
             var graceColon = user.grace.indexOf(":")
             $scope.graceMins = parseInt(user.grace.substring(0, graceColon));
-            $scope.graceSeconds = parseInt(user.grace.substring(graceColon+1, user.grace.length));
+            $scope.graceSeconds = user.grace.substring(graceColon+1, user.grace.length);
             var filthy50Colon = user.filthy50.indexOf(":")
             $scope.filthy50Mins = parseInt(user.filthy50.substring(0, filthy50Colon));
-            $scope.filthy50Seconds = parseInt(user.filthy50.substring(filthy50Colon+1, user.filthy50.length));
+            $scope.filthy50Seconds = user.filthy50.substring(filthy50Colon+1, user.filthy50.length);
             var sprintColon = user.sprint400m.indexOf(":")
             $scope.sprintMins = parseInt(user.sprint400m.substring(0, sprintColon));
-            $scope.sprintSeconds = parseInt(user.sprint400m.substring(sprintColon+1, user.sprint400m.length));
+            $scope.sprintSeconds = user.sprint400m.substring(sprintColon+1, user.sprint400m.length);
             var runColon = user.run5k.indexOf(":")
             $scope.runMins = parseInt(user.run5k.substring(0, runColon));
-            $scope.runSeconds = parseInt(user.run5k.substring(runColon+1, user.run5k.length));
+            $scope.runSeconds = user.run5k.substring(runColon+1, user.run5k.length);
 
           }
         }, function(error) {
