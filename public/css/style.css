@@ -42,6 +42,14 @@ body {
   float: right;
 }
 
+#userIcon {
+  margin-right: 10px;
+}
+
+#userIcon span {
+  color: #dd0000;
+}
+
 .btn-primary {
   background-color:#dd0000;
   border-color: #aa0000;
@@ -49,13 +57,16 @@ body {
 }
 
 .btn-primary:focus,
-.btn-primary.focus {
+.btn-primary.focus,
+.btn-default:focus,
+.btn-default.focus {
   color: #fff;
   background-color:#dd0000;
   border-color: #aa0000;
   font-family:aero_maticsregular;
   outline: 0;
 }
+
 .btn-primary:hover {
   color: #fff;
   background-color:#aa0000;
