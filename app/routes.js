@@ -24,7 +24,6 @@ module.exports = function(app) {
      // use mongoose to get all nerds in the database
 
      AthleteScores.find(function(err, scores) {
-
        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
        if (err)
          res.send(err);

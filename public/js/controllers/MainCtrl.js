@@ -44,6 +44,7 @@ angular.module('MainCtrl', []).controller('MainController', ['$rootScope', '$sco
 
 
   $scope.getAthleteScores = function(){
+    console.log("Doing it");
     if($scope.gender=="women") {
       $scope.genderLabel = "Female";
     } else {
@@ -62,8 +63,11 @@ angular.module('MainCtrl', []).controller('MainController', ['$rootScope', '$sco
       $scope.levelLabel = "First Place";
     }
 
+    console.log("Getting it");
     var division = $scope.gender+"-"+$scope.level;
     Athlete.get(division, $scope.year).then(function(scores) {
+      console.log("Got it");
+
       var franMins = Math.floor(parseInt(scores.fran) / 60);
       var franSecs = parseInt(scores.fran) % 60;
       franSecs = ("0" + franSecs).slice(-2)
@@ -154,7 +158,10 @@ angular.module('MainCtrl', []).controller('MainController', ['$rootScope', '$sco
       } else {
         $scope.maxPullups = Math.floor(scores.maxPullups);
       }
-  })};
+    })
+    console.log("Done");
+
+  };
 
   $scope.getAthleteScores();
 

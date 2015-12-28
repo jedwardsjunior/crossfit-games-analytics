@@ -42,5 +42,5 @@ require('./app/routes')(app); // configure our routes
 
 // start app ===============================================
 app.listen(port);// startup our app at http://localhost:8080
-//console.log('Magic happens on port ' + port); // shoutout to the user
+
 exports = module.exports = app; // expose app
