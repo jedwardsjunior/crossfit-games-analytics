@@ -14,6 +14,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'CompareYourselfController'
 		})
 
+		.when('/strengthFinder', {
+			templateUrl: 'views/strengthFinder.html',
+			controller: 'StrengthFinderController'
+		})
+
 		.when('/descriptions', {
 			templateUrl: 'views/descriptions.html',
 			controller: 'MainController'

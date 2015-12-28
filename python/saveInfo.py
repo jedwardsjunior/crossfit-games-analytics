@@ -263,7 +263,17 @@ def setMaleFirst(scores, year):
     indicatorDictionary.insert_one(scores)
     client.close()
 
-def main():
-    backupUserDB()
+# Resets the dictionary of female Games athletes
+def setDifferentialsDictionary(dictionary, year):
+    client = pymongo.MongoClient(MONGODB_URI)
+    db = client.get_default_database()
+    collection = "differentials-%s" % year
+    db.drop_collection(collection)
+    indicatorDictionary = db[collection]
+    indicatorDictionary.insert_one(dictionary)
+    client.close()
 
-main()
+#def main():
+#    backupUserDB()
+
+#main()

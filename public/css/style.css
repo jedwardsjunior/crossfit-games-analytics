@@ -188,12 +188,12 @@ fieldset[disabled] .btn-link:focus {
 
 .navbar-header {
   position: relative;
-  left: 300px;
+  left: 235px;
 }
 
 #navbar ul {
   position: relative;
-  left: 300px;
+  left: 235px;
 }
 
 
@@ -438,6 +438,11 @@ fieldset[disabled] .btn-link:focus {
   color:#FFF;
 }
 
+.info h1, h2 {
+  text-align:center;
+  font-family:aero_maticsregular;
+  color:#FFF;
+}
 
 #compare-groups-content .results_table {
   top:445px;

@@ -63,7 +63,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
     # --- counter "i" to capture that change.
 
     for i in range(1, numPages+1):
-        print "Processing",i
+        #print "Processing",i
         # --- Get all the links to the athlete bios ---
         links = getAthleteLinks(url % (str(i), str(year)))
 
@@ -108,7 +108,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                 timeIndex = contents.find(":")
                                 if (kgIndex is not -1):
                                     kgs = eval("%0.2f" % eval(contents[0:kgIndex]*2.20462))
-                                    print "\n\nKgs =",kgs,"\n\n"
+                                    #print "\n\nKgs =",kgs,"\n\n"
                                     # Some people embellish their scores
                                     if (kgs < 600):
                                         scores[key].append(kgs)
@@ -116,7 +116,7 @@ def getAthletesScores(url, numToCount=-1, numPages=1, year=15):
                                 # --- Remove the "lb" of lb values ---
                                 elif (lbIndex is not -1):
                                     lbs = eval("%0.2f" % eval(contents[0:lbIndex]))
-                                    print "Lbs =",lbs
+                                    #print "Lbs =",lbs
                                     # Some people embellish their scores
                                     if (lbs < 600):
                                         scores[key].append(lbs)
@@ -148,7 +148,7 @@ def getFirstScores(year):
         femaleFirstScore[key] = "%0.2f" % (eventScore[0])
     saveInfo.setFemaleFirst(femaleFirstScore, year)
 
-    maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
     maleFirstScore = getAthletesScores(maleFirst, 1, 1, year)
     for key in maleFirstScore.keys():
         eventScore = maleFirstScore[key]
@@ -173,7 +173,7 @@ def getTopScores(year):
         femaleTopScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleTopDictionary(femaleTopScores, year)
 
-    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
     maleTopScores = getAthletesScores(maleGames, 10, 1, year)
     for key in maleTopScores.keys():
         eventScores = maleTopScores[key]
@@ -201,7 +201,7 @@ def getGamesScores(year):
         femaleGamesScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleGamesDictionary(femaleGamesScores, year)
 
-    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=1&region=%s&numberperpage=60&userid=0&competition=2&frontpage=0&expanded=0&year=%s&full=0&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename="
+    maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
     maleGamesScores = getAthletesScores(maleGames, -1, 1, year)
     for key in maleGamesScores.keys():
         eventScores = maleGamesScores[key]
@@ -217,8 +217,16 @@ def getGamesScores(year):
 # --- Calculate the scores for top 15 female and male regional finishers
 # --- from all regions
 def getRegionalScores(year):
-    femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
-    femaleRegionalScores = getAthletesScores(femaleRegionals, 15, 17, year)
+    if (year == "15"):
+        numRegions = 8
+        femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=1&regional=%s&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=1&regional=%s&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+    else:
+        numRegions = 17
+        femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+
+    femaleRegionalScores = getAthletesScores(femaleRegionals, 15, numRegions, year)
     for key in femaleRegionalScores.keys():
         eventScores = femaleRegionalScores[key]
         numScores = len(eventScores)
@@ -230,8 +238,7 @@ def getRegionalScores(year):
         femaleRegionalScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setFemaleRegionalDictionary(femaleRegionalScores, year)
 
-    maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
-    maleRegionalScores = getAthletesScores(maleRegionals, 15, 17, year)
+    maleRegionalScores = getAthletesScores(maleRegionals, 15, numRegions, year)
     for key in maleRegionalScores.keys():
         eventScores = maleRegionalScores[key]
         numScores = len(eventScores)
@@ -275,6 +282,63 @@ def getOpenScores(year):
         maleOpenScores[key] = "%0.2f" % (total/numScores)
     saveInfo.setMaleOpenDictionary(maleOpenScores, year)
 
+def returnScores(category, year):
+    if (category == "femaleFirst"):
+        femaleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(femaleFirst, 1, 1, year)
+
+    elif (category == "maleFirst"):
+        maleFirst = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(maleFirst, 1, 1, year)
+
+    elif(category == "femaleTop"):
+        femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(femaleGames, 10, 1, year)
+
+    elif (category == "maleTop"):
+        maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(maleGames, 10, 1, year)
+
+    elif (category == "femaleGames"):
+        femaleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=4&numberperpage=60&page=0&competition=2&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=0&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(femaleGames, -1, 1, year)
+
+    elif (category == "maleGames"):
+        maleGames = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=6&numberperpage=60&page=0&competition=2&frontpage=0&expanded=1&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=undefined&scaled=0"
+        return getAthletesScores(maleGames, -1, 1, year)
+
+    elif (category == "femaleRegionals"):
+        if (year == "15"):
+            numRegions = 8
+            femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=1&regional=%s&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        else:
+            numRegions = 17
+            femaleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=201&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        return getAthletesScores(femaleRegionals, 15, numRegions, year)
+
+    elif (category == "maleRegionals"):
+        if (year == "15"):
+            numRegions = 8
+            maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=1&regional=%s&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        else:
+            numRegions = 17
+            maleRegionals = "http://games.crossfit.com/scores/leaderboard.php?stage=0&sort=0&division=101&region=%s&regional=0&numberperpage=60&page=0&competition=1&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=1&scaled=0"
+        return getAthletesScores(maleRegionals, 15, numRegions, year)
+
+    elif (category == "femaleOpen"):
+        # --- Note: instead of numPages representing the region, it represents the
+        # --- actual pagination (so the '%s' is in a new spot)
+        femaleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=2&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
+        return getAthletesScores(femaleOpen, 100, 6, year)
+
+    elif (category=="maleOpen"):
+        maleOpen = "http://games.crossfit.com/scores/leaderboard.php?stage=5&sort=0&division=1&region=0&regional=0&numberperpage=100&page=%s&competition=0&frontpage=0&expanded=0&full=0&year=%s&showtoggles=0&hidedropdowns=1&showathleteac=0&athletename=&fittest=1&fitSelect=0&scaled=0"
+        return getAthletesScores(maleOpen, 100, 6, year)
+
+    else:
+        return
+
+
 def main():
     cont = raw_input("Test? (Y/N)")
     year = raw_input("Year? (YY format): ")
@@ -300,11 +364,11 @@ def main():
         print "\n\nFirst Place Male:\n"
         print saveInfo.getMaleFirst(year)
     else:
-        getTopScores(year)
-        getGamesScores(year)
+        #getTopScores(year)
+        #getGamesScores(year)
         getRegionalScores(year)
-        getOpenScores(year)
-        getFirstScores(year)
+        #getOpenScores(year)
+        #getFirstScores(year)
 
 
 main()
