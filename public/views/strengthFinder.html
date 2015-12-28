@@ -1,0 +1,274 @@
+<div ng-hide="loggedIn" class="info">
+  <h1> Strength Finder </h1>
+  <p>You must <a href="/login">log in</a> or
+    <a href="/register"> register (if you do not have an account)</a>
+    to view this page.
+  </p>
+  <br/>
+  <br/>
+  <h2>What is Strength Finder?</h2>
+  <p> Strength Finder generates a personalized performance analysis report based
+    on your scores and maxes on 9 benchmark CrossFit workouts/movements.
+    The report shows you how you compare to others in your competitive group in
+    precise numbers, and also highlights your strengths and weaknesses based
+    on the scores you entered.
+  </p>
+</div>
+<div ng-show="loggedIn" id="compare-yourself-content">
+  <div class="info">
+    <p>Select the Gender and Level (i.e. Female Top 10 Games Finishers)
+       you want to compare yourself with, and then verify that your scores are
+       accurate in the text boxes below.
+       <br/><br/>
+       Press submit, and wait while your personalized performance analysis report is
+       generated. This report will show you exactly how you compare to others in
+       your competitive group, highlight your strengths (based on the scores you entered),
+       and also calculate your weaknesses.
+    </p>
+  </div>
+
+
+  <div class="compare-yourself-selection" ng-hide="hiddenForm">
+    <form name="compareForm" ng-submit="submitCompareForm()">
+      Select Gender and Level to compare with:
+      <br/>
+      <select ng-model="level">
+        <option value="women-top", label="Female Top 10", ng-selected="level == women-top"></option>
+        <option value="women-games", label="Female Games Competitors", ng-selected="level == women-games"></option>
+        <option value="women-regionals", label="Female Regionals Competitors", ng-selected="level == women-regionals"></option>
+        <option value="women-open", label="Female Open Competitors", ng-selected="level == women-open"></option>
+        <option value="women-first", label="First Place Female", ng-selected="level == women-first">
+        <option value="men-top", label="Male Top 10", ng-selected="level == men-top"></option>
+        <option value="men-games", label="Male Games Competitors", ng-selected="level == men-games"></option>
+        <option value="men-regionals", label="Male Regionals Competitors", ng-selected="level == men-regionals"></option>
+        <option value="men-open", label="Male Open Competitors", ng-selected="level == men-open"></option>
+        <option value="men-first", label="First Place Male", ng-selected="level == men-first">
+      </select>
+      <select ng-model="year" ng-change="getAthleteScores()">
+        <option value="15", label="2015", ng-selected="year == 15">
+        <option value="14", label="2014", ng-selected="year == 14">
+        <option value="13", label="2013", ng-selected="year == 13">
+        <option value="12", label="2012", ng-selected="year == 12">
+      </select>
+      <br>
+      <br>
+      Fran time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="franMins"> : <input type="text" pattern="[0-5][0-9]" ng-model="franSeconds">
+      <br>
+      <br>
+      Helen time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="helenMins"> : <input type="text" pattern="[0-5][0-9]" ng-model="helenSeconds">
+      <br>
+      <br>
+      Grace time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="graceMins"> : <input type="text" pattern="[0-5][0-9]" ng-model="graceSeconds">
+      <br>
+      <br>
+      Filthy 50 time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="filthy50Mins"> : <input type="text" pattern="[0-5][0-9]" ng-model="filthy50Seconds">
+      <br>
+      <br>
+      Fight Gone Bad score:<br>
+      <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="fightGoneBadScore">
+      <br>
+      <br>
+      Sprint 400m time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="sprintMins"> : <input type="text" pattern="[0-5][0-9]" ng-model="sprintSeconds">
+      <br>
+      <br>
+      Run 5k time:<br>
+      <input type="text" pattern="[0-9]|[1-5][0-9]" ng-model="runMins"> : <input type="text" pattern="[0-5][0-9]" ng-model="runSeconds">
+      <br>
+      <br>
+      Max Clean&Jerk:<br>
+      <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="cleanAndJerkScore"> lbs
+      <br>
+      <br>
+      Max Snatch:<br>
+      <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="snatchScore"> lbs
+      <br>
+      <br>
+      Max Deadlift:<br>
+      <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="deadliftScore"> lbs
+      <br>
+      <br>
+      Max Back Squat:<br>
+      <input type="text" pattern="[0-9]|[1-9][0-9]|[1-9][0-9]{2}" ng-model="backSquatScore"> lbs
+      <br>
+      <br>
+      Max Unbroken Pull-ups:<br>
+      <input type="text" pattern="[1-9]?[0-9]?" ng-model="maxPullupsScore">
+      <br>
+      <br>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="compare-yourself-results results_table" ng-hide="hiddenTable">
+    <table>
+      <tbody>
+        <tr>
+          <td class="name">
+            <div class="dropdown" style="float:left">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="viewScores()">View Scores</a></li>
+                <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+              </ul>
+            </div>
+            <div style="float:center">WOD or Max</div>
+            <div style="clear:both"></div>
+          </td>
+          <td>Average {{levelLabel}} Scores</td>
+          <td>Your Scores</td>
+        </tr>
+        <tr>
+          <td class="name"> Fran </td>
+          <td class="value">{{fran}}</td>
+          <td class="value">{{franScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Helen </td>
+          <td class="value">{{helen}}</td>
+          <td class="value">{{helenScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Grace </td>
+          <td class="value">{{grace}}</td>
+          <td class="value">{{graceScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Filthy 50 </td>
+          <td class="value">{{filthy50}}</td>
+          <td class="value">{{filthy50Score}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Fight Gone Bad </td>
+          <td class="value">{{fightGoneBad}}</td>
+          <td class="value">{{fightGoneBadScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Sprint 400m </td>
+          <td class="value">{{sprint400m}}</td>
+          <td class="value">{{sprint400mScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Run 5k </td>
+          <td class="value">{{run5k}}</td>
+          <td class="value">{{run5kScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Clean & Jerk </td>
+          <td class="value">{{cleanAndJerk}}</td>
+          <td class="value">{{cleanAndJerkScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Snatch </td>
+          <td class="value">{{snatch}}</td>
+          <td class="value">{{snatchScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Deadlift </td>
+          <td class="value">{{deadlift}}</td>
+          <td class="value">{{deadliftScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Back Squat </td>
+          <td class="value">{{backSquat}}</td>
+          <td class="value">{{backSquatScore}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Max Pull-ups </td>
+          <td class="value">{{maxPullups}}</td>
+          <td class="value">{{maxPullupsScore}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="compare-yourself-results results_table" ng-hide="hiddenDiff">
+    <table>
+      <tbody>
+        <tr>
+          <td class="name">
+            <div class="dropdown" style="float:left">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="viewScores()">View Scores</a></li>
+                <li><a ng-click="viewDifferentials()">View Differentials</a></li>
+              </ul>
+            </div>
+            <div style="float:center">WOD or Max (Diff)</div>
+            <div style="clear:both"></div>
+          </td>
+          <td>Average {{levelLabel}} Scores</td>
+          <td>Your Scores</td>
+        </tr>
+        <tr>
+          <td class="name"> Fran </td>
+          <td class="value">{{franDiff}}</td>
+          <td class="value">{{franScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Helen </td>
+          <td class="value">{{helenDiff}}</td>
+          <td class="value">{{helenScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Grace </td>
+          <td class="value">{{graceDiff}}</td>
+          <td class="value">{{graceScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Filthy 50 </td>
+          <td class="value">{{filthy50Diff}}</td>
+          <td class="value">{{filthy50ScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Fight Gone Bad </td>
+          <td class="value">{{fightGoneBadDiff}}</td>
+          <td class="value">{{fightGoneBadScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Sprint 400m </td>
+          <td class="value">{{sprint400mDiff}}</td>
+          <td class="value">{{sprint400mScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Run 5k </td>
+          <td class="value">{{run5kDiff}}</td>
+          <td class="value">{{run5kScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Clean & Jerk </td>
+          <td class="value">{{cleanAndJerkDiff}}</td>
+          <td class="value">{{cleanAndJerkScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Snatch </td>
+          <td class="value">{{snatchDiff}}</td>
+          <td class="value">{{snatchScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Deadlift </td>
+          <td class="value">{{deadliftDiff}}</td>
+          <td class="value">{{deadliftScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Back Squat </td>
+          <td class="value">{{backSquatDiff}}</td>
+          <td class="value">{{backSquatScoreDiff}}</td>
+        </tr>
+        <tr>
+          <td class="name"> Max Pull-ups </td>
+          <td class="value">{{maxPullupsDiff}}</td>
+          <td class="value">{{maxPullupsScoreDiff}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
