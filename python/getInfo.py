@@ -366,7 +366,7 @@ def main():
     else:
         #getTopScores(year)
         #getGamesScores(year)
-        getRegionalScores(year)
+        #getRegionalScores(year)
         #getOpenScores(year)
         #getFirstScores(year)
 
